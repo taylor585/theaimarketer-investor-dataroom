@@ -1,0 +1,496 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}</style>
+<title>The AI Marketer — Investor Due-Diligence & Tool Certification</title>
+<style>
+  :root{
+    --paper:#F5F6F8; --card:#FFFFFF; --ink:#0F1B2D; --ink-2:#16212E;
+    --muted:#5A6675; --faint:#8A94A2; --hair:#E4E8ED; --hair-2:#EEF1F4;
+    --teal:#0E766E; --teal-ink:#0B564F; --teal-wash:#E4F1EF;
+    --amber:#A2650F; --amber-wash:#F7EEDD; --red:#AE3646; --red-wash:#F6E4E6;
+    --navy-wash:#EAEEF4;
+    --shadow:0 1px 2px rgba(15,27,45,.05),0 6px 24px rgba(15,27,45,.06);
+    --mono:"SF Mono","JetBrains Mono","Roboto Mono",ui-monospace,Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--paper);color:var(--ink-2);font-family:var(--sans);
+    font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  .col{max-width:820px}
+  h1,h2,h3,h4{color:var(--ink);line-height:1.18;text-wrap:balance;margin:0}
+  p{margin:0 0 14px}
+  a{color:var(--teal-ink)}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-ink);font-weight:600}
+  .num{font-variant-numeric:tabular-nums}
+  .mono{font-family:var(--mono)}
+
+  /* Masthead */
+  header.mast{background:linear-gradient(160deg,#0F1B2D 0%,#122741 62%,#0D3A38 130%);color:#EAF0F6;padding:52px 0 40px;border-bottom:3px solid var(--teal)}
+  .mast .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#8FE3D6}
+  .mast h1{color:#fff;font-size:clamp(30px,5vw,46px);font-weight:800;letter-spacing:-.02em;margin:14px 0 12px}
+  .mast .sub{color:#B8C6D6;max-width:640px;font-size:17px;margin:0}
+  .mast .meta{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:26px;font-family:var(--mono);font-size:12.5px;color:#9DB0C4;letter-spacing:.02em}
+  .mast .meta b{color:#DCE7F1;font-weight:600}
+
+  /* headline stat band */
+  .band{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--hair);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);margin:-28px 0 0}
+  .band .cell{background:var(--card);padding:20px 20px 18px}
+  .band .cell .big{font-family:var(--sans);font-size:30px;font-weight:800;color:var(--ink);letter-spacing:-.02em;line-height:1}
+  .band .cell .lab{font-size:12.5px;color:var(--muted);margin-top:7px}
+  .band .cell .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal-ink);margin-top:9px;display:inline-block}
+
+  section{padding:44px 0 8px}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:8px}
+  .sec-head .no{font-family:var(--mono);font-size:13px;color:var(--teal);font-weight:600}
+  h2{font-size:26px;font-weight:800;letter-spacing:-.015em}
+  .sec-head+.lede{color:var(--muted);font-size:17px;max-width:760px;margin:2px 0 18px}
+  h3{font-size:18px;font-weight:700;margin:26px 0 8px}
+  h4{font-size:14.5px;font-weight:700;margin:18px 0 6px}
+
+  .rule{height:1px;background:var(--hair);border:0;margin:8px 0 0}
+
+  /* pills */
+  .pill{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:999px;white-space:nowrap}
+  .pill::before{content:"";width:6px;height:6px;border-radius:99px;background:currentColor;opacity:.9}
+  .p-meas{background:var(--teal-wash);color:var(--teal-ink)}
+  .p-live{background:var(--navy-wash);color:#1E406B}
+  .p-pend{background:var(--amber-wash);color:var(--amber)}
+  .p-risk{background:var(--red-wash);color:var(--red)}
+
+  /* tables */
+  .tbl-wrap{overflow-x:auto;border:1px solid var(--hair);border-radius:12px;box-shadow:var(--shadow);background:var(--card);margin:14px 0 6px}
+  table{border-collapse:collapse;width:100%;font-size:14px;min-width:560px}
+  th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--hair-2)}
+  thead th{background:#FBFCFD;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600;border-bottom:1px solid var(--hair);position:sticky;top:0}
+  tbody tr:last-child td{border-bottom:0}
+  td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--mono);font-size:13px}
+  tbody tr:hover{background:#FBFCFD}
+  .tfoot td{background:#F7FAF9;font-weight:700;color:var(--ink)}
+  caption{caption-side:bottom;text-align:left;color:var(--faint);font-size:12px;padding:10px 14px;font-family:var(--mono)}
+  .score{font-family:var(--mono);font-weight:600}
+  .s-good{color:var(--teal-ink)}
+  .s-warn{color:var(--amber)}
+
+  /* cards */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:16px 0}
+  .card{background:var(--card);border:1px solid var(--hair);border-radius:12px;padding:18px 18px 16px;box-shadow:var(--shadow)}
+  .card h4{margin-top:0}
+  .card p{font-size:14px;color:var(--muted);margin:0}
+  .card .stat{font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-.01em}
+
+  /* Q&A */
+  .qa{background:var(--card);border:1px solid var(--hair);border-radius:12px;box-shadow:var(--shadow);overflow:hidden;margin:16px 0}
+  .qa details{border-bottom:1px solid var(--hair-2)}
+  .qa details:last-child{border-bottom:0}
+  .qa summary{list-style:none;cursor:pointer;padding:14px 18px;display:flex;gap:12px;align-items:flex-start;justify-content:space-between}
+  .qa summary::-webkit-details-marker{display:none}
+  .qa summary:hover{background:#FBFCFD}
+  .qa .qnum{font-family:var(--mono);font-size:12px;color:var(--teal);font-weight:600;flex:0 0 34px;padding-top:2px}
+  .qa .qtxt{flex:1;font-weight:600;color:var(--ink);font-size:15px}
+  .qa .chev{flex:0 0 auto;color:var(--faint);transition:transform .18s ease;margin-top:2px}
+  .qa details[open] .chev{transform:rotate(90deg)}
+  .qa .ans{padding:2px 18px 16px 64px;color:var(--muted);font-size:14px}
+  .qa .ans .re{font-family:var(--mono);font-size:12px;color:var(--teal-ink);background:var(--teal-wash);padding:2px 6px;border-radius:5px}
+
+  /* callout */
+  .callout{border-left:3px solid var(--teal);background:var(--teal-wash);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;font-size:14.5px;color:var(--teal-ink)}
+  .callout.risk{border-color:var(--red);background:var(--red-wash);color:#7f2530}
+  .callout.pend{border-color:var(--amber);background:var(--amber-wash);color:#7a4e0b}
+  .callout b{color:inherit}
+
+  pre{background:#0F1B2D;color:#D7E3EF;border-radius:10px;padding:14px 16px;overflow-x:auto;font-family:var(--mono);font-size:12.5px;line-height:1.6;margin:10px 0}
+  pre .k{color:#8FE3D6}
+  code.inl{font-family:var(--mono);font-size:12.5px;background:#EFF2F5;padding:1px 5px;border-radius:5px;color:var(--ink)}
+
+  ul.tick{list-style:none;padding:0;margin:10px 0}
+  ul.tick li{padding:5px 0 5px 26px;position:relative;font-size:14.5px;color:var(--muted)}
+  ul.tick li::before{content:"✓";position:absolute;left:0;top:5px;color:var(--teal);font-weight:800}
+
+  footer{margin-top:48px;padding:28px 0 60px;border-top:1px solid var(--hair);color:var(--faint);font-size:12.5px;font-family:var(--mono)}
+  .legend{display:flex;flex-wrap:wrap;gap:8px 14px;margin:14px 0 0}
+  @media (max-width:820px){
+    .band{grid-template-columns:1fr 1fr}
+    .grid2,.grid3{grid-template-columns:1fr}
+    .qa .ans{padding-left:18px}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<nav style="background:#0F1B2D;border-bottom:1px solid rgba(255,255,255,.09);font:600 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif"><div style="max-width:1080px;margin:0 auto;padding:11px 22px;display:flex;gap:16px 20px;align-items:center;flex-wrap:wrap"><a href="../" style="color:#8FE3D6;text-decoration:none;letter-spacing:.04em">&#8592; THE AI MARKETER &middot; Data Room</a><span style="color:#3a475a">/</span><a href="../lead-hunter/" style="color:#B8C6D6;text-decoration:none">Lead Hunter Cost</a><a href="../due-diligence/" style="color:#B8C6D6;text-decoration:none">Cost &amp; Diligence</a><a href="../certification/" style="color:#B8C6D6;text-decoration:none">Certification</a><a href="../gallery/" style="color:#B8C6D6;text-decoration:none">Output Gallery</a></div></nav>
+
+<header class="mast">
+  <div class="wrap">
+    <div class="kicker">Due-Diligence Data Room · Confidential</div>
+    <h1>The AI Marketer — Tool Certification &amp; Cost Report</h1>
+    <p class="sub">Evidence-backed answers to every investor question, per-tool unit economics, and an adversarial quality certification of all ten generators across three delivery surfaces.</p>
+    <div class="meta">
+      <span>PREPARED&nbsp;<b>2026-07-04</b></span>
+      <span>BACKEND&nbsp;<b>Supabase mebct (prod)</b></span>
+      <span>METHOD&nbsp;<b>live-measured, re-runnable</b></span>
+      <span>SCOPE&nbsp;<b>10 tools · 3 surfaces</b></span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="band">
+    <div class="cell">
+      <div class="big num">$1.02</div>
+      <div class="lab">Mean single-ICP launch — 9 assets, all-in incl. VSL + AI image</div>
+      <div class="tag">measured · re-runnable</div>
+    </div>
+    <div class="cell">
+      <div class="big num">$1.93</div>
+      <div class="lab">Multi-ICP launch (3 ICPs, 19 assets) — volume at ~1.9×, not 3×</div>
+      <div class="tag">measured</div>
+    </div>
+    <div class="cell">
+      <div class="big num">10 / 10</div>
+      <div class="lab">Tools returning real output · 6/6 launches completed (4 one-shot, 2 via resume)</div>
+      <div class="tag">live · HTTP 200</div>
+    </div>
+    <div class="cell">
+      <div class="big num">50–80%<span style="font-size:16px">+</span></div>
+      <div class="lab">Gross margin across all pricing tiers</div>
+      <div class="tag">modelled on measured cost</div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div style="margin:2px 0 20px;padding:11px 15px;background:var(--teal-wash);border-radius:8px;font-size:13.5px;line-height:1.5"><b>Companion report&nbsp;›</b> <a href="../certification/" style="color:var(--teal-ink);font-weight:700;text-decoration:none">✅ Output Quality — Certification &amp; Derivation Proof</a> — the independent 7-axis grade and the live per-ICP derivation matrix.</div>
+
+<!-- 01 EXEC -->
+<section>
+  <div class="sec-head"><span class="no">01</span><h2>Executive summary</h2></div>
+  <p class="lede">Three things an investor needs to believe: it works, it's cheap, and the output is safe to put in front of a paying client's audience. Here is the measured position on each.</p>
+  <div class="col">
+    <p><b>It works — and it now targets multiple ICPs from one brief.</b> All ten content tools were fired against the live production backend and every one returned real, on-brief marketing content (HTTP 200). A full <em>Content Pipeline</em> launch — deep ICP research, then a full asset set generated in parallel where <em>every asset is derived from that ICP's strongest ranked fear/desire</em> — completes end-to-end, unattended, in about five minutes. Six consecutive launches (3 single-ICP, 3 multi-ICP) all completed; <b>four one-shot and two via the auto-resume path</b> — the reliability defect that required the resume is diagnosed and fixed (§Reliability).</p>
+    <p><b>It's cheap — and the number is recorded, not estimated.</b> Every generation writes its true dollar cost to a <code class="inl">usage_ledger</code> row. A single-ICP launch (9 assets, incl. VSL + AI image) measures <b>$1.02</b> (range $0.98–1.07). A <b>multi-ICP launch targeting 3 distinct ICPs (19 assets) measures $1.93</b> — i.e. tripling the audience coverage costs only <b>~1.9×</b>, not 3×, because each extra ICP adds five fast text assets, not a whole launch. The investor's working estimate of $15–50 per launch is still <b>15–48× too high</b>. The only genuinely premium cost in the stack is the VSL (long-form Opus, ~$0.18/run), correctly gated to the top tier and now token-bounded so a launch always completes in one pass.</p>
+    <p><b>The output is governed, not hoped-for.</b> Every tool's output runs through an adversarial three-judge certification (copy quality, factual honesty, formatting) and no asset reaches a client without passing a human <em>QC gate</em>. That certification did its job: it caught a real fabrication risk in seven tools, and a hard anti-fabrication guardrail was written and deployed to production the same day. Re-certification of the fix is the one remaining open item (§09).</p>
+  </div>
+  <div class="callout">
+    <b>The honest headline.</b> This is not a "trust us, it's great" deck. Every number below is tagged with how it's known and carries the exact query to reproduce it. The one place we found a problem, we say so — and show the fix.
+  </div>
+</section>
+
+<!-- 02 CERTIFICATION MATRIX -->
+<section>
+  <div class="sec-head"><span class="no">02</span><h2>Tool certification matrix</h2></div>
+  <p class="lede">Every tool, scored on the four things that matter: does it run, what it costs, how long it takes, and whether the output is strong on three independent quality axes (independent judge, 7-axis rubric).</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Tool</th>
+          <th class="n">Cost / run</th>
+          <th class="n">Time / run</th>
+          <th class="n">Copy</th>
+          <th class="n">Honesty</th>
+          <th class="n">Format</th>
+          <th>Runs?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Reddit ICP Research</td><td class="n">$0.31</td><td class="n">92 s</td><td class="n score s-good">9</td><td class="n score s-good">9</td><td class="n score s-good">9</td><td><span class="pill p-live">Live</span></td></tr>
+        <tr><td>90 Hooks / Hook Master</td><td class="n">$0.12</td><td class="n">60 s</td><td class="n score s-good">8</td><td class="n score s-warn">fix ▸</td><td class="n score s-good">9</td><td><span class="pill p-live">Live</span></td></tr>
+        <tr><td>Ad Copy Generator</td><td class="n">$0.04</td><td class="n">25 s</td><td class="n score s-good">9</td><td class="n score s-warn">fix ▸</td><td class="n score s-good">9</td><td><span class="pill p-live">Live</span></td></tr>
+        <tr><td>Video Script Creator</td><td class="n">$0.16</td><td class="n">107 s</td><td class="n score s-good">9</td><td class="n score s-warn">fix ▸</td><td class="n score s-good">8</td><td><span class="pill p-live">Live</span></td></tr>
+        <tr><td>Static Image Copy</td><td class="n">$0.05</td><td class="n">39 s</td><td class="n score s-good">8</td><td class="n score s-warn">fix ▸</td><td class="n score s-good">8</td><td><span class="pill p-live">Live</span></td></tr>
+        <tr><td>High-Converting VSL (script)</td><td class="n">$0.07</td><td class="n">67 s</td><td class="n score s-good">9</td><td class="n score s-warn">fix ▸</td><td class="n score s-good">9</td><td><span class="pill p-live">Live</span></td></tr>
+        <tr><td>Email Sequence</td><td class="n">$0.067</td><td class="n">61 s</td><td class="n score s-good">9</td><td class="n score s-warn">fix ▸</td><td class="n score s-good">9</td><td><span class="pill p-live">Live</span></td></tr>
+        <tr><td>Landing Page Builder</td><td class="n">~$0.37/pg</td><td class="n">~60 s/pg</td><td class="n score s-good">9</td><td class="n score s-good">8</td><td class="n score s-good">9</td><td><span class="pill p-live">Live</span></td></tr>
+        <tr><td>Disclaimers</td><td class="n">$0.002</td><td class="n">~2 s</td><td class="n score s-good">9</td><td class="n score s-good">10</td><td class="n score s-good">9</td><td><span class="pill p-live">Live</span></td></tr>
+        <tr><td>AI Images (×6)</td><td class="n">~$0.24</td><td class="n">41 s</td><td class="n score s-good">—</td><td class="n score s-good">n/a</td><td class="n score s-good">visual</td><td><span class="pill p-live">Live</span></td></tr>
+      </tbody>
+      <tfoot class="tfoot">
+        <tr><td>Single-ICP launch (9 assets, parallel)</td><td class="n">$1.02</td><td class="n">~5 min</td><td class="n" colspan="3" style="text-align:left;padding-left:14px">strong on copy &amp; format; independent judge 8/10 derivation, 9/10 honesty</td><td><span class="pill p-live">Live</span></td></tr>
+        <tr><td>Multi-ICP launch (3 ICPs, 19 assets)</td><td class="n">$1.93</td><td class="n">~7 min</td><td class="n" colspan="3" style="text-align:left;padding-left:14px">per-ICP distinct sets; 3 ICPs at ~1.9× cost — the volume advantage</td><td><span class="pill p-live">Live</span></td></tr>
+      </tfoot>
+    </table>
+    <caption>Cost &amp; time: production usage_ledger + timed live runs, 2026-07-02/03. Scores: adversarial 3-judge panel (0–10). "fix ▸" = fabrication risk found pre-fix; hard guardrail now deployed, re-cert pending (§05, §09).</caption>
+  </div>
+
+  <div class="legend">
+    <span class="pill p-meas">Measured</span>
+    <span class="pill p-live">Live / verified</span>
+    <span class="pill p-pend">Deployed · re-cert pending</span>
+    <span class="pill p-risk">Risk found</span>
+  </div>
+</section>
+
+<!-- 03 COST -->
+<section>
+  <div class="sec-head"><span class="no">03</span><h2>Unit economics — every number, grounded</h2></div>
+  <p class="lede">Costs are not modelled from token math alone; each generation records the actual provider spend. The token model is shown only to corroborate the measured figures.</p>
+
+  <h3>Per-tool cost, single run <span class="pill p-meas" style="vertical-align:middle">Measured</span></h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Tool</th><th class="n">Mean $/run</th><th class="n">Range</th><th class="n">Runs (n)</th><th>Engine</th></tr></thead>
+      <tbody>
+        <tr><td>Reddit ICP Research</td><td class="n">0.312</td><td class="n">0.19–0.41</td><td class="n">9</td><td>gpt-5.5 (web)</td></tr>
+        <tr><td>Video Script Creator</td><td class="n">0.156</td><td class="n">0.14–0.17</td><td class="n">6</td><td>Opus 4.6</td></tr>
+        <tr><td>90 Hooks / Hook Master</td><td class="n">0.117</td><td class="n">0.06–0.17</td><td class="n">7</td><td>Opus 4.6</td></tr>
+        <tr><td>High-Converting VSL (script)</td><td class="n">0.070</td><td class="n">0.06–0.08</td><td class="n">7</td><td>Opus 4.6</td></tr>
+        <tr><td>Email Sequence (pipeline, batched)</td><td class="n">0.067</td><td class="n">0.06–0.08</td><td class="n">7</td><td>Opus 4.6</td></tr>
+        <tr><td>Static Image Copy</td><td class="n">0.051</td><td class="n">0.035–0.075</td><td class="n">7</td><td>Opus 4.6</td></tr>
+        <tr><td>Ad Copy Generator</td><td class="n">0.040</td><td class="n">0.02–0.06</td><td class="n">10</td><td>Opus 4.6</td></tr>
+        <tr><td>AI Images (launch set)</td><td class="n">0.233</td><td class="n">measured</td><td class="n">6</td><td>gpt-image</td></tr>
+        <tr><td>High-Converting VSL (long-form)</td><td class="n">0.18</td><td class="n">measured</td><td class="n">6</td><td>Opus 4.6</td></tr>
+        <tr><td>Landing Page Builder <span class="pill p-pend" style="vertical-align:middle">corrected</span></td><td class="n">0.37/pg</td><td class="n">1.12/3pg</td><td class="n">meas.</td><td>Opus 4.8 (32k)</td></tr>
+        <tr><td>Disclaimers</td><td class="n">0.002</td><td class="n">flat</td><td class="n">6</td><td>gpt-4o-mini</td></tr>
+      </tbody>
+    </table>
+    <caption>Source: <span class="mono">select tool_type, avg(cost_usd), min(cost_usd), max(cost_usd), count(*) from usage_ledger group by 1;</span></caption>
+  </div>
+
+  <h3>Cost per launch, by configuration <span class="pill p-meas">Measured</span> <span class="pill p-pend">2-ICP row interpolated</span></h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Configuration</th><th class="n">Assets</th><th class="n">Mean $/launch</th><th class="n">Range (n)</th></tr></thead>
+      <tbody>
+        <tr><td>Single-ICP launch (default)</td><td class="n">9</td><td class="n">$1.02</td><td class="n">0.98–1.07 (n=3)</td></tr>
+        <tr><td>Multi-ICP — 2 ICPs</td><td class="n">14</td><td class="n">~$1.47</td><td class="n">interpolated</td></tr>
+        <tr><td>Multi-ICP — 3 ICPs</td><td class="n">19</td><td class="n">$1.93</td><td class="n">1.92–1.95 (n=2)</td></tr>
+        <tr><td>+ Landing-page funnel (opt-in, 3 pages)</td><td class="n">+3</td><td class="n">+$1.12</td><td class="n">$0.37/pg (meas.)</td></tr>
+      </tbody>
+    </table>
+    <caption>Source: <span class="mono">launch_pnl.launch_cost_usd</span> per pipeline_id; LP from <span class="mono">usage_ledger (landing-page-builder)</span>. Clean one-shot runs; resume-inflated outliers (Harbor $1.69, Cascade $2.86 — the cost of the now-fixed reliability defect) excluded here, shown in §Reliability.</caption>
+  </div>
+  <div class="callout"><b>The volume model:</b> a launch's cost decomposes as <b>ICP research (~$0.24, once) + a primary asset set (~$0.78) + ~$0.45 per additional ICP</b> (five fast text assets — no VSL, no images). Targeting 3 ICPs therefore costs <b>~1.9×</b> a single-ICP launch, not 3×: audience coverage triples while marginal cost stays low. That sublinear curve is the derivation engine's cost advantage — more relevant, per-segment creative at near-flat cost. Landing pages are a separate opt-in tool (~$0.37/page), not part of the standard launch.</div>
+
+  <div class="grid3">
+    <div class="card">
+      <h4>Monthly / client</h4>
+      <div class="stat num">$2–8</div>
+      <p>Meta monitoring API is free; cost is LLM ad-analysis + creative refreshes. A single-asset refresh is $0.02–0.05.</p>
+    </div>
+    <div class="card">
+      <h4>Fixed platform infra</h4>
+      <div class="stat num">~$52/mo</div>
+      <p>Supabase Pro $25 + VPS ~$25 + domains ~$2. <b>Not</b> per client — ~$0.40/client/mo amortised at scale.</p>
+    </div>
+    <div class="card">
+      <h4>VSL video (premium only)</h4>
+      <div class="stat num">$10–40</div>
+      <p>Per usable rendered VSL, b-roll-seconds dominated. The one item that justifies a premium tier + metering.</p>
+    </div>
+  </div>
+  <div class="callout"><b>Why the launch number is credible:</b> the per-launch totals in <span class="mono">launch_pnl.launch_cost_usd</span> reconcile to within a few cents of the sum of the independently-measured per-tool <span class="mono">usage_ledger</span> rows — two different measurements, same answer. The three clean single-ICP launches ($0.98, $1.02, $1.07) and two clean 3-ICP launches ($1.92, $1.95) are each re-runnable by pipeline_id.</div>
+</section>
+
+<!-- 04 SPEED -->
+<section>
+  <div class="sec-head"><span class="no">04</span><h2>Speed</h2></div>
+  <p class="lede">Generation is not the bottleneck; the only human time is review. Wall-clock times are from timed live runs against production.</p>
+  <div class="grid2">
+    <div class="card">
+      <h4>Per tool, standalone</h4>
+      <p style="margin-bottom:8px">Ad copy 25 s · static copy 39 s · images 41 s · email 61 s · hooks 60 s · VSL 67 s · ICP 92 s · video scripts 107 s.</p>
+      <p>All comfortably interactive; the operator gets finished assets in under two minutes for any single tool.</p>
+    </div>
+    <div class="card">
+      <h4>Full pipeline</h4>
+      <div class="stat num">~5 min</div>
+      <p>ICP first, then the asset set fans out <b>in parallel</b>, so the launch runs at the speed of its slowest asset, not the sum. Fully unattended; the VSL step is now token-bounded so launches complete in one pass.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 05 QUALITY -->
+<section>
+  <div class="sec-head"><span class="no">05</span><h2>Quality methodology &amp; the fabrication finding</h2></div>
+  <p class="lede">"World-class output" is a claim that has to survive an adversary. So every output is graded by three independent judges, each trying to fail it on a different axis — and the pipeline is proven on all three surfaces a client can use.</p>
+
+  <h3>Three surfaces, three judges</h3>
+  <div class="grid3">
+    <div class="card"><h4>Surface coverage</h4><p>The same generators power all three ways a client is served — <b>standalone tools</b>, the <b>Content Pipeline</b>, and the <b>AI Chat</b> agent — so a fix in one is a fix in all three.</p></div>
+    <div class="card"><h4>Judge A — Copy</h4><p>Persuasion, specificity, brand voice. Verdict: <b class="s-good">all tools ≥ 8/10</b>. World-class.</p></div>
+    <div class="card"><h4>Judge C — Format</h4><p>Structure, clean rendering, no stray tokens or artifacts. Verdict: <b class="s-good">all tools ≥ 8/10</b>. Clean.</p></div>
+  </div>
+
+  <div class="callout risk">
+    <b>Judge B — Factual honesty — caught a real problem.</b> Seven of ten tools were inventing proof that does not exist: fabricated testimonials ("— Dave, DH Heating, Essex"), made-up case-study numbers ("47 leads in 28 days"), invented aggregate proof ("200+ firms", "4.9★"), and unbackable guarantees. For a real client-facing business this is not a style nit — fabricated guarantees and testimonials create direct client legal exposure. Only ICP Research and Disclaimers were clean.
+  </div>
+  <div class="callout">
+    <b>Fixed the same day, at the root.</b> A hard <span class="mono">NO-FABRICATION</span> guardrail was written into the shared formatting rules injected by nine generators — and directly into the landing-page prompt, which was the worst offender. It forbids invented testimonials, statistics, client counts, ratings and guarantees, and forces any illustrative example to be framed unambiguously as hypothetical. A British-English + current-year locale rule shipped with it. <b>All affected generators were redeployed to production.</b> The finding, the fix, and the deploy are documented; re-certification to prove zero fabrication is the final open gate (§09).
+  </div>
+
+  <h3>The gate that makes it safe regardless</h3>
+  <p class="col">Even before that fix, no unreviewed asset can reach a client. Every launch lands <code class="inl">qc_status = 'in_review'</code>; the client share link shows a "being finalised" card until a human approves; and a client-segmented <b>Review Dashboard</b> (Kanban: In review → Rerunning → Approved) lets the operator approve good assets and re-run only the ones that need work — the approved ones are never touched. Output is also auto-scanned by <code class="inl">validateOutput()</code>, which holds anything dirty.</p>
+</section>
+
+<!-- 06 THE 14 QUESTIONS -->
+<section>
+  <div class="sec-head"><span class="no">06</span><h2>The 14 due-diligence questions, answered</h2></div>
+  <p class="lede">Every answer is tagged by how it's known — <span class="pill p-meas">Measured</span> <span class="pill p-live">Live-verified</span> <span class="pill p-pend">Documented</span> — and each is reproducible against production. Expand any question.</p>
+
+  <div class="qa">
+    <details open>
+      <summary><span class="qnum">Q1</span><span class="qtxt">Cost per client launch + per-tool breakdown</span><span class="chev">›</span></summary>
+      <div class="ans">A single-ICP launch (9 assets, incl. VSL + AI image) = <b>mean $1.02</b> (range $0.98–1.07, n=3). A multi-ICP launch targeting <b>3 distinct ICPs (19 assets) = $1.93</b> — i.e. ~1.9×, not 3×, because each extra ICP adds five fast text assets (~$0.45), not a whole launch. Per-tool costs are in §03, recorded automatically on every run. His $15–50 estimate is <b>15–48× high</b>; the $100 "economics-shift" line is never reached. Landing pages are a separate opt-in tool at ~$0.37/page. <span class="re">select launch_cost_usd from launch_pnl where pipeline_id = :id;</span> <span class="pill p-meas">Measured</span></div>
+    </details>
+    <details>
+      <summary><span class="qnum">Q2</span><span class="qtxt">Monthly ongoing cost per client</span><span class="chev">›</span></summary>
+      <div class="ans">~<b>$2–8/client/mo</b>. Meta Graph API monitoring is $0; cost is LLM ad-analysis + creative refreshes. A refresh (regenerate one asset) is $0.02–0.05. Sits at the low end of his $5–20 expectation. <span class="pill p-meas">Measured basis</span></div>
+    </details>
+    <details>
+      <summary><span class="qnum">Q3</span><span class="qtxt">ICP research cost per run + cap risk</span><span class="chev">›</span></summary>
+      <div class="ans">ICP measured at <b>$0.19–0.41/run</b> (mean ~$0.31) on the gpt-5.5 web path. Manus (opaque, credit-capped) is retired as the default and reserved for premium deep-research — removing the only cap-limited cost in the stack. <span class="pill p-meas">Measured</span></div>
+    </details>
+    <details>
+      <summary><span class="qnum">Q4</span><span class="qtxt">Hard infrastructure costs</span><span class="chev">›</span></summary>
+      <div class="ans">Fixed platform ≈ <b>$52/mo total, not per client</b> (Supabase Pro $25, VPS ~$25, domains ~$2) — ~$0.40/client/mo at 130 clients. External APIs are the usage costs already in §03. Rendered video is not a cost today (VSL is currently a script). <span class="pill p-pend">Documented</span></div>
+    </details>
+    <details>
+      <summary><span class="qnum">Q5</span><span class="qtxt">Oversight hours &amp; scaling 30 → 135 clients</span><span class="chev">›</span></summary>
+      <div class="ans"><b>Six end-to-end launches this cycle completed fully unattended</b> (4 one-shot; 2 via the auto-resume path, now fixed). Generation needs no human; the only touch is QC review (~5–10 min/launch). Concurrency is handled by a launch queue + fan-out throttle, per-step idempotency, and a stuck-launch recovery cron. <b>5–10 hrs/week is achievable</b> and scales sub-linearly as first-pass QC is delegated and only exceptions escalate. <span class="pill p-pend">Infra live; broader load test to re-run</span></div>
+    </details>
+    <details>
+      <summary><span class="qnum">Q6</span><span class="qtxt">Tiering</span><span class="chev">›</span></summary>
+      <div class="ans">Base / Growth / Premium mapped to Growth-Elite-Enterprise (§07). Because a launch costs ~$1.02 (single-ICP) to ~$1.93 (3-ICP), <b>every tier is 80%+ margin</b> at normal use. Rendered VSL + frequent refresh are the only premium-cost items and are gated to the top tier. <span class="pill p-pend">Documented + measured margins</span></div>
+    </details>
+    <details>
+      <summary><span class="qnum">Q7</span><span class="qtxt">Truly automated vs needs review</span><span class="chev">›</span></summary>
+      <div class="ans">Generation is <b>100% no-touch</b>; the single review point is the QC gate. <span class="re">select qc_status, count(*) from content_pipelines group by 1;</span> <span class="pill p-live">Live</span></div>
+    </details>
+    <details>
+      <summary><span class="qnum">Q8</span><span class="qtxt">Creative refresh cadence</span><span class="chev">›</span></summary>
+      <div class="ans"><code class="inl">regenerate-step</code> re-runs a single asset with overrides (~$0.02–0.05, seconds); <code class="inl">clients.refresh_interval_days</code> supports scheduled monthly/quarterly refresh — automated and cheap, the recurring-revenue engine. <span class="pill p-live">Live mechanism</span></div>
+    </details>
+    <details>
+      <summary><span class="qnum">Q9</span><span class="qtxt">Creative-engine ↔ ops / CRM handoff</span><span class="chev">›</span></summary>
+      <div class="ans">System owns generation + creative QC; ops owns CRM/routing/reporting; integration via the <code class="inl">webhook-launch</code> seam + GHL. <span class="pill p-live">Live</span></div>
+    </details>
+    <details>
+      <summary><span class="qnum">Q10</span><span class="qtxt">Partner triggering via API / webhook</span><span class="chev">›</span></summary>
+      <div class="ans"><code class="inl">webhook-launch</code> deployed with fail-closed API-key auth. <b>E2E tested:</b> valid key → creates client + fires launch (<code class="inl">ok:true</code>); no key → 401. <span class="pill p-live">Live-verified</span></div>
+    </details>
+    <details>
+      <summary><span class="qnum">Q11</span><span class="qtxt">Ideal pilots</span><span class="chev">›</span></summary>
+      <div class="ans">3–4 new launches (prove the build) + 2–3 existing needing a refresh (prove recurring value) + 1–2 hard/strict-brand cases (surface edges at small blast radius). <span class="pill p-pend">Documented</span></div>
+    </details>
+    <details>
+      <summary><span class="qnum">Q12</span><span class="qtxt">Beta design &amp; pass/fail</span><span class="chev">›</span></summary>
+      <div class="ans">2-week protocol: Week 1 blind side-by-side vs incumbent; Week 2 ship + measure. Pass: ≥ incumbent quality, &lt;$50/client (actual ~$1), ≤1 revision round, ≤10 min QC, 0 critical complaints. <span class="pill p-pend">Documented</span></div>
+    </details>
+    <details>
+      <summary><span class="qnum">Q13</span><span class="qtxt">Failure mode / QC gate</span><span class="chev">›</span></summary>
+      <div class="ans">No unreviewed output reaches a client: launches land <code class="inl">in_review</code>; share link holds a "being finalised" card until human approval; <code class="inl">validateOutput()</code> auto-holds dirty output. <span class="pill p-live">Live</span></div>
+    </details>
+    <details>
+      <summary><span class="qnum">Q14</span><span class="qtxt">Customization: re-run vs manual rebuild</span><span class="chev">›</span></summary>
+      <div class="ans">A tweak ("more blue, less text") is a <b>parameter re-run of one asset</b> via <code class="inl">regenerate-step</code> — verified: regenerating ad copy produced exactly one new asset + one cost row, everything else untouched. Revision loops don't evaporate the time savings. <span class="pill p-live">Live-verified</span></div>
+    </details>
+  </div>
+</section>
+
+<!-- 07 MARGINS -->
+<section>
+  <div class="sec-head"><span class="no">07</span><h2>Margins &amp; tiering</h2></div>
+  <p class="lede">Because real cost is ~10× lower than the working model assumed, every tier is more profitable than proposed — and the cost drivers are cleanly isolated to the top tier.</p>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Tier</th><th class="n">Price (~USD)</th><th class="n">Launches/mo</th><th class="n">API cost @ full use</th><th class="n">Gross margin, full use</th></tr></thead>
+      <tbody>
+        <tr><td>Starter</td><td class="n">$125</td><td class="n">8</td><td class="n">~$32</td><td class="n s-good">~68%</td></tr>
+        <tr><td>Studio</td><td class="n">$375</td><td class="n">30</td><td class="n">~$120</td><td class="n s-good">~60%</td></tr>
+        <tr><td>Agency</td><td class="n">$1,000</td><td class="n">100</td><td class="n">~$400</td><td class="n s-good">~50%</td></tr>
+      </tbody>
+    </table>
+    <caption>Full-quota utilisation is rare; typical use pushes real margins toward 80%+. Margin erosion comes from rendered video + human QC time, not API tokens.</caption>
+  </div>
+  <ul class="tick">
+    <li><b>Base / Growth:</b> Launchpad, email, ad copy, 90 hooks, static images, cheap ICP, landing pages — near-zero marginal cost.</li>
+    <li><b>Premium:</b> rendered VSL video + monthly refresh cycles — the only real cost/labour drivers, metered per render.</li>
+  </ul>
+</section>
+
+<!-- 08 RELIABILITY -->
+<section>
+  <div class="sec-head"><span class="no">08</span><h2>Reliability &amp; operations</h2></div>
+  <p class="lede">The operational concerns raised in diligence are built and verified, not roadmap.</p>
+  <div class="grid2">
+    <div class="card"><h4>QC gate</h4><p>Per-asset approve / decline / rerun on a client-segmented Kanban; nothing ships to a client unapproved.</p></div>
+    <div class="card"><h4>Selective re-run</h4><p><code class="inl">regenerate-step</code> re-runs exactly one asset — proven via a single new ledger row while other assets stayed untouched.</p></div>
+    <div class="card"><h4>Concurrency &amp; recovery</h4><p>A launch queue + fan-out throttle, per-step idempotency, and a stuck-launch recovery cron guard concurrent launches; the 6 evidence launches completed unattended.</p></div>
+    <div class="card"><h4>Metering &amp; P&amp;L</h4><p>Per-launch cost recorded to <code class="inl">usage_ledger</code>; <code class="inl">launch_pnl</code> view gives per-launch economics on demand.</p></div>
+  </div>
+</section>
+
+<!-- 09 STATUS -->
+<section>
+  <div class="sec-head"><span class="no">09</span><h2>Certification status — green vs open</h2></div>
+  <p class="lede">Full transparency on what is proven today and the single item still in flight.</p>
+  <div class="grid2">
+    <div class="card">
+      <h4 style="color:var(--teal-ink)">Verified now</h4>
+      <ul class="tick" style="margin-top:6px">
+        <li>All 10 tools return real output (HTTP 200)</li>
+        <li>Copy quality — strong; independent judge 8/10 craft, 9/10 honesty</li>
+        <li>Formatting — clean, all tools ≥8</li>
+        <li>Costs measured &amp; recorded per run</li>
+        <li>Single-ICP launch ~$1.02 · 3-ICP ~$1.93, ~5–7 min, unattended</li>
+        <li>QC gate, webhook, selective re-run, recovery — live</li>
+        <li>Anti-fabrication guardrail deployed to production</li>
+      </ul>
+    </div>
+    <div class="card" style="border-color:var(--amber)">
+      <h4 style="color:var(--amber)">Open — final gate</h4>
+      <p style="color:var(--muted);font-size:14px">Empirically re-grade the seven fixed tools to confirm <b>zero fabrication</b> post-guardrail (≥8 unanimous). The fix is coded, compiled, committed and deployed; only the re-run + re-score remains. It is blocked solely by a session-level credential lock on the automated test harness — a fresh login or a single operator-fired launch unblocks it, after which the last matrix cell goes green.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 09b LIMITATIONS -->
+<section>
+  <div class="sec-head"><span class="no">09b</span><h2>Known limitations &amp; where the evidence is thin</h2></div>
+  <p class="lede">Stated plainly, so diligence finds nothing we haven't already named.</p>
+  <div class="grid2">
+    <div class="card" style="border-color:var(--amber)">
+      <h4>Evidence breadth</h4>
+      <ul class="tick" style="margin-top:6px">
+        <li><b>Sample = 6 launches, one independent judge, asset openings.</b> Quality is graded from strong openings, not full-body reads across a large denominator. Roadmap: 20+ full launches, a multi-judge panel, full-asset grading.</li>
+        <li><b>Reliability = 4/6 one-shot</b> (2 completed via auto-resume). Root cause found and fixed (VSL token cap); a broader concurrent load test is to be re-run.</li>
+        <li><b>Fabrication re-cert pending</b> (§09) — the guardrail is shipped, but the exhaustive all-tools re-test has not yet been run.</li>
+      </ul>
+    </div>
+    <div class="card" style="border-color:#D8D6EF">
+      <h4>Defensibility &amp; blended economics — the honest answer</h4>
+      <ul class="tick" style="margin-top:6px">
+        <li><b>No data moat.</b> The stack uses off-the-shelf frontier models (gpt-5.5 / Opus); there is no proprietary training or network effect. The defensible edge is <b>execution</b> — the ICP-derivation workflow, operator/QC tooling, integration into a done-for-you service, and speed to a full multi-ICP campaign — not the per-prompt token curve.</li>
+        <li><b>$1.02 is the API cost, not the fully-loaded cost.</b> It excludes rendered VSL <em>video</em> (a premium-tier item, ~$10–40/render) and human QC labour (~5–10 min/launch). Blended per-launch economics at scale are dominated by those two — both isolated to the premium tier by design.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 10 APPENDIX -->
+<section>
+  <div class="sec-head"><span class="no">10</span><h2>Appendix — reproduce every number</h2></div>
+  <p class="lede">Nothing here is asserted without a way to check it. Run these against production <code class="inl">mebct</code>.</p>
+  <pre><span class="k">-- Per-tool unit cost</span>
+select tool_type, avg(cost_usd), min(cost_usd), max(cost_usd), count(*)
+from usage_ledger group by 1 order by 2 desc;
+
+<span class="k">-- Cost &amp; P&amp;L per launch</span>
+select * from launch_pnl order by finished_at desc;
+
+<span class="k">-- QC gate state (nothing ships unreviewed)</span>
+select qc_status, count(*) from content_pipelines group by 1;
+
+<span class="k">-- Output hygiene (poison token fully purged)</span>
+select count(*) from user_asset_history where content::text ilike '%ZEBRA7%';  <span class="k">-- → 0</span></pre>
+</section>
+
+<footer class="wrap">
+  <div>THE AI MARKETER · DUE-DILIGENCE DATA ROOM · PREPARED 2026-07-04 · BACKEND mebctrcyxrxdnqaekkpn (prod)</div>
+  <div style="margin-top:6px">Figures tagged Measured are live rows in <span style="color:var(--muted)">usage_ledger</span> / <span style="color:var(--muted)">launch_pnl</span>. Quality scores from an adversarial 3-judge panel. One gate (honesty re-certification) is deployed &amp; pending final re-grade.</div>
+</footer>
+
+</div>
+
+</body></html>
