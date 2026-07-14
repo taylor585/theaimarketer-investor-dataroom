@@ -1,0 +1,991 @@
+<!doctype html><html><head><meta charset=utf8><title>SaaS Pivot — Master Plan</title><meta name="robots" content="noindex,nofollow"><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}</style></head><body>
+<title>SaaS Pivot — Master Plan</title>
+<style>
+  :root{
+    --paper:#F5F6F8; --card:#FFFFFF; --ink:#0F1B2D; --ink-2:#16212E;
+    --muted:#5A6675; --faint:#8A94A2; --hair:#E4E8ED; --hair-2:#EEF1F4;
+    --blue:#2743C7; --blue-ink:#1E339C; --blue-wash:#E9ECF9;
+    --teal:#0E766E; --teal-ink:#0B564F; --teal-wash:#E4F1EF;
+    --amber:#A2650F; --amber-wash:#F7EEDD; --red:#AE3646; --red-wash:#F6E4E6;
+    --orange:#C2670A; --orange-wash:#FBEFDD;
+    --plain:#FFFBEB; --plain-line:#EBDCA8; --plain-ink:#6B5313;
+    --shadow:0 1px 2px rgba(15,27,45,.05),0 6px 24px rgba(15,27,45,.06);
+    --mono:"SF Mono","JetBrains Mono","Roboto Mono",ui-monospace,Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink-2);font-family:var(--sans);
+    font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  .col{max-width:820px}
+  h1,h2,h3,h4{color:var(--ink);line-height:1.18;text-wrap:balance;margin:0}
+  p{margin:0 0 14px}
+  a{color:var(--blue-ink)}
+  .num{font-variant-numeric:tabular-nums}
+  .mono{font-family:var(--mono)}
+
+  header.mast{background:linear-gradient(160deg,#0F1B2D 0%,#141F49 62%,#1B2B7A 130%);color:#EAF0F6;padding:48px 0 36px;border-bottom:3px solid var(--blue)}
+  .mast .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#A9B6F5}
+  .mast h1{color:#fff;font-size:clamp(28px,5vw,42px);font-weight:800;letter-spacing:-.02em;margin:14px 0 12px}
+  .mast .sub{color:#B8C2E4;max-width:680px;font-size:16.5px;margin:0}
+  .mast .meta{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:22px;font-family:var(--mono);font-size:12.5px;color:#9AA6CE;letter-spacing:.02em}
+  .mast .meta b{color:#DCE3F5;font-weight:600}
+
+  .band{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--hair);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);margin:-26px 0 0}
+  .band .cell{background:var(--card);padding:18px 18px 16px}
+  .band .cell .big{font-size:28px;font-weight:800;color:var(--ink);letter-spacing:-.02em;line-height:1}
+  .band .cell .lab{font-size:12.5px;color:var(--muted);margin-top:7px}
+  .band .cell .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-ink);margin-top:9px;display:inline-block}
+
+  /* ============ TABS ============ */
+  .tabbar-outer{position:sticky;top:0;z-index:50;background:rgba(245,246,248,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--hair);margin-top:24px}
+  .tabbar{display:flex;gap:4px;overflow-x:auto;padding:10px 0;scrollbar-width:none}
+  .tabbar::-webkit-scrollbar{display:none}
+  .tabbtn{appearance:none;border:1px solid transparent;background:transparent;color:var(--muted);
+    font-family:var(--sans);font-size:13.5px;font-weight:600;padding:8px 14px;border-radius:999px;cursor:pointer;
+    white-space:nowrap;display:inline-flex;align-items:center;gap:8px;transition:background .15s,color .15s}
+  .tabbtn .tno{font-family:var(--mono);font-size:10.5px;font-weight:700;opacity:.65}
+  .tabbtn:hover{background:#ECEFF4;color:var(--ink)}
+  .tabbtn:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+  .tabbtn[aria-selected="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .tabbtn[aria-selected="true"] .tno{opacity:.7}
+  .tabbtn.orange-tab[aria-selected="true"]{background:var(--orange);border-color:var(--orange)}
+  .tabbtn.orange-tab .dot{width:8px;height:8px;border-radius:99px;background:var(--orange);display:inline-block}
+  .tabbtn.orange-tab[aria-selected="true"] .dot{background:#fff}
+
+  .panel{display:none;animation:fadein .25s ease}
+  .panel.active{display:block}
+  @keyframes fadein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){.panel{animation:none}}
+
+  .jump{color:var(--blue-ink);font-weight:600;cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+
+  .pager{display:flex;justify-content:space-between;gap:12px;margin:36px 0 0;padding-top:18px;border-top:1px solid var(--hair)}
+  .pager button{appearance:none;border:1px solid var(--hair);background:var(--card);color:var(--ink);font-family:var(--sans);
+    font-size:13.5px;font-weight:600;padding:10px 16px;border-radius:10px;cursor:pointer;box-shadow:var(--shadow)}
+  .pager button:hover{border-color:var(--blue);color:var(--blue-ink)}
+  .pager button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+  .pager .spacer{flex:1}
+
+  section{padding:34px 0 8px}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:8px}
+  .sec-head .no{font-family:var(--mono);font-size:13px;color:var(--blue);font-weight:600}
+  h2{font-size:25px;font-weight:800;letter-spacing:-.015em}
+  .sec-head+.lede{color:var(--muted);font-size:17px;max-width:760px;margin:2px 0 18px}
+  h3{font-size:18px;font-weight:700;margin:26px 0 8px}
+  h4{font-size:14.5px;font-weight:700;margin:16px 0 6px}
+
+  .pill{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:999px;white-space:nowrap}
+  .pill::before{content:"";width:6px;height:6px;border-radius:99px;background:currentColor;opacity:.9}
+  .p-live{background:var(--teal-wash);color:var(--teal-ink)}
+  .p-build{background:var(--blue-wash);color:var(--blue-ink)}
+  .p-decide{background:var(--amber-wash);color:var(--amber)}
+  .p-orange{background:var(--orange-wash);color:var(--orange)}
+
+  .tbl-wrap{overflow-x:auto;border:1px solid var(--hair);border-radius:12px;box-shadow:var(--shadow);background:var(--card);margin:14px 0 6px}
+  table{border-collapse:collapse;width:100%;font-size:14px;min-width:600px}
+  th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--hair-2);vertical-align:top}
+  thead th{background:#FBFCFD;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600;border-bottom:1px solid var(--hair)}
+  tbody tr:last-child td{border-bottom:0}
+  td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--mono);font-size:13px}
+  tbody tr:hover{background:#FBFCFD}
+  .tfoot td{background:#F7F8FD;font-weight:700;color:var(--ink)}
+  caption{caption-side:bottom;text-align:left;color:var(--faint);font-size:12px;padding:10px 14px;font-family:var(--mono)}
+  .s-good{color:var(--teal-ink);font-family:var(--mono);font-weight:600}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:16px 0}
+  .card{background:var(--card);border:1px solid var(--hair);border-radius:12px;padding:18px;box-shadow:var(--shadow)}
+  .card h4{margin-top:0}
+  .card p{font-size:14px;color:var(--muted);margin:0}
+  .card .stat{font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-.01em}
+
+  .callout{border-left:3px solid var(--blue);background:var(--blue-wash);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;font-size:14.5px;color:var(--blue-ink)}
+  .callout.good{border-color:var(--teal);background:var(--teal-wash);color:var(--teal-ink)}
+  .callout.warn{border-color:var(--amber);background:var(--amber-wash);color:#7a4e0b}
+  .callout.risk{border-color:var(--red);background:var(--red-wash);color:#7f2530}
+  .callout b{color:inherit}
+
+  .plain{background:var(--plain);border:1px solid var(--plain-line);border-radius:12px;padding:16px 18px;margin:16px 0;font-size:14.5px;color:#4A3E14}
+  .plain .plbl{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--plain-ink);display:flex;align-items:center;gap:8px;margin-bottom:8px}
+  .plain .plbl::before{content:"💡"}
+  .plain b{color:#3A3110}
+  .plain .step{display:flex;gap:10px;padding:6px 0;border-top:1px dashed var(--plain-line)}
+  .plain .step:first-of-type{border-top:0}
+  .plain .step .sk{flex:0 0 118px;font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--plain-ink);padding-top:3px}
+  .plain .step .sv{flex:1}
+
+  .math{font-family:var(--mono);font-size:13.5px;background:#0F1B2D;color:#D7E3EF;border-radius:10px;padding:12px 16px;margin:10px 0;overflow-x:auto;white-space:pre;line-height:1.9}
+  .math .hl{color:#9DE8CF;font-weight:700}
+
+  ul.tick{list-style:none;padding:0;margin:10px 0}
+  ul.tick li{padding:5px 0 5px 26px;position:relative;font-size:14.5px;color:var(--muted)}
+  ul.tick li::before{content:"✓";position:absolute;left:0;top:5px;color:var(--teal);font-weight:800}
+  ul.arrow{list-style:none;padding:0;margin:10px 0}
+  ul.arrow li{padding:5px 0 5px 26px;position:relative;font-size:14.5px;color:var(--muted)}
+  ul.arrow li::before{content:"→";position:absolute;left:0;top:5px;color:var(--blue);font-weight:800}
+  ul.tick li b, ul.arrow li b{color:var(--ink)}
+
+  code.inl{font-family:var(--mono);font-size:12.5px;background:#EFF1F5;padding:1px 5px;border-radius:5px;color:var(--ink)}
+
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--hair);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);margin:16px 0}
+  .split>div{padding:22px;background:var(--card)}
+  .split>div:first-child{border-right:1px solid var(--hair)}
+  .split .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;margin-bottom:8px}
+
+  .oq{background:var(--card);border:1px solid var(--hair);border-left:4px solid var(--orange);border-radius:12px;box-shadow:var(--shadow);margin:22px 0;overflow:hidden}
+  .oq .oq-head{padding:14px 18px;background:var(--orange-wash);display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+  .oq .oq-head .tagq{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--orange);text-transform:uppercase;white-space:nowrap}
+  .oq .oq-head .txt{font-weight:800;color:var(--ink);font-size:16px}
+  .oq .oq-body{padding:16px 18px 18px}
+  .oq .row{display:flex;gap:12px;padding:9px 0;border-top:1px solid var(--hair-2);font-size:14.5px}
+  .oq .row:first-child{border-top:0}
+  .oq .row .rk{flex:0 0 148px;font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding-top:4px}
+  .oq .row .rv{flex:1;color:var(--muted)}
+  .oq .row .rv b{color:var(--ink)}
+  .rk-rem{color:var(--orange)} .rk-what{color:var(--blue-ink)} .rk-math{color:#0F1B2D} .rk-ans{color:var(--teal-ink)} .rk-why{color:var(--plain-ink)}
+  .oq blockquote{margin:0;padding:10px 14px;background:var(--orange-wash);border-radius:8px;font-size:13.5px;color:#7A4A10;font-style:italic}
+  .verdict{display:inline-block;font-family:var(--mono);font-size:12px;font-weight:700;padding:2px 10px;border-radius:6px;margin-right:6px}
+  .v-lock{background:var(--teal-wash);color:var(--teal-ink)}
+  .v-adjust{background:var(--amber-wash);color:var(--amber)}
+  .v-hold{background:var(--red-wash);color:var(--red)}
+
+  .phase{display:flex;gap:16px;padding:14px 0;border-bottom:1px solid var(--hair-2)}
+  .phase:last-child{border-bottom:0}
+  .phase .pno{flex:0 0 92px;font-family:var(--mono);font-size:12px;color:var(--blue-ink);font-weight:700;padding-top:2px}
+  .phase .pbody{flex:1;font-size:14.5px;color:var(--muted)}
+  .phase .pbody b{color:var(--ink)}
+
+  footer{margin-top:48px;padding:28px 0 60px;border-top:1px solid var(--hair);color:var(--faint);font-size:12.5px;font-family:var(--mono)}
+  @media (max-width:820px){
+    .band{grid-template-columns:1fr 1fr}
+    .grid2,.grid3,.split{grid-template-columns:1fr}
+    .split>div:first-child{border-right:0;border-bottom:1px solid var(--hair)}
+    .oq .row{flex-direction:column;gap:2px}
+    .oq .row .rk{flex:none}
+    .plain .step{flex-direction:column;gap:2px}
+    .plain .step .sk{flex:none}
+  }
+</style>
+
+<header class="mast">
+  <div class="wrap">
+    <div class="kicker">Data Room · Vol. III · Confidential — do not publish</div>
+    <h1>SaaS Pivot — Master Plan</h1>
+    <p class="sub">The plan for turning our proven AI marketing engine into a software product other businesses pay monthly to use — with every question from the 6 July calls answered (orange-highlighted or spoken), and a complete go-to-market layer so a green light means launch, not more planning. Use the tabs below; every number is explained in plain English wherever it appears.</p>
+    <div class="meta">
+      <span>PREPARED&nbsp;<b>2026-07-06</b></span>
+      <span>FOR&nbsp;<b>Investor / sales-team meeting, 7 July</b></span>
+      <span>BASIS&nbsp;<b>real, recorded costs — not estimates</b></span>
+      <span>STATUS&nbsp;<b>investor-ready + go-to-market mapped · prices draft</b></span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="band">
+    <div class="cell">
+      <div class="big num">$1.02</div>
+      <div class="lab">What one complete marketing campaign costs us to produce (<span class="jump" data-goto="tab-start">explained in Start Here</span>)</div>
+      <div class="tag">real recorded cost</div>
+    </div>
+    <div class="cell">
+      <div class="big num">$0.29</div>
+      <div class="lab">What one sales lead costs us to find (<span class="jump" data-goto="tab-start">explained in Start Here</span>)</div>
+      <div class="tag">real recorded cost</div>
+    </div>
+    <div class="cell">
+      <div class="big num">$52.73</div>
+      <div class="lab">The average price one of those leads sells for (<span class="jump" data-goto="tab-start">explained in Start Here</span>)</div>
+      <div class="tag">from the live test</div>
+    </div>
+    <div class="cell">
+      <div class="big num">10 / 10</div>
+      <div class="lab">All ten content tools working, tested and independently graded</div>
+      <div class="tag">certified</div>
+    </div>
+  </div>
+</div>
+
+<div class="tabbar-outer">
+  <div class="wrap">
+    <nav class="tabbar" role="tablist" aria-label="Master plan sections">
+      <button class="tabbtn" role="tab" id="btn-tab-start" aria-selected="true" data-tab="tab-start"><span class="tno">1</span>Start Here</button>
+      <button class="tabbtn" role="tab" id="btn-tab-proof" aria-selected="false" data-tab="tab-proof"><span class="tno">2</span>The Proof</button>
+      <button class="tabbtn" role="tab" id="btn-tab-split" aria-selected="false" data-tab="tab-split"><span class="tno">3</span>The Split</button>
+      <button class="tabbtn" role="tab" id="btn-tab-plans" aria-selected="false" data-tab="tab-plans"><span class="tno">4</span>Plans &amp; Billing</button>
+      <button class="tabbtn" role="tab" id="btn-tab-leads" aria-selected="false" data-tab="tab-leads"><span class="tno">5</span>Lead Hunter</button>
+      <button class="tabbtn orange-tab" role="tab" id="btn-tab-orange" aria-selected="false" data-tab="tab-orange"><span class="dot"></span>Orange Questions</button>
+      <button class="tabbtn" role="tab" id="btn-tab-gtm" aria-selected="false" data-tab="tab-gtm"><span class="tno">7</span>Go to Market</button>
+      <button class="tabbtn" role="tab" id="btn-tab-index" aria-selected="false" data-tab="tab-index"><span class="tno">8</span>Every Question</button>
+      <button class="tabbtn" role="tab" id="btn-tab-roadmap" aria-selected="false" data-tab="tab-roadmap"><span class="tno">9</span>Roadmap &amp; Actions</button>
+    </nav>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- ================= TAB 1 · START HERE ================= -->
+<div class="panel active" id="tab-start" role="tabpanel" aria-labelledby="btn-tab-start">
+
+<div style="margin:20px 0 0;padding:11px 15px;background:var(--blue-wash);border-radius:8px;font-size:13.5px;line-height:1.6">
+  <b>The evidence behind this plan&nbsp;›</b>&nbsp;
+  <a href="../due-diligence/">📊 Cost Control &amp; Due-Diligence</a> ·
+  <a href="../certification/">✅ Output Quality &amp; Certification</a> ·
+  <a href="../gallery/">🖼 Output Example Gallery</a> ·
+  <a href="../lead-hunter/">🎯 Lead Hunter Cost Analysis</a>
+</div>
+
+<section>
+  <div class="sec-head"><span class="no">1a</span><h2>Start here — the four numbers behind everything</h2></div>
+  <p class="lede">Every calculation in this document is built from four numbers. Each one comes from a real test we ran on the live system, with the cost recorded automatically — none of them are guesses. Two minutes here and every other tab reads easily.</p>
+
+  <div class="grid2">
+    <div class="card">
+      <h4><span class="stat num">$1.02</span> — the cost of one campaign</h4>
+      <p>We give the system one client's details. About five minutes later it hands back a <b>complete marketing campaign</b>: customer research, 72 emails, ad copy, headlines, images, video scripts — 9 finished pieces. The AI bill for all of that, recorded automatically: <b>$1.02</b>. If we ask it to target three different customer types at once (19 pieces of content), the bill is <b>$1.93</b> — not three times more, because the research is only done once.</p>
+      <div class="math">1 campaign, 9 pieces of content  =  <span class="hl">$1.02</span>
+1 campaign, 3 audiences, 19 pieces  =  <span class="hl">$1.93</span></div>
+    </div>
+    <div class="card">
+      <h4><span class="stat num">$0.29</span> — the cost of one lead</h4>
+      <p>A "lead" is a real business that is actively looking to buy a service — the system finds them, collects their details, and grades them. In our live test we asked it to find <b>50 businesses looking for someone to run their Meta (Facebook) ads</b>. It found all 50. The total AI bill was <b>$14.46</b>. Divide the bill by the leads:</p>
+      <div class="math">$14.46 total  ÷  50 leads  =  <span class="hl">$0.29 per lead</span></div>
+      <p>Twenty-nine cents to find one real, ready-to-buy business. Hold onto that number — it is why every guarantee in the <span class="jump" data-goto="tab-orange">Orange Questions tab</span> is safe.</p>
+    </div>
+    <div class="card">
+      <h4><span class="stat num">80+</span> — the quality score</h4>
+      <p>The system grades every lead it finds from <b>0 to 100</b> on how ready they are to buy — are they asking for the service right now? Did they mention a budget? Did they say "urgent"? We only count and only sell leads that score <b>80 or above</b>. Anything below 80 is thrown away and the system keeps hunting until it finds one that qualifies. So when this document says "a lead," it always means <b>a lead scoring 80 or more</b>.</p>
+    </div>
+    <div class="card">
+      <h4><span class="stat num">$52.73</span> — the selling price of one lead</h4>
+      <p>Each lead gets a sale price based on its score — hotter lead, higher price. Our set retail bands run from <b>$50</b> for an 80-score lead up to <b>$125</b> for a 95+ lead (<span class="jump" data-goto="tab-leads">Lead Hunter 5c</span>). In the live test, the 64 leads we produced carried AI-suggested prices adding up to <b>$3,375</b>. Divide the total value by the number of leads:</p>
+      <div class="math">$3,375 total value  ÷  64 leads  =  <span class="hl">$52.73 average per lead</span></div>
+      <p>So whenever you see "$52.73 average" anywhere in this document, it means: <b>the average selling price of one lead from the live test</b>. A lead costs us $0.29 to make and sells for about $52.73 — that gap is the business.</p>
+    </div>
+  </div>
+
+  <div class="plain">
+    <div class="plbl">In plain English — the whole business in one sentence</div>
+    The machine makes two things extremely cheaply — <b>finished marketing campaigns (about $1 each)</b> and <b>ready-to-buy sales leads (about 29 cents each)</b> — and both of them sell for many times what they cost. Everything else in this document is just deciding <b>who</b> gets to use the machine and <b>how they pay for it</b>.
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="no">1b</span><h2>Executive summary — what we're doing and why</h2></div>
+  <div class="col">
+    <p><b>What exists today.</b> A working, tested system (10 tools, all live) that produces complete marketing campaigns for $1.02–$1.93 each and finds scored sales leads for $0.29 each. Every run's cost is recorded automatically, the output has been graded by independent reviewers (copy 8/10, honesty 9/10), and nothing goes to a client without a human pressing "approve" first. Full detail in <span class="jump" data-goto="tab-proof">The Proof</span>.</p>
+    <p><b>The pivot.</b> Right now, only we can use this system. The plan is to split it into two versions: <b>(a)</b> our own internal version, for running our clients, and <b>(b)</b> a version other businesses <b>pay a monthly subscription to use</b> — with their own login, their own client list, and strict limits on how much they can use. That second version is what the Republiq offer calls the <b>"AI Ad Buyer."</b> How the split works is in <span class="jump" data-goto="tab-split">The Split</span>.</p>
+    <p><b>Why the numbers work.</b> If a customer pays $299 a month and uses <em>every single drop</em> of their allowance, our AI bill for them is about $19. We keep the rest. Most customers won't come close to their allowance — so real margins are higher still. The risk in this business isn't cost. It's making sure nobody can run up our bill — and <span class="jump" data-goto="tab-plans">Plans &amp; Billing</span> shows the three locks that make that impossible.</p>
+    <p><b>And the launch is mapped, not implied.</b> Naming, the 7-day customer onboarding runbook, the sales team's demo script and objection answers, the training layer, and the go-live checklist are all written — in <span class="jump" data-goto="tab-gtm">Go to Market</span>. Every question Will asked on the calls has a one-line answer with a link, in <span class="jump" data-goto="tab-index">Every Question</span>. A green light tomorrow starts the launch clock, not another planning cycle.</p>
+  </div>
+  <div class="callout"><b>The one-liner for the room:</b> "The machine is already built and already measured — about a dollar per campaign, 29 cents per lead. What we're building over the next month isn't the product. It's the cash register: the accounts, the limits, and the billing that let us sell the machine without ever touching it."</div>
+</section>
+</div>
+
+<!-- ================= TAB 2 · THE PROOF ================= -->
+<div class="panel" id="tab-proof" role="tabpanel" aria-labelledby="btn-tab-proof">
+<section>
+  <div class="sec-head"><span class="no">2</span><h2>What is already proven</h2></div>
+  <p class="lede">Nothing in this plan rests on a projection. These results come from real runs on the live system, and each links to a full report you can open.</p>
+
+  <div class="grid2">
+    <div class="card">
+      <h4>The campaign engine <span class="pill p-live">Live &amp; tested</span></h4>
+      <ul class="tick" style="margin:8px 0 0">
+        <li><b>$1.02</b> for a full campaign (9 pieces), <b>$1.93</b> for three audiences (19 pieces) — costs recorded automatically on every run</li>
+        <li>Runs start-to-finish in ~5–7 minutes with <b>no human involved</b>; all 6 test launches completed</li>
+        <li>Every piece of content is written from that audience's <b>strongest</b> fear or desire — proven by showing three totally different ad sets for one dental clinic</li>
+        <li>Independent grading: writing quality 8/10, honesty 9/10, formatting 8/10</li>
+        <li>A strict "no made-up facts" rule is built into every tool (no invented testimonials, statistics or guarantees)</li>
+        <li>A human <b>approval gate</b>: nothing reaches a client until someone reviews it and clicks approve</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>The Lead Hunter <span class="pill p-live">Live &amp; tested</span></h4>
+      <ul class="tick" style="margin:8px 0 0">
+        <li><b>$0.29 per lead</b> — 50 leads found for $14.46 total (businesses wanting Meta ads management)</li>
+        <li>Second test in a different industry (roofing): 14 leads for $4.12 — being completed to the full 20</li>
+        <li>Delivered <b>64 of 70</b> requested leads exactly to spec — a 91% hit rate</li>
+        <li>Every lead scored 0–100; only <b>80+</b> counts as sellable</li>
+        <li>The 64 test leads carried <b>$3,375</b> of suggested sale value against roughly <b>$20</b> of cost</li>
+        <li>Proven in <b>both directions</b>: finding businesses that want to <em>buy leads</em> (the Meta-ads batch) and finding <em>consumer leads</em> to sell (the roofing batch)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="plain">
+    <div class="plbl">In plain English</div>
+    <div class="step"><div class="sk">Remember</div><div class="sv">On the call, Taylor showed the screen with the <b>50 leads that cost $14.46</b> and the campaign that cost <b>$1.02</b>. This tab is that, written down with receipts.</div></div>
+    <div class="step"><div class="sk">What it is</div><div class="sv">Proof that the machine works, at those prices, on the <b>live</b> system — not a demo, not a mock-up. Every claim links to a report where the exact test can be re-run.</div></div>
+    <div class="step"><div class="sk">Why it matters</div><div class="sv">Everything you're asked to believe in the other tabs — the subscription margins, the guarantee costs — is just multiplication on top of these measured numbers. If you trust this tab, the rest follows.</div></div>
+  </div>
+
+  <div class="callout warn"><b>What we tell you before you ask (the honest caveats):</b> the sample so far is 6 campaign launches and 2 lead batches — bigger samples are scheduled. The "no made-up facts" rule is deployed but its final formal re-test is still to run. And $1.02 is the AI bill only — it doesn't include rendered video (a top-tier extra at $10–40) or the ~5–10 minutes of human review per campaign. None of this changes the picture by an order of magnitude.</div>
+</section>
+</div>
+
+<!-- ================= TAB 3 · THE SPLIT ================= -->
+<div class="panel" id="tab-split" role="tabpanel" aria-labelledby="btn-tab-split">
+<section>
+  <div class="sec-head"><span class="no">3a</span><h2>The split — our version vs. the version we sell</h2></div>
+  <p class="lede">One system, two front doors. Same engine underneath, so every improvement we make lands in both at once.</p>
+
+  <div class="plain">
+    <div class="plbl">In plain English</div>
+    <div class="step"><div class="sk">Remember</div><div class="sv">On the call: "we can split this into two — one is just us managing our own clients, and one we sell as a complete dashboard, with a <b>sub-account manager</b> so we can see what everyone is using and spending."</div></div>
+    <div class="step"><div class="sk">What it is</div><div class="sv">Think of a bank. The bank staff have an internal screen showing every customer. Each customer has their own login showing only <em>their</em> account. Same bank, two views. We are building the "customer login" version, plus the staff screen that watches all of them.</div></div>
+    <div class="step"><div class="sk">Why it matters</div><div class="sv">This is what turns a tool we use into a <b>product we sell</b>. Recurring subscription revenue, without hiring fulfilment staff.</div></div>
+  </div>
+
+  <div class="split">
+    <div>
+      <div class="lbl" style="color:var(--teal-ink)">A · Our internal version — "Mission Control"</div>
+      <ul class="arrow" style="margin:0">
+        <li>Keeps the <b>Client Manager</b> screen — every client's campaign at a glance, colour-coded by urgency, problems surfaced, one-click fixes</li>
+        <li>Runs <b>our own clients</b>: ScaleLogix, WealthWise, the accounts being taken over from Stealth, and Republiq fulfilment work</li>
+        <li>Shows full costs and profit per client (only we ever see this)</li>
+        <li>Designed so a trained admin can run it — Taylor is not the bottleneck</li>
+      </ul>
+    </div>
+    <div>
+      <div class="lbl" style="color:var(--blue-ink)">B · The version we sell — the "AI Ad Buyer"</div>
+      <ul class="arrow" style="margin:0">
+        <li>The customer gets their own login and their own client list — they never see ours, or anyone else's</li>
+        <li>Their plan sets hard limits on usage (see <span class="jump" data-goto="tab-plans">Plans &amp; Billing</span>) — enforced by the system, not by trust</li>
+        <li>Two ways to pay for the AI: <b>through us</b> (built into their subscription, capped) or <b>their own AI account</b> ("here's the training video — you pay your own AI fees")</li>
+        <li>Can carry the customer's own branding — so a Republiq operator can resell it to <em>their</em> customers (<span class="jump" data-goto="tab-orange">Orange Q5</span>)</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>The Sub-Account Manager — our control room over every customer <span class="pill p-build">Build · priority 1</span></h3>
+  <p class="col">This is the screen Will described: "it will show you if anybody's abusing it, how close somebody is to hitting their tier, and if the payment's failed." The good news: the system <b>already records</b> every generation and its exact cost. This screen mostly just displays data we already collect.</p>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Panel</th><th>What you see on it</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td><b>Account list</b></td><td>Every paying customer: their plan, their niche, when they last logged in, and a health colour (green/amber/red)</td><td><span class="pill p-build">Build</span></td></tr>
+        <tr><td><b>Usage meters</b></td><td>How much of their monthly allowance each customer has used — campaigns, tool runs, leads — as simple progress bars</td><td><span class="pill p-live">Data already recorded</span></td></tr>
+        <tr><td><b>Spend meter</b></td><td>The real dollars of AI cost each customer has generated this month, against their cap</td><td><span class="pill p-live">Data already recorded</span></td></tr>
+        <tr><td><b>Abuse flags</b></td><td>Anyone breaking the fine print (e.g. re-running the same tool more than 3 times per campaign) gets flagged automatically</td><td><span class="pill p-build">Build</span></td></tr>
+        <tr><td><b>Upsell list</b></td><td>Customers who've used 80%+ of their allowance — a ready-made list for "you're close to your limit, want the next tier?"</td><td><span class="pill p-build">Build</span></td></tr>
+        <tr><td><b>Billing status</b></td><td>Whose card payment failed. After a 72-hour grace period, their account <b>pauses itself automatically</b> — and un-pauses the moment they pay</td><td><span class="pill p-build">Build</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="no">3b</span><h2>One hub — where the existing dashboards go</h2></div>
+  <p class="lede">Will's ask: "have this all in one hub you can walk an investor through." The four reports you've already seen become tabs of a single screen, alongside the two manager views.</p>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Tab</th><th>What it shows</th><th>Who it's for</th><th>Work needed</th></tr></thead>
+      <tbody>
+        <tr><td><b>Cost Control</b></td><td>Live version of the cost report — what everything costs, updated automatically</td><td>Investors / Will</td><td>Connect to the live cost ledger</td></tr>
+        <tr><td><b>Output Quality</b></td><td>The certification report — how the output is graded and policed</td><td>Investors / sales team</td><td>Drop in as-is; refresh after the final re-test</td></tr>
+        <tr><td><b>Outputs</b> <span class="pill p-orange">Will's ask</span></td><td>Real examples of everything the machine produces, plus a short demo video per tool</td><td>Sales team demos</td><td>New tab; record the videos</td></tr>
+        <tr><td><b>Lead Hunter</b></td><td>The lead cost dashboard</td><td>Investors / operators</td><td>Finish the roofing batch (14 of 20 done) before showing it</td></tr>
+        <tr><td><b>Sub-Account Manager</b></td><td>Every paying customer's usage, spend and billing (above)</td><td>Us + Republiq ops</td><td>Build — priority 1</td></tr>
+        <tr><td><b>Client Manager</b></td><td>Our own clients' campaigns</td><td>Internal only</td><td>None — already exists</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+</div>
+
+<!-- ================= TAB 4 · PLANS & BILLING ================= -->
+<div class="panel" id="tab-plans" role="tabpanel" aria-labelledby="btn-tab-plans">
+<section>
+  <div class="sec-head"><span class="no">4</span><h2>Subscription plans &amp; the three locks on our bill <span class="pill p-decide" style="vertical-align:middle">Prices are drafts — for decision</span></h2></div>
+  <p class="lede">Three plans, exactly as discussed on the call: each plan allows a set number of <b>client launches</b> (one launch = one complete campaign for one client), a fine-print rule of <b>3 re-runs per tool per launch</b>, and a monthly allowance of individual tool uses and leads.</p>
+
+  <div class="callout warn"><b>Pricing status:</b> the dollar amounts below are <b>placeholder test pricing</b> — allowances and structure are locked by Taylor (6 Jul); the final prices are Will's call under the ScaleLogix partnership. Lead allowances are deliberately low: these are curated, 80+-scored, high-intent leads — scarce on purpose, not bulk data.</div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Plan</th><th class="n">Price /month (test)</th><th class="n">Campaigns /mo</th><th class="n">Single tool uses /mo</th><th class="n">Leads /mo</th><th class="n">Our worst-case AI bill</th><th class="n">We keep (worst case)</th></tr></thead>
+      <tbody>
+        <tr><td><b>Operator</b></td><td class="n">$299</td><td class="n">5</td><td class="n">25</td><td class="n">25</td><td class="n">~$19</td><td class="n s-good">~$280&nbsp;(94%)</td></tr>
+        <tr><td><b>Scale</b></td><td class="n">$699</td><td class="n">15</td><td class="n">100</td><td class="n">75</td><td class="n">~$61</td><td class="n s-good">~$638&nbsp;(91%)</td></tr>
+        <tr><td><b>Network</b></td><td class="n">$1,499</td><td class="n">40</td><td class="n">300</td><td class="n">150</td><td class="n">~$151</td><td class="n s-good">~$1,348&nbsp;(90%)</td></tr>
+      </tbody>
+      <tfoot class="tfoot"><tr><td colspan="7">"Worst case" means the customer uses <b>100% of everything</b> they're allowed. Almost nobody does. Typical use is 20–40% of the allowance, so real margins sit even higher.</td></tr></tfoot>
+    </table>
+    <caption>How the worst-case bill is calculated, e.g. Operator: 5 campaigns × $1.93 + 25 tool uses × ~$0.10 + 25 leads × $0.29 ≈ $19. Allowances locked by Taylor 2026-07-06; prices pending Will.</caption>
+  </div>
+
+  <div class="plain">
+    <div class="plbl">In plain English</div>
+    <div class="step"><div class="sk">Remember</div><div class="sv">Will's exact worry on the call: "it's going to be on <b>our</b> billing account — how do we make sure we don't get cornered on usage if someone's going ham on it?"</div></div>
+    <div class="step"><div class="sk">What it is</div><div class="sv">Every customer's account works like a <b>prepaid phone plan</b>. Their plan comes with an allowance. When the allowance is used up, the system stops generating for them — politely, with an "upgrade or wait until next month" message. There is no way for a customer to keep spending our money, because the limit is enforced by the machine, not by us noticing.</div></div>
+    <div class="step"><div class="sk">Why it matters</div><div class="sv">This is the answer to the single biggest financial risk in the whole model. Our maximum possible loss per customer per month is a known, small number — the "worst-case AI bill" column above.</div></div>
+  </div>
+
+  <h3>The three locks (all three run at once)</h3>
+  <div class="grid3">
+    <div class="card"><h4>Lock 1 · A capped wallet per customer</h4><p>Each customer runs on their own <b>sub-key</b> of our AI account with a <b>hard dollar limit</b> — like giving each customer a prepaid card instead of access to our bank account. When it's empty, generation stops. Our master bill physically cannot be run up by one customer.</p></div>
+    <div class="card"><h4>Lock 2 · Allowance rules in the system</h4><p>Campaign counts, the 3-re-runs rule and tool limits are checked <b>by the server before every generation</b> — the same checkpoint that runs the human approval gate today. Every use is written to the ledger, which is what the Sub-Account Manager displays.</p></div>
+    <div class="card"><h4>Lock 3 · No pay, no play</h4><p>Card payment fails → 72-hour grace period → the account <b>pauses itself</b>. It un-pauses automatically the moment payment goes through. And customers who prefer it can connect <b>their own AI account</b> instead — then their usage never touches our bill at all.</p></div>
+  </div>
+
+  <div class="callout"><b>How this fits the Republiq offer:</b> Venture customers ($2,499/month) get the top "Network" plan <b>included</b> — and its worst-possible cost to us is ~$151, so it fits inside their monthly with enormous room to spare. Operators can then resell access to <em>their own</em> customers at a suggested <b>$199–499/month per seat</b>, with Republiq taking a cut of each seat. After their 12-month term: <b>license-to-own</b> — they keep the system running on their own AI account and pay us a smaller maintenance fee. That's the "waterfall" from the call, with prices on it. Full detail in <span class="jump" data-goto="tab-orange">Orange Q5</span>.</div>
+
+  <h3>What's included in each plan — the full grid <span class="pill p-decide">Draft — for decision</span></h3>
+  <div class="plain">
+    <div class="plbl">In plain English</div>
+    <div class="step"><div class="sk">Remember</div><div class="sv">Will's exact ask: "is there a way you can put it in a bulleted format — you get a certain amount of this included in each tier; you want the full enchilada, that's X amount per month."</div></div>
+    <div class="step"><div class="sk">What it is</div><div class="sv">The complete tier-by-tier grid: every capability of the system, and how much of it each plan includes. This is the table that goes straight into the sales one-pager and the offer's tier grid.</div></div>
+    <div class="step"><div class="sk">Why it matters</div><div class="sv">A salesperson can't sell "lots of AI marketing." They can sell "5 complete campaigns a month, 100 leads, and everything on this list." Specific allowances close deals — and they're also what the system enforces, so the promise and the product are the same thing.</div></div>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>What you get</th><th class="n">Operator<br>$299/mo</th><th class="n">Scale<br>$699/mo</th><th class="n">Network<br>$1,499/mo</th></tr></thead>
+      <tbody>
+        <tr><td><b>Complete client campaigns</b> per month (research + 9–19 assets each)</td><td class="n">5</td><td class="n">15</td><td class="n">40</td></tr>
+        <tr><td>Audiences (ICPs) per campaign</td><td class="n">up to 3</td><td class="n">up to 3</td><td class="n">up to 3</td></tr>
+        <tr><td>Re-runs per tool, per campaign (the fine-print rule)</td><td class="n">3</td><td class="n">3</td><td class="n">5</td></tr>
+        <tr><td>Single tool uses per month (any tool, outside a campaign)</td><td class="n">25</td><td class="n">100</td><td class="n">300</td></tr>
+        <tr><td>Lead Hunter leads per month (scored 80+ — curated, never bulk)</td><td class="n">25</td><td class="n">75</td><td class="n">150</td></tr>
+        <tr><td>Landing pages / funnels</td><td class="n">add-on</td><td class="n">✓</td><td class="n">✓</td></tr>
+        <tr><td>AI Ad Buyer on their own Meta account &amp; pixel</td><td class="n">✓</td><td class="n">✓</td><td class="n">✓</td></tr>
+        <tr><td>Fire campaigns from their CRM (webhook/API)</td><td class="n">—</td><td class="n">✓</td><td class="n">✓</td></tr>
+        <tr><td>Spend-vs-message Meta report</td><td class="n">—</td><td class="n">✓</td><td class="n">✓</td></tr>
+        <tr><td>White-label (their own branding, resellable seats)</td><td class="n">—</td><td class="n">—</td><td class="n">✓</td></tr>
+        <tr><td>Rendered VSL videos</td><td class="n">—</td><td class="n">—</td><td class="n">metered</td></tr>
+        <tr><td>Team logins (seats)</td><td class="n">1</td><td class="n">3</td><td class="n">10</td></tr>
+        <tr><td>Support</td><td class="n">email</td><td class="n">priority</td><td class="n">dedicated</td></tr>
+      </tbody>
+      <tfoot class="tfoot"><tr><td colspan="4">Every allowance in this grid is enforced by the system itself (the three locks above) — so the sales team can promise it without creating a fulfilment risk. Numbers marked draft until Taylor + Will sign off.</td></tr></tfoot>
+    </table>
+    <caption>Rendered VSL video is metered separately (real cost $10–40 per video) — the one genuinely expensive item, kept out of flat allowances on purpose.</caption>
+  </div>
+</section>
+</div>
+
+<!-- ================= TAB 5 · LEAD HUNTER ================= -->
+<div class="panel" id="tab-leads" role="tabpanel" aria-labelledby="btn-tab-leads">
+<section>
+  <div class="sec-head"><span class="no">5a</span><h2>Lead Hunter — three ways to make money from a 29-cent lead</h2></div>
+  <p class="lede">Will proposed three business models on the call. They aren't rivals — they're three lanes of the same road, and we recommend running all three.</p>
+
+  <div class="plain">
+    <div class="plbl">In plain English — the fishing version</div>
+    The machine is a boat that catches fish for 29 cents each, and fish sell for about $52 each. We can: <b>(1) catch fish and sell them</b> ourselves, <b>(2) rent the boat out</b> for a monthly fee and let others fish, or <b>(3) use the boat to find people who buy fish</b> — which is how we back up the promises in Will's offer. Same boat, three incomes.
+  </div>
+
+  <div class="grid3">
+    <div class="card">
+      <h4>Lane 1 — We make the leads and sell them</h4>
+      <p class="stat num">~99% margin</p>
+      <p style="margin-top:6px"><b>How it works:</b> we spend 29 cents to make a lead, sell it wholesale to Republiq operators, and they resell it at $50–125 depending on its score. <b>The limit</b> isn't cost — it's how many niches we can operate carefully at once. <b>Verdict: switch on now.</b> It generates cash immediately and stocks the "wholesale lead access" shelf in Will's offer.</p>
+    </div>
+    <div class="card">
+      <h4>Lane 2 — We rent out the machine</h4>
+      <p class="stat num">Monthly subscriptions</p>
+      <p style="margin-top:6px"><b>How it works:</b> operators run the Lead Hunter themselves inside their subscription (with the limits in <span class="jump" data-goto="tab-plans">Plans &amp; Billing</span>), or unlimited on their own AI account. We carry zero delivery responsibility — a training video replaces our labour. <b>Verdict: this is the core software business</b> an investor is buying growth in, and the "license-to-own" story at month 12.</p>
+    </div>
+    <div class="card">
+      <h4>Lane 3 — We find the buyers</h4>
+      <p class="stat num">Backs the guarantees</p>
+      <p style="margin-top:6px"><b>How it works:</b> the same engine that finds leads also finds <b>businesses that buy leads</b> — that's literally what the 50-lead test was (businesses wanting Meta ads help). This lane is what makes the promises in the <span class="jump" data-goto="tab-orange">Orange Questions tab</span> safe to sign. <b>Verdict: don't sell it separately — bake it into the offer's guarantees.</b></p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="no">5b</span><h2>The two kinds of leads — don't mix them up</h2></div>
+  <p class="lede">On the call Will asked: "an opt-in lead would cost more, right — maybe $15–30 if we're running paid traffic?" Correct — because it's a different animal. The offer sells both, so everyone on the sales team needs this distinction cold.</p>
+  <div class="split">
+    <div>
+      <div class="lbl" style="color:var(--teal-ink)">Kind 1 · Intent-found lead — $0.29 <span class="pill p-live" style="vertical-align:middle">measured</span></div>
+      <p style="font-size:14.5px;color:var(--muted)">The AI finds a business that is <b>publicly asking for the service right now</b> — posting "my cost per lead is suffering, I need someone to take over my Meta ads." They haven't given anyone their details; we found them. Cost: <b>$0.29</b> (measured, <span class="jump" data-goto="tab-start">Start Here</span>). They're hot, but <b>someone still has to reach out</b> — see "from contact to conversation" below.</p>
+    </div>
+    <div>
+      <div class="lbl" style="color:var(--blue-ink)">Kind 2 · Opt-in lead — est. $15–30 <span class="pill p-decide" style="vertical-align:middle">estimate — being measured</span></div>
+      <p style="font-size:14.5px;color:var(--muted)">A person <b>fills in a form</b> after seeing a paid ad — they've raised their hand and expect a call. Warmer, but dearer: the cost is real ad spend, and <b>$15–30 is an industry estimate, not our measured number</b> — the AI Ad Buyer is collecting the real figure on WealthWise now (that's why <span class="jump" data-goto="tab-orange">Orange Q4</span> is on HOLD). These are the leads a customer's <em>own ad budget</em> generates for their fulfilment calendar.</p>
+    </div>
+  </div>
+  <div class="plain">
+    <div class="plbl">In plain English</div>
+    Kind 1 is us <b>finding</b> people who are already shopping (29 cents, we knock on their door). Kind 2 is people <b>coming to us</b> off an ad (they knock, but each knock costs real ad money). The offer's wholesale lead supply and the guarantees run on Kind 1. The customer's own ad campaigns produce Kind 2. Different costs, different promises — never quote one's price for the other.
+  </div>
+
+  <h3>From contact to conversation — how a 29-cent name becomes a booked meeting</h3>
+  <p class="col">A list is not a pipeline. This is the mechanism (already built and used to win clients) that turns Kind-1 contacts into the "qualified conversations" promised in <span class="jump" data-goto="tab-orange">Orange Q2</span>:</p>
+  <ul class="arrow">
+    <li><b>Step 1 — Study:</b> the AI reads the contact's public posts and profile, and drafts a first message that answers the <em>exact</em> problem they posted about ("your cost per lead is suffering — here's how we bring it down"), not a generic pitch.</li>
+    <li><b>Step 2 — Loop:</b> it checks back for replies and knows how to send a second and third touch without being pushy.</li>
+    <li><b>Step 3 — Book:</b> when interest shows, it goes for the booked call — routed through the CRM (text/email sequences), or handed to a human closer for the live conversation.</li>
+    <li><b>The two levers that decide the rate:</b> who the message appears to come from (a trustworthy profile) and how precisely it mirrors their stated problem. Both are controllable, which is why the 1-in-4 contract rate in Orange Q2 is conservative.</li>
+  </ul>
+</section>
+
+<section>
+  <div class="sec-head"><span class="no">5c</span><h2>Recommended retail price bands <span class="pill p-decide" style="vertical-align:middle">Draft — for decision</span></h2></div>
+  <p class="lede">Will's ask from the call: "you could tier these however you want — 75, 100, 125…" Here's the recommended banding, anchored to the live test.</p>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Intent score</th><th>What that score means</th><th class="n">Recommended retail</th><th class="n">Our cost</th></tr></thead>
+      <tbody>
+        <tr><td class="n">95–100</td><td>Urgent, budget mentioned, asking to be contacted</td><td class="n">$125</td><td class="n">$0.29</td></tr>
+        <tr><td class="n">90–94</td><td>Actively asking for the service now</td><td class="n">$100</td><td class="n">$0.29</td></tr>
+        <tr><td class="n">85–89</td><td>Clear buying intent, timing less explicit</td><td class="n">$75</td><td class="n">$0.29</td></tr>
+        <tr><td class="n">80–84</td><td>Qualified interest — the floor we sell at</td><td class="n">$50</td><td class="n">$0.29</td></tr>
+        <tr><td class="n">below 80</td><td>Not sellable — discarded, never counted</td><td class="n">—</td><td class="n">—</td></tr>
+      </tbody>
+      <tfoot class="tfoot"><tr><td colspan="4">Bands set by Taylor (6 Jul). They sit above the live test's AI-suggested average of <b>$52.73</b> deliberately: only 80+ leads are ever sold, and observed conversion (5–7 conversations per 10 contacts — see Orange Q2) supports premium pricing. Adjust per niche; final sign-off with Will.</td></tr></tfoot>
+    </table>
+  </div>
+  <div class="callout"><b>Market check (from Will's "$100K/Month Lead Business" doc):</b> published market prices run <b>$55–70</b> for shared leads and <b>$150–300</b> for exclusives, with live transfers higher still — and market cost-per-lead has risen every year on record (~$170 in 2020 → ~$214 in 2026). Our $50–125 bands sit comfortably <em>inside</em> the market range while our production cost is $0.29 — we're not asking buyers to believe unusual prices, just unusual margins.</div>
+
+  <h3>How 150 leads a month squares with a "$100K/month" lead business</h3>
+  <div class="plain">
+    <div class="plbl">In plain English</div>
+    <div class="step"><div class="sk">Remember</div><div class="sv">Will's 100K anatomy doc says a mature operation moves <b>~1,000 leads a month</b> — but our top plan's allowance is 150. An investor may spot that gap, so here's the answer before they ask.</div></div>
+    <div class="step"><div class="sk">What it is</div><div class="sv">The anatomy's 1,000/month comes from <b>three blended supply lanes</b>: the operator's own ad engine, a data engine, and wholesale purchases. The 150 allowance is only lane three's <em>self-serve</em> slice — the operator's own Lead Hunter quota inside their subscription. Their ad engine (the AI Ad Buyer running their budget) and <b>wholesale purchases from us at per-lead prices have no allowance cap</b> — wholesale is bought inventory, not a subscription feature.</div></div>
+    <div class="step"><div class="sk">Why it matters</div><div class="sv">The allowance protects lead <em>quality</em> (curated 80+ only); volume comes from ad spend and wholesale, which scale with the operator's money, not our subscription. The two numbers describe different pipes — and saying so up front is what "airtight" looks like.</div></div>
+  </div>
+</section>
+</div>
+
+<!-- ================= TAB 6 · ORANGE QUESTIONS ================= -->
+<div class="panel" id="tab-orange" role="tabpanel" aria-labelledby="btn-tab-orange">
+<section>
+  <div class="sec-head"><span class="no">6</span><h2>The Orange Questions — every highlighted item in Will's offer doc, answered</h2></div>
+  <p class="lede">Will's offer document (the "Republiq Master Reference v3") has five passages highlighted in orange — the open questions he needs answered before the sales team goes to market. Here is each one: what the doc says, what it means in plain English, the arithmetic, and our answer. <b>This is the tab to send Will today.</b></p>
+
+  <!-- OQ1 -->
+  <div class="oq">
+    <div class="oq-head"><span class="tagq">Orange Q1</span><span class="txt">The Intent Buyers Guarantee — can we safely promise 25 / 50 verified buyers?</span></div>
+    <div class="oq-body">
+      <div class="row"><div class="rk rk-rem">Remember — the doc says</div><div class="rv"><blockquote>"25 (Catalyst) / 50 (Venture) verified high-intent lead buyers delivered. Any contact failing verification criteria is replaced 2-for-1 on claim within the window."</blockquote></div></div>
+      <div class="row"><div class="rk rk-what">What this means</div><div class="rv">When someone buys Will's program, we promise to hand them a list of <b>25 real businesses</b> (or 50 on the bigger plan) that are <b>actively looking to buy leads right now</b> in their chosen niche. If any contact on the list turns out to be a dud, we replace it with <b>two</b> new ones. The question Will needs answered: <b>can we actually deliver that, and what does it cost us?</b></div></div>
+      <div class="row"><div class="rk rk-math">The simple math</div><div class="rv">One lead costs us $0.29 to find (<span class="jump" data-goto="tab-start">Start Here</span>). So:
+        <div class="math">25 buyer contacts × $0.29  =  <span class="hl">about $7</span>
+50 buyer contacts × $0.29  =  <span class="hl">about $15</span>
+Absolute worst case — every single contact fails
+and we replace all of them two-for-one:
+Catalyst: 25 + 50 replacements = 75 × $0.29 ≈ <span class="hl">$22</span>
+Venture:  50 + 100 replacements = 150 × $0.29 ≈ <span class="hl">$44</span></div>
+      Against a customer paying $1,499–2,499 <b>per month</b>, the worst-case cost of honouring this promise is the price of a takeaway dinner.</div></div>
+      <div class="row"><div class="rk rk-ans">Our answer</div><div class="rv"><span class="verdict v-lock">LOCK IT — say yes to 25 / 50</span> With the verification test now <b>confirmed by Taylor (6 Jul)</b> for the legal exhibit: "verified" means the contact <b>scored 80 or above</b> on our intent scale plus the doc's existing checks. We never sell a lead below 80, full stop — so every replacement claim stays a simple yes/no.</div></div>
+      <div class="row"><div class="rk rk-why">Why you can relax</div><div class="rv">We already did it once, for real: the live test asked for 50 and delivered 50, at $14.46 total. This guarantee promises something we have <b>already demonstrated</b>, at a cost that rounds to zero.</div></div>
+    </div>
+  </div>
+
+  <!-- OQ2 -->
+  <div class="oq">
+    <div class="oq-head"><span class="tagq">Orange Q2</span><span class="txt">The Buyer Pipeline Guarantee — how many real conversations dare we promise?</span></div>
+    <div class="oq-body">
+      <div class="row"><div class="rk rk-rem">Remember — the doc says</div><div class="rv"><blockquote>"[6] (Catalyst) / [15] (Venture) qualified buyer conversations within 6 months of Go-Live… [Numbers pending Taylor's outreach conversion data — set at worst-quartile-comfortable.]"</blockquote>The square brackets mean the numbers are <b>placeholders waiting for Taylor's sign-off</b> — that's exactly what this answer provides.</div></div>
+      <div class="row"><div class="rk rk-what">What this means</div><div class="rv">A step beyond Q1. There, we promise a <b>list of names</b>. Here, we promise that some of those names turn into <b>actual meetings</b> — a "qualified conversation" is defined in the doc as a held meeting or completed live call with a real decision-maker who buys leads. The question: <b>how many meetings is it safe to promise in 6 months?</b></div></div>
+      <div class="row"><div class="rk rk-math">The simple math</div><div class="rv">Taylor's observed rate, running this outreach himself on high-intent (80+) contacts:
+        <div class="math">Observed:  10 high-intent leads  →  <span class="hl">5–7 real conversations</span>  (50–70%)
+           …and about <span class="hl">2 closed deals per 10</span>, when WE do the closing
+
+The contract asks for far less:
+Catalyst:  6 meetings from 25 contacts  =  <span class="hl">2.4 per 10</span>  (24%)
+Venture:  15 meetings from 50 contacts  =  <span class="hl">3 per 10</span>    (30%)</div>
+      In plain terms: experience says every 10 contacts produce 5–7 conversations; the guarantee only needs 2.4–3. That's <b>less than half the observed floor</b> — a genuine worst-quartile number, exactly what Will's doc asked for. And the safety net still stands: if a client's pipeline runs behind, the remedy is "our outreach team keeps going," and every extra contact fed in costs $0.29.</div></div>
+      <div class="row"><div class="rk rk-ans">Our answer</div><div class="rv"><span class="verdict v-lock">LOCK 6 for Catalyst</span><span class="verdict v-lock">LOCK 15 for Venture</span> Both sit at half (or less) of Taylor's observed conversation rate — confirmed against his real outreach results on 6 July, not a guess. Two important lines in the sand: <b>(1)</b> we guarantee <em>conversations</em>, never <em>closes</em> — closing 2-in-10 is what happens when <em>we</em> run the calls, and the doc's own exhibit language ("conversations are opportunities, not outcomes") already protects this; <b>(2)</b> the observed rate assumes the outreach is done our way (personalised to the contact's own post — see <span class="jump" data-goto="tab-leads">Lead Hunter 5b</span>), which is exactly what the Tier-1 remedy delivers. The doc's definition of "qualified conversation," the participation gates, and the remedy ladder: <b>approved as written</b>.</div></div>
+      <div class="row"><div class="rk rk-why">Why you can relax</div><div class="rv">The promise is meetings with people who are <em>already buying</em> what our customer sells — the easiest kind of meeting there is to book. The contract rate is under half the demonstrated rate, and the cost of over-delivering our way out of any shortfall is cents, not dollars.</div></div>
+    </div>
+  </div>
+
+  <!-- OQ3 -->
+  <div class="oq">
+    <div class="oq-head"><span class="tagq">Orange Q3</span><span class="txt">The Pipeline Credit — is a $1,000 / $2,500 "make-good" affordable?</span></div>
+    <div class="oq-body">
+      <div class="row"><div class="rk rk-rem">Remember — the doc says</div><div class="rv"><blockquote>"Tier 2 — Pipeline Credit: $[1,000] / $[2,500] wholesale lead inventory credit + data allocation boost."</blockquote></div></div>
+      <div class="row"><div class="rk rk-what">What this means</div><div class="rv">If, even after our outreach team takes over (Q2's first remedy), a customer still hasn't got their promised meetings, the backstop is a <b>store credit</b>: $1,000 (or $2,500) worth of leads from our own supply, free. The question: <b>what does giving away "$1,000 of leads" actually cost us?</b> This is where the "$52.73 average" line comes from — so let's spell it out.</div></div>
+      <div class="row"><div class="rk rk-math">The simple math</div><div class="rv">From <span class="jump" data-goto="tab-start">Start Here</span>: a lead <b>sells</b> for $52.73 on average (the sticker price), but <b>costs us</b> $0.29 to make. A credit is denominated in sticker price, so:
+        <div class="math">$1,000 credit ÷ $52.73 sticker price  =  <span class="hl">about 19 leads</span>
+19 leads × $0.29 to make  =  <span class="hl">about $6 real cost to us</span>
+
+$2,500 credit ÷ $52.73  =  about 47 leads
+47 leads × $0.29  =  <span class="hl">about $14 real cost to us</span></div>
+      It's like a bakery offering a "$1,000 bread credit": the customer hears $1,000; the bakery pays for flour.</div></div>
+      <div class="row"><div class="rk rk-ans">Our answer</div><div class="rv"><span class="verdict v-lock">LOCK BOTH NUMBERS</span> $1,000 and $2,500 are approved. To the customer this is the strongest-sounding remedy in the stack; to us it costs $6 / $14. There is no cheaper way to look this generous.</div></div>
+      <div class="row"><div class="rk rk-why">Why you can relax</div><div class="rv">Even in a disaster month where <em>ten</em> customers all triggered the big credit at once, our total cost would be about $140. The guarantee's scary number is denominated in <b>their</b> currency (retail), not ours (cost).</div></div>
+    </div>
+  </div>
+
+  <!-- OQ4 -->
+  <div class="oq">
+    <div class="oq-head"><span class="tagq">Orange Q4</span><span class="txt">The Lead Flow Guarantee — the one promise we should NOT make yet</span></div>
+    <div class="oq-body">
+      <div class="row"><div class="rk rk-rem">Remember — the doc says</div><div class="rv"><blockquote>"[PENDING ad buyer's data.] Spend-gated — minimum ad spend maintained through the window… Not referenced in any asset until finalized."</blockquote></div></div>
+      <div class="row"><div class="rk rk-what">What this means</div><div class="rv">This one is different from everything above. Q1–Q3 promise things <b>our machine</b> produces at a known cost. This guarantee would promise a number of <b>consumer leads from the customer's own paid advertising</b> — and ad results depend on their budget, their niche, and the ad platform's mood. You can't promise output from a machine you haven't measured yet.</div></div>
+      <div class="row"><div class="rk rk-math">The simple math</div><div class="rv">There isn't one yet — <b>and that's the point.</b> The AI Ad Buyer went live on its first real account (WealthWise) days ago. We need 2–4 weeks of real cost-per-lead data, ideally across a second niche, before a number goes in a contract.</div></div>
+      <div class="row"><div class="rk rk-ans">Our answer</div><div class="rv"><span class="verdict v-hold">HOLD — exactly as the doc already says</span> Keep it out of every sales asset for now. Data lands by <b>~20 July</b>; Taylor brings the numbers back on the 14th and this gets locked the same way Q1–Q3 were: measured first, promised second.</div></div>
+      <div class="row"><div class="rk rk-why">Why this is a strength, not a gap</div><div class="rv">Telling an investor "we only guarantee what we've measured — and here's the one thing we're still measuring" is the most credible sentence in the whole pitch. It proves the other four answers weren't bravado.</div></div>
+    </div>
+  </div>
+
+  <!-- OQ5 -->
+  <div class="oq">
+    <div class="oq-head"><span class="tagq">Orange Q5</span><span class="txt">The "AI Ad Buyer" — what exactly is it, and how is it sold as software?</span></div>
+    <div class="oq-body">
+      <div class="row"><div class="rk rk-rem">Remember — the doc says</div><div class="rv"><blockquote>"AI Ad Buyer deployed on your ad accounts — you own the pixel and all data" … "The AI Ad Buyer as SaaS — monthly software subscriptions sold to your own lead buyers."</blockquote></div></div>
+      <div class="row"><div class="rk rk-what">What this means</div><div class="rv">The AI Ad Buyer is the commercial name for <b>this entire system</b>: the campaign engine + the Lead Hunter (<span class="jump" data-goto="tab-proof">The Proof</span>) + the connection to the customer's own Meta/Facebook advertising account. "You own the pixel and all data" means it's installed <b>on the customer's own ad account</b> — they keep everything if they ever leave. This is exactly how it already runs on WealthWise today. "As SaaS" means it can be <b>re-sold as a monthly subscription</b> — an operator can sell logins to <em>their</em> customers.</div></div>
+      <div class="row"><div class="rk rk-math">The simple math</div><div class="rv">
+        <div class="math">Included in Venture ($2,499/mo): the top "Network" plan
+Worst-possible AI cost of that plan  =  <span class="hl">~$151/mo</span>  → fits with enormous room
+Operator resells seats at $199–499/mo
+Cost of one extra seat to us  =  <span class="hl">pennies</span> (it's software + capped AI)</div></div></div>
+      <div class="row"><div class="rk rk-ans">Our answer</div><div class="rv"><span class="verdict v-lock">SPEC'D — see The Split &amp; Plans tabs</span> Ships inside Venture as a managed top-tier account. Resale: operators sell seats at a suggested <b>$199–499/month</b>, on a per-seat licence where Republiq takes a cut of every seat. At month 13: <b>license-to-own</b> — confirmed by Taylor: they get their hosted system running on <b>their own AI account</b> (never the source code), and pay an ongoing monthly licence fee <b>forever</b>. The fee level is deliberately open — <span class="mono">$300? / $500? / $1,000?</span> — one of the items flagged for Will's call (<span class="jump" data-goto="tab-roadmap">Roadmap 9c</span>). The connection is deliberately portable (our AI billing, their own OpenRouter account, or their own Claude subscription), so nobody is ever "trapped" — which is itself a selling point.</div></div>
+      <div class="row"><div class="rk rk-why">Why it matters</div><div class="rv">This is the item that turns Will's offer from a service into a <b>product with resale rights</b> — the "waterfall": we license operators, operators license their customers, and a monthly cut flows up each layer.</div></div>
+    </div>
+  </div>
+
+  <div class="callout"><b>Also on the doc's open-items list (not ours to answer):</b> LinkedIn per-account cost and the Datamoon allocation terms sit with Will. The two items that were waiting on Taylor — the Buyer Pipeline numbers (Q2) and the ad-buyer data timeline (Q4) — are answered above.</div>
+</section>
+</div>
+
+<!-- ================= TAB 7 · GO TO MARKET ================= -->
+<div class="panel" id="tab-gtm" role="tabpanel" aria-labelledby="btn-tab-gtm">
+<section>
+  <div class="sec-head"><span class="no">7a</span><h2>Go to market — so a green light means launch, not more planning</h2></div>
+  <p class="lede">Everything on this tab exists for one reason: if the investor says yes tomorrow, the sales team sells this week and the first customer is live within days. Names, onboarding, sales answers, training, operations, and the launch checklist — all decided or explicitly flagged.</p>
+
+  <div class="plain">
+    <div class="plbl">In plain English</div>
+    <div class="step"><div class="sk">Remember</div><div class="sv">Taylor's brief: "it shouldn't just be ready to show investors — if an investor gives us the green light, we should have everything mapped out so we can go to market instantly."</div></div>
+    <div class="step"><div class="sk">What it is</div><div class="sv">The launch kit. The other tabs prove the machine works and the numbers hold; this tab is the checklist of everything <em>around</em> the machine — what it's called, how a customer gets set up, what the sales team says, who runs it day to day.</div></div>
+    <div class="step"><div class="sk">Why it matters</div><div class="sv">Deals die in the gap between "great pitch" and "so what happens when I pay?" This tab deletes that gap.</div></div>
+  </div>
+
+  <h3>What it's called — the naming lock <span class="pill p-live">Locked by Taylor · 6 Jul</span></h3>
+  <p class="col">Will's doc locks terminology for a reason ("the stack never shows"). Same discipline here — one product name, used everywhere, and the plumbing never mentioned:</p>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Context</th><th>Say this</th><th>Never say</th></tr></thead>
+      <tbody>
+        <tr><td>The product, everywhere</td><td><b>"AI Ad Buyer"</b> — one system covering campaigns + leads + ad deployment; matches Will's offer doc exactly</td><td>"the Lovable app", "the dashboard Taylor built"</td></tr>
+        <tr><td>Optional co-brand inside Republiq</td><td><b>"The AI Marketer — powered by ScaleLogix"</b> (Will to confirm the co-brand line)</td><td>a third new name</td></tr>
+        <tr><td>Any audience, ever</td><td>"your account", "your campaigns", "your leads"</td><td>the internal stack: Supabase, OpenRouter, Claude, edge functions, model names</td></tr>
+      </tbody>
+      <tfoot class="tfoot"><tr><td colspan="3">From the call — "do we merge the lead-gen system and the full marketing system under one name?" Locked: <b>one product, two plan levels</b>. The lead-gen piece is a capability of the tiers, not a separate product — two names would force the sales team to explain a boundary customers don't care about.</td></tr></tfoot>
+    </table>
+  </div>
+
+  <h3>Customer onboarding — the first 7 days, step by step</h3>
+  <p class="col">Will's question: "how do we set it up per client?" Here is the actual runbook. Total hands-on labour for us: <b>about one hour per customer</b>, most of it watching automation run.</p>
+  <div class="card">
+    <div class="phase"><div class="pno">Day 0</div><div class="pbody"><b>Sale closes.</b> Account created on the chosen plan → capped AI wallet issued automatically → card subscription starts → customer receives login + a 5-field intake form (brand, niche, offer, colours, logo).</div></div>
+    <div class="phase"><div class="pno">Day 1</div><div class="pbody"><b>Connections.</b> Customer (or our VA, on the higher tiers) connects their Meta ad account and pixel — they own both — and, if they use a CRM, the webhook so campaigns can fire from it.</div></div>
+    <div class="phase"><div class="pno">Day 2</div><div class="pbody"><b>First campaign — guided.</b> We run their first client launch with them on a screen-share (~30 min): brief in → assets out → human review gate → approve → deliver. This is the "aha" moment; never skip it.</div></div>
+    <div class="phase"><div class="pno">Day 3–7</div><div class="pbody"><b>Self-sufficiency.</b> They watch the training videos (below), run their first Lead Hunter batch, and get their first check-in. Success bar: <b>first campaign delivered within 48 hours, first lead batch within 7 days.</b></div></div>
+  </div>
+
+  <h3>Sales enablement — the demo, and the six objections</h3>
+  <p class="col">The 10-minute demo the sales team runs, in order: <b>(1)</b> the four numbers (<span class="jump" data-goto="tab-start">Start Here</span>) → <b>(2)</b> fire a live campaign and let it build during the call → <b>(3)</b> show the <a href="../gallery/">Output Gallery</a> while it runs → <b>(4)</b> open the finished campaign → <b>(5)</b> show the tier grid (<span class="jump" data-goto="tab-plans">Plans &amp; Billing</span>). The machine demos itself; the closer just narrates.</p>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>They'll say…</th><th>The answer (all backed elsewhere in this doc)</th></tr></thead>
+      <tbody>
+        <tr><td>"AI content is generic slop."</td><td>Every asset is built from that audience's <b>strongest ranked</b> fear or desire — shown by one clinic getting three completely different ad sets (<span class="jump" data-goto="tab-proof">The Proof</span>). Independent grading: 8–9/10.</td></tr>
+        <tr><td>"AI makes things up — that's legal risk."</td><td>A hard "no made-up facts" rule is built into every tool (no invented testimonials, stats or guarantees), a disclaimers tool runs per asset, and a <b>human approves everything</b> before a client sees it.</td></tr>
+        <tr><td>"What if I blow through the usage?"</td><td>You can't — allowances are enforced by the system (<span class="jump" data-goto="tab-plans">the three locks</span>). Worst case you see an "upgrade or wait" message. Our bill can't run away either — that's the same lock.</td></tr>
+        <tr><td>"Why not just use ChatGPT ourselves?"</td><td>ChatGPT gives you a text box. This gives you a <b>system</b>: expert playbooks per tool, ranked audience research feeding every asset, 72-email sequences, QC gates, cost tracking, and leads — orchestrated, not prompted.</td></tr>
+        <tr><td>"Who owns the data if I leave?"</td><td>You do. The AI Ad Buyer runs on <b>your</b> Meta account and <b>your</b> pixel. At month 13, license-to-own moves the whole system onto your own AI account (<span class="jump" data-goto="tab-orange">Orange Q5</span>).</td></tr>
+        <tr><td>"What if the AI provider raises prices?"</td><td>A campaign costs ~$1–2 today. Even if AI prices <b>tripled</b>, the worst-case bill on the $299 plan goes from ~$19 to ~$57 — a fifth of the subscription — and typical use sits at 20–40% of allowances, so real exposure is smaller still. If it ever mattered, allowances re-tier in a day, and any customer can switch to their own AI account (<span class="jump" data-goto="tab-plans">Plans &amp; Billing</span>).</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Training layer — who learns what</h3>
+  <div class="grid3">
+    <div class="card"><h4>Customers / operators</h4><p>A short video per tool (recorded with our own AI video tool — the product demos the product) + the guided Day-2 launch. Lives in the account and in the Republiq <b>Operator Playbook</b> as a new module.</p></div>
+    <div class="card"><h4>David's placed VAs</h4><p>A run-the-system tutorial: fire a launch, work the review gate, read the Sub-Account Manager, when to escalate. Certification = they run one full launch unassisted. This is the "human oversight for the investor" from the call.</p></div>
+    <div class="card"><h4>Republiq course module</h4><p>Action from the call: review the existing course content and add a module on this system — what it is, what it produces, how it fits the lead-gen business. Demo video first (this week), full module after launch.</p></div>
+  </div>
+
+  <h3>Who runs it day to day — the operations model</h3>
+  <p class="col">Will's concern from the call: "you don't want to be stuck in the weeds — it needs to be automated with admins who understand marketing keeping their eyes on it."</p>
+  <ul class="arrow">
+    <li><b>Generation: nobody.</b> Campaigns run unattended; the only human touch is the review gate (~5–10 minutes per campaign).</li>
+    <li><b>First-line QC: a trained admin</b> (marketing-literate, trained on the review gate). At 30 clients that's roughly 5 hours a week; it scales by adding reviewers, not engineers.</li>
+    <li><b>Customer health: the Sub-Account Manager</b> (<span class="jump" data-goto="tab-split">The Split</span>) — usage, spend, failed payments and abuse flags surface themselves; the admin works the upsell list weekly.</li>
+    <li><b>Escalation only:</b> Taylor handles exceptions and product, not routine review. Barron covers oversight during absences (as agreed for this week's handover).</li>
+  </ul>
+
+  <h3>The launch checklist — what must be green before the first paying customer</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>#</th><th>Gate</th><th>Status today</th><th>Lands</th></tr></thead>
+      <tbody>
+        <tr><td class="n">1</td><td>"No made-up facts" formal re-test passes on all tools</td><td><span class="pill p-decide">Pending</span></td><td>Week of Jul 14</td></tr>
+        <tr><td class="n">2</td><td>AI billing separated from the other project sharing the account</td><td><span class="pill p-decide">Pending</span></td><td>Week of Jul 14</td></tr>
+        <tr><td class="n">3</td><td>Allowance enforcement + capped wallets live (Locks 1–2)</td><td><span class="pill p-build">Build P1</span></td><td>Week of Jul 14</td></tr>
+        <tr><td class="n">4</td><td>Sub-Account Manager v1</td><td><span class="pill p-build">Build P2</span></td><td>Week of Jul 21</td></tr>
+        <tr><td class="n">5</td><td>Stripe plans + failed-payment auto-pause (Lock 3) — runs on the <b>ScaleLogix Stripe account</b>, which we don't yet have access to (Will to provide)</td><td><span class="pill p-decide">Blocked on Will</span></td><td>Week of Jul 28</td></tr>
+        <tr><td class="n">6</td><td>Terms + fine print written (3-re-runs rule, allowances, guarantee exhibit refs)</td><td><span class="pill p-decide">Pending</span></td><td>With P3</td></tr>
+        <tr><td class="n">7</td><td>Training videos recorded; demo account seeded with a sample client</td><td><span class="pill p-decide">In motion</span></td><td>July</td></tr>
+        <tr><td class="n">8</td><td>Roofing lead batch completed (14/20 today) so every shown number is finished</td><td><span class="pill p-decide">In motion</span></td><td>This week</td></tr>
+        <tr><td class="n">9</td><td>Support inbox + response promise per tier (email / priority / dedicated)</td><td><span class="pill p-decide">Pending</span></td><td>With P3</td></tr>
+        <tr><td class="n">10</td><td>Consent &amp; outreach compliance rails — Will's own 100K doc calls these "load-bearing… built first, not after the first demand letter" (consent capture, TCPA/outreach rules for lead resale); confirm scope with Will/legal</td><td><span class="pill p-decide">Pending — Will/legal</span></td><td>Before lead resale at scale</td></tr>
+      </tbody>
+      <tfoot class="tfoot"><tr><td colspan="4">Bottom line for the investor: <b>the sales team can sell now</b> (deposits / founding-customer pricing against a dated go-live), and the system takes its first fully-billed customer when rows 1–6 are green — earliest end of July on the current build plan (<span class="jump" data-goto="tab-roadmap">Roadmap</span>).</td></tr></tfoot>
+    </table>
+  </div>
+</section>
+</div>
+
+<!-- ================= TAB 8 · EVERY QUESTION ================= -->
+<div class="panel" id="tab-index" role="tabpanel" aria-labelledby="btn-tab-index">
+<section>
+  <div class="sec-head"><span class="no">8</span><h2>Every question from the calls — and exactly where it's answered</h2></div>
+  <p class="lede">Both meetings (6 July), itemised. Every question Will asked — orange-highlighted or spoken — with the answer in one line and a link to the full treatment. If a question isn't on this list, it wasn't asked; nothing is left open except the two items explicitly marked pending.</p>
+
+  <h3>Access &amp; control</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th style="width:44%">Will asked</th><th>One-line answer</th><th style="width:14%">Full answer</th></tr></thead>
+      <tbody>
+        <tr><td>"Do they get access to that visual… or is there a sub-account dashboard for someone who wants to be autonomous?"</td><td>Both: customers get their own login seeing only their clients; we watch all of them via the Sub-Account Manager.</td><td><span class="jump" data-goto="tab-split">The Split</span></td></tr>
+        <tr><td>"If an agency licenses it, do they get their own login that sees all of this?"</td><td>They see their own dashboard, never ours; white-label branding on the Network plan.</td><td><span class="jump" data-goto="tab-split">The Split</span></td></tr>
+        <tr><td>"Make the master one different colours with a different login."</td><td>Yes — internal "Mission Control" keeps the Client Manager and full cost/P&amp;L view, master login only.</td><td><span class="jump" data-goto="tab-split">The Split</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Billing &amp; cost control</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th style="width:44%">Will asked</th><th>One-line answer</th><th style="width:14%">Full answer</th></tr></thead>
+      <tbody>
+        <tr><td>"If their auto-bill bounces, their account gets paused or something?"</td><td>Yes — failed payment → 72h grace → automatic pause, automatic resume on payment (Lock 3).</td><td><span class="jump" data-goto="tab-plans">Plans &amp; Billing</span></td></tr>
+        <tr><td>"It's going to be on our billing account — how do we not get cornered on usage?"</td><td>Three locks: capped per-customer AI wallets, server-enforced allowances, and the billing gate. Worst case per customer is a known small number.</td><td><span class="jump" data-goto="tab-plans">Plans &amp; Billing</span></td></tr>
+        <tr><td>"Maybe they get three iterations on each tool per launch — in the fine print, and you can track it."</td><td>Adopted exactly: 3 re-runs per tool per campaign (5 on Network), enforced server-side, breaches auto-flagged.</td><td><span class="jump" data-goto="tab-plans">Plans &amp; Billing</span></td></tr>
+        <tr><td>"Or we put it in the training video — here's how you connect OpenRouter, you pay your own fees."</td><td>Built in as the BYO-key option: they connect their own AI account, we charge software only; onboarding video covers it.</td><td><span class="jump" data-goto="tab-plans">Plans &amp; Billing</span></td></tr>
+        <tr><td>(Taylor flagged) "Video creation would drive the cost up a bit."</td><td>Correct — rendered video is $10–40 each, so it's metered on the top plan only, never inside a flat allowance.</td><td><span class="jump" data-goto="tab-plans">Plans &amp; Billing</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Guarantees &amp; the numbers <span class="pill p-orange" style="vertical-align:middle">the orange items</span></h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th style="width:44%">Will asked</th><th>One-line answer</th><th style="width:14%">Full answer</th></tr></thead>
+      <tbody>
+        <tr><td>25 / 50 verified high-intent lead buyers, 2-for-1 replacement — safe?</td><td><b>LOCK.</b> Costs ~$7 / ~$15 to deliver; worst case with full replacement ~$22 / ~$44.</td><td><span class="jump" data-goto="tab-orange">Orange Q1</span></td></tr>
+        <tr><td>[6] / [15] qualified conversations in 6 months — "pending Taylor's conversion data."</td><td><b>LOCK 6 · LOCK 15</b> — Taylor's observed rate is 5–7 conversations per 10 contacts; the contract needs only 2.4–3 per 10. Conversations guaranteed, never closes.</td><td><span class="jump" data-goto="tab-orange">Orange Q2</span></td></tr>
+        <tr><td>"How do we define a qualified conversation? We need a true definition."</td><td>The doc's definition is approved as written: held meeting or live transfer with a decision-maker; binary verification; CRM-logged gates.</td><td><span class="jump" data-goto="tab-orange">Orange Q2</span></td></tr>
+        <tr><td>Pipeline Credit $1,000 / $2,500 — affordable?</td><td><b>LOCK.</b> Real cost to us ~$6 / ~$14 (credit is priced in retail, our cost is $0.29/lead).</td><td><span class="jump" data-goto="tab-orange">Orange Q3</span></td></tr>
+        <tr><td>Lead Flow Guarantee — pending ad buyer's data.</td><td><b>HOLD.</b> Correct call — WealthWise data lands ~Jul 20; promise nothing unmeasured.</td><td><span class="jump" data-goto="tab-orange">Orange Q4</span></td></tr>
+        <tr><td>"What would be a comfortable number to put in there to start with?"</td><td>All numbers above, each with its arithmetic — the two that were waiting on Taylor are now answered.</td><td><span class="jump" data-goto="tab-orange">Orange Qs</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>The offer, tiers &amp; pricing</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th style="width:44%">Will asked</th><th>One-line answer</th><th style="width:14%">Full answer</th></tr></thead>
+      <tbody>
+        <tr><td>"Put the deliverables in a bulleted format — you get a certain amount included in each tier."</td><td>Done twice: the capability bullets (Roadmap tab) and the full tier-by-tier grid with allowances.</td><td><span class="jump" data-goto="tab-plans">Plans &amp; Billing</span></td></tr>
+        <tr><td>"What would you sort of call it?"</td><td>Locked: <b>"AI Ad Buyer"</b>, one product; optional co-brand inside Republiq: "The AI Marketer — powered by ScaleLogix" (Will to confirm).</td><td><span class="jump" data-goto="tab-gtm">Go to Market</span></td></tr>
+        <tr><td>"Lead-gen piece on the lower tier, the full stack on the higher tier… license to own after 12 months?"</td><td>Adopted: capability rises by tier; Venture includes the top plan; month 13 = license-to-own on their own AI account.</td><td><span class="jump" data-goto="tab-orange">Orange Q5</span></td></tr>
+        <tr><td>"You can tier the lead prices however you want — 75, 100, 125…"</td><td>Set by Taylor: <b>$50/$75/$100/$125</b> by score band — above the test's $52.73 average because only 80+ leads are ever sold; Will signs off per niche.</td><td><span class="jump" data-goto="tab-leads">Lead Hunter 5c</span></td></tr>
+        <tr><td>"Maybe they resell this even further — we're licensing them to resell, we get a cut?"</td><td>Yes: operators resell seats at $199–499/mo, Republiq takes a per-seat cut — the waterfall, priced.</td><td><span class="jump" data-goto="tab-orange">Orange Q5</span></td></tr>
+        <tr><td>"Autonomous (monthly) vs controlled for 12 months, then they can buy out?"</td><td>Both exist: self-serve plans, or managed-inside-Venture converting to license-to-own at month 13.</td><td><span class="jump" data-goto="tab-plans">Plans &amp; Billing</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Leads — kinds, conversion &amp; models</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th style="width:44%">Will asked</th><th>One-line answer</th><th style="width:14%">Full answer</th></tr></thead>
+      <tbody>
+        <tr><td>"An opt-in lead would cost more — $15 to $30 if we're running paid traffic?"</td><td>Yes — different kind of lead: intent-found is $0.29 measured; opt-in is real ad spend, $15–30 as an estimate until WealthWise data lands.</td><td><span class="jump" data-goto="tab-leads">Lead Hunter 5b</span></td></tr>
+        <tr><td>"How would we make that person a lead in our system — who's messaging, do they look trustworthy?"</td><td>The built outreach mechanism: study the post → personalised first message → follow-up loop → booked call via CRM or closer.</td><td><span class="jump" data-goto="tab-leads">Lead Hunter 5b</span></td></tr>
+        <tr><td>The three models: sell leads / license the system / find the buyers.</td><td>Run all three — wholesale lane, software lane, and the buyer-finding lane that backs the guarantees.</td><td><span class="jump" data-goto="tab-leads">Lead Hunter 5a</span></td></tr>
+        <tr><td>"The $1.02 — is that the plumber ICP, or the plumber's customers, or both?"</td><td>Both — one campaign covers whichever direction the brief targets, and Lead Hunter is proven in both directions too.</td><td><span class="jump" data-goto="tab-proof">The Proof</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Operations, training &amp; fulfilment</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th style="width:44%">Will asked</th><th>One-line answer</th><th style="width:14%">Full answer</th></tr></thead>
+      <tbody>
+        <tr><td>"Manage all our ScaleLogix clients on this at scale… train someone so you're not stuck in the weeds."</td><td>Internal hub runs our whole book; a trained marketing-literate admin works the review gate (~5 hrs/wk at 30 clients); Taylor handles exceptions only.</td><td><span class="jump" data-goto="tab-gtm">Go to Market</span></td></tr>
+        <tr><td>"Whoever David places — a quick training tutorial and they'll do it for them."</td><td>VA tutorial + certification (run one full launch unassisted) is in the training layer.</td><td><span class="jump" data-goto="tab-gtm">Go to Market</span></td></tr>
+        <tr><td>"Go into the course, see the content, give feedback on what to add… a training on this if they pay for it."</td><td>Committed: course review + a new system module; demo video first, module after launch.</td><td><span class="jump" data-goto="tab-gtm">Go to Market</span></td></tr>
+        <tr><td>"How do we fulfil? Set it up per client — seems very simple?"</td><td>It is — the 7-day onboarding runbook is written; ~1 hour of our labour per customer.</td><td><span class="jump" data-goto="tab-gtm">Go to Market</span></td></tr>
+        <tr><td>"Sub-account manager… see how much they're spending, close to their tier, payment failed."</td><td>Fully spec'd — usage meters, spend meter, upsell list, abuse flags, billing state. Build priority 1.</td><td><span class="jump" data-goto="tab-split">The Split</span></td></tr>
+        <tr><td>"A tab for 'here's the outputs'… anything we can demo helps the sales team slam-dunk this."</td><td>Outputs tab + per-tool demo videos are in the hub plan and the build phases; the gallery exists today.</td><td><span class="jump" data-goto="tab-split">The Split</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout good"><b>Score: every question asked on 6 July has a written answer.</b> The only numbers still open in this plan are open on purpose: the Lead Flow Guarantee (waiting for real ad data, ~Jul 20), the final tier prices (test pricing — Will confirms), and the license-to-own monthly fee ($300?/$500?/$1,000? — Will's call). Everything else is locked, with the full locked-vs-pending split in <span class="jump" data-goto="tab-roadmap">Roadmap 9c</span>.</div>
+</section>
+</div>
+
+<!-- ================= TAB 9 · ROADMAP & ACTIONS ================= -->
+<div class="panel" id="tab-roadmap" role="tabpanel" aria-labelledby="btn-tab-roadmap">
+<section>
+  <div class="sec-head"><span class="no">9a</span><h2>Build plan — from here to sellable</h2></div>
+  <p class="lede">Sequenced so the sales team can sell from day one — the engine and the evidence already exist — while the subscription shell is built behind it. Taylor is off 7–13 July; building resumes on the 14th.</p>
+  <div class="card">
+    <div class="phase"><div class="pno">DONE</div><div class="pbody"><b>The machine.</b> 10 certified tools · automatic cost recording on every run · human approval gate · campaign-trigger API (so other systems like the CRM can fire launches) · Lead Hunter with scoring · AI Ad Buyer live on its first real account (WealthWise).</div></div>
+    <div class="phase"><div class="pno">NOW · Jul 6</div><div class="pbody"><b>Meeting pack.</b> This plan + the <span class="jump" data-goto="tab-orange">Orange Questions</span> answers to Will · the deliverables list below · finish the roofing lead batch · start recording tool demo videos.</div></div>
+    <div class="phase"><div class="pno">Wk of Jul 14</div><div class="pbody"><b>Accounts &amp; limits.</b> Customer plans, allowance enforcement (campaigns, the 3-re-runs rule, tool and lead counts) and the capped per-customer AI wallets — Locks 1 and 2 from <span class="jump" data-goto="tab-plans">Plans &amp; Billing</span>.</div></div>
+    <div class="phase"><div class="pno">Wk of Jul 21</div><div class="pbody"><b>Sub-Account Manager.</b> The control-room screen from <span class="jump" data-goto="tab-split">The Split</span> — mostly displaying data the system already records.</div></div>
+    <div class="phase"><div class="pno">Wk of Jul 28</div><div class="pbody"><b>Billing.</b> Card subscriptions per plan, failed-payment auto-pause (Lock 3), overage top-ups, and the "connect your own AI account" option with its training video.</div></div>
+    <div class="phase"><div class="pno">August</div><div class="pbody"><b>White-label &amp; demo.</b> Customer branding, a demo account for the sales team, the Outputs tab with per-tool videos, the Meta spend-vs-message report wired in, and the formal fabrication re-test.</div></div>
+  </div>
+  <div class="callout"><b>First live cohort:</b> the 5–10 accounts being handed over this week run on our <b>internal</b> version immediately — no waiting on the subscription build. They double as the load test and the case-study factory for the SaaS launch.</div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="no">9b</span><h2>The deliverables list — "everything, capability-wise, in bullets"</h2></div>
+  <p class="lede">Will's exact ask, for the tier grid and the sales one-pagers: everything one subscribed account can produce.</p>
+  <div class="grid2">
+    <div class="card">
+      <h4>Every campaign launch includes (one client brief in → all of this out)</h4>
+      <ul class="tick" style="margin:8px 0 0">
+        <li>Deep customer research — up to 3 audience profiles, with their fears, desires and objections <b>ranked by strength</b></li>
+        <li>72 emails across 4 sequences (book-a-call, pre-call, follow-up, long-term nurture)</li>
+        <li>Ad copy written natively for Meta, Instagram, LinkedIn and Google</li>
+        <li>90 attention-grabbing hooks, spread across the strongest angles</li>
+        <li>Static ad copy + 5 image art directions</li>
+        <li>6 AI-generated campaign images matched to the audience</li>
+        <li>Full video sales letter script + short-form video scripts</li>
+        <li>Landing pages / full funnel (optional add-on)</li>
+        <li>Legal disclaimers per asset</li>
+        <li>Human review gate + a shareable client link + downloadable ZIP</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Always-on systems in the account</h4>
+      <ul class="tick" style="margin:8px 0 0">
+        <li><b>Lead Hunter</b> — scored (0–100), verified ready-to-buy leads and lead-buyer contacts, in any niche</li>
+        <li><b>AI Ad Buyer</b> — runs on the customer's own Meta ad account and pixel (they own all the data)</li>
+        <li><b>Spend-vs-message report</b> — reads their Meta account and shows exactly where ad spend disagrees with what their audience cares about (built; final hookup in August)</li>
+        <li>Regenerate any single asset in seconds (2–5 cents) — the monthly refresh engine</li>
+        <li>Fire campaigns from their CRM automatically (API/webhook)</li>
+        <li>Usage and cost tracking on every single generation</li>
+        <li>Skill-file architecture: every tool follows a written expert playbook — no guessing, no wasted spend</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="no">9c</span><h2>Open decisions &amp; this week's actions</h2></div>
+  <div class="grid2">
+    <div class="card" style="border-color:#BFE3C9">
+      <h4 style="color:var(--teal-ink)">Locked by Taylor — 6 July</h4>
+      <ul class="tick" style="margin:8px 0 0">
+        <li>Currency: <b>USD</b> · tier structure + allowances (5/15/40 campaigns, 25/100/300 tool runs, <b>25/75/150 leads</b> — curated, never bulk)</li>
+        <li>Guarantee numbers: <b>6 Catalyst / 15 Venture</b> conversations — backed by observed 5–7 per 10 (<span class="jump" data-goto="tab-orange">Orange Q2</span>)</li>
+        <li>"Verified" = intent score <b>≥ 80</b>, binary — nothing below 80 is ever sold</li>
+        <li>Retail lead bands: <b>$50 / $75 / $100 / $125</b> by score band</li>
+        <li>Naming: <b>"AI Ad Buyer"</b>; co-brand option "The AI Marketer — powered by ScaleLogix"</li>
+        <li>License-to-own = hosted system on their own AI keys, <b>never the code</b>, + a forever monthly licence fee</li>
+        <li>Billing: managed capped wallets by default; own-AI-account as the option</li>
+      </ul>
+    </div>
+    <div class="card" style="border-color:#E8C88F">
+      <h4 style="color:var(--amber)">Reviewed by Taylor — needs Will's opinion</h4>
+      <ul class="arrow" style="margin:8px 0 0">
+        <li><b>Final tier prices</b> — $299/$699/$1,499 are placeholder test pricing under the ScaleLogix partnership; Will confirms</li>
+        <li><b>License-to-own monthly fee</b> — deliberately open: <span class="mono">$300? / $500? / $1,000?</span></li>
+        <li><b>Reseller terms</b> — per-seat price floor and Republiq's cut on operator-resold seats</li>
+        <li><b>Retail band sign-off</b> — Taylor's $50/$75/$100/$125, adjusted per niche</li>
+        <li><b>Co-brand line</b> — approve "The AI Marketer — powered by ScaleLogix" inside Republiq</li>
+        <li><b>Stripe access</b> — subscriptions run on the ScaleLogix Stripe account; we need access to build billing (launch-checklist row 5)</li>
+        <li><b>Support definitions</b> — what "priority" and "dedicated" mean in hours/SLA (fulfilled by David's VAs — Will's side)</li>
+        <li>Will's own open items from the offer doc: LinkedIn per-account cost · data-allocation terms for the "Republiq AI Data System" (internally: Datamoon — never that name in front of customers, per his terminology lock)</li>
+        <li>Consent/TCPA compliance scope for lead outreach &amp; resale (launch-checklist row 10 — his 100K doc calls it load-bearing)</li>
+      </ul>
+    </div>
+  </div>
+  <div style="margin:16px 0">
+    <div class="card">
+      <h4 style="color:var(--blue-ink)">Actions in motion (from the two calls)</h4>
+      <ul class="arrow" style="margin:8px 0 0">
+        <li>Send Will: this plan — especially the <span class="jump" data-goto="tab-orange">Orange Questions tab</span> — <b>today</b></li>
+        <li>Sync with Barron: the Stealth handover — 9 white-label clients; prorate ~6 days of July, pause any who haven't paid, migrate the paid ones onto our engine</li>
+        <li>Record tool demo videos with the AI video tool → Outputs tab + Republiq Operator Playbook</li>
+        <li>Will: Data Moon access for Taylor · sales-hub link · reseller-cut decision</li>
+        <li>Finish the roofing lead batch (14 of 20) before it's shown to investors</li>
+        <li>Collect WealthWise AI-Ad-Buyer cost data → lock the Lead Flow Guarantee (~Jul 20)</li>
+        <li>Review the Republiq course content → propose the AI-system training module (<span class="jump" data-goto="tab-gtm">Go to Market</span>)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout risk"><b>Named risks, so nobody finds them for us:</b> (1) the "no made-up facts" rule is deployed but its formal re-test hasn't run — it will before any customer account goes live; (2) our AI billing account is currently shared with another project — it gets separated before customer accounts launch; (3) per the offer doc, guarantees live only in the legal agreement and approved marketing, never in course content — this document is confidential for the same reason.</div>
+</section>
+</div>
+
+<footer class="wrap">
+  <div>THE AI MARKETER × REPUBLIQ · SAAS PIVOT MASTER PLAN · PREPARED 2026-07-06 · CONFIDENTIAL</div>
+  <div style="margin-top:6px">All costs are real recorded figures from the live system (2026-07-02 → 07-05 test runs). Plan prices are drafts for decision. Every guarantee answer shows its arithmetic in full.</div>
+</footer>
+</div>
+
+<script>
+(function(){
+  var order = ['tab-start','tab-proof','tab-split','tab-plans','tab-leads','tab-orange','tab-gtm','tab-index','tab-roadmap'];
+  var names = {'tab-start':'Start Here','tab-proof':'The Proof','tab-split':'The Split','tab-plans':'Plans & Billing','tab-leads':'Lead Hunter','tab-orange':'Orange Questions','tab-gtm':'Go to Market','tab-index':'Every Question','tab-roadmap':'Roadmap & Actions'};
+
+  function show(id, scroll){
+    if (order.indexOf(id) === -1) return;
+    document.querySelectorAll('.panel').forEach(function(p){ p.classList.toggle('active', p.id === id); });
+    document.querySelectorAll('.tabbtn').forEach(function(b){ b.setAttribute('aria-selected', String(b.dataset.tab === id)); });
+    if (scroll !== false){
+      var bar = document.querySelector('.tabbar-outer');
+      var y = bar ? bar.getBoundingClientRect().top + window.pageYOffset : 0;
+      // Only scroll up to the tab bar if we're below it
+      if (window.pageYOffset > y) window.scrollTo({top: y, behavior: 'smooth'});
+    }
+    try { history.replaceState(null, '', '#' + id); } catch(e){}
+    buildPagers();
+  }
+
+  function buildPagers(){
+    document.querySelectorAll('.pager').forEach(function(p){ p.remove(); });
+    var active = document.querySelector('.panel.active');
+    if (!active) return;
+    var i = order.indexOf(active.id);
+    var pager = document.createElement('div');
+    pager.className = 'pager';
+    if (i > 0){
+      var prev = document.createElement('button');
+      prev.textContent = '← ' + names[order[i-1]];
+      prev.addEventListener('click', function(){ show(order[i-1]); window.scrollTo({top:0}); });
+      pager.appendChild(prev);
+    }
+    var sp = document.createElement('div'); sp.className = 'spacer'; pager.appendChild(sp);
+    if (i < order.length - 1){
+      var next = document.createElement('button');
+      next.textContent = names[order[i+1]] + ' →';
+      next.addEventListener('click', function(){ show(order[i+1]); window.scrollTo({top:0}); });
+      pager.appendChild(next);
+    }
+    active.appendChild(pager);
+  }
+
+  document.querySelectorAll('.tabbtn').forEach(function(b){
+    b.addEventListener('click', function(){ show(b.dataset.tab); });
+  });
+  document.addEventListener('click', function(e){
+    var j = e.target.closest('[data-goto]');
+    if (j){ show(j.dataset.goto); window.scrollTo({top:0, behavior:'smooth'}); }
+  });
+
+  var hash = (location.hash || '').replace('#','');
+  show(order.indexOf(hash) !== -1 ? hash : 'tab-start', false);
+})();
+</script>
+
+</body></html>
