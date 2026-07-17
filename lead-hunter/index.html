@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="data:," />
   <title>LeadHunter Digital Dashboard</title>
   <style>
     :root {
@@ -261,7 +262,7 @@
 
     .run-board {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: minmax(0, 1fr);
       gap: 14px;
     }
 
@@ -466,8 +467,43 @@
       border-radius: 8px;
     }
 
+    .cost-wrap {
+      overflow-x: auto;
+    }
+
+    .cost-wrap table {
+      min-width: 980px;
+    }
+
     .evidence-wrap table {
       min-width: 920px;
+    }
+
+    .keyword-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .keyword-wrap table {
+      min-width: 1220px;
+    }
+
+    .keyword-summary {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .keyword-summary .note {
+      margin: 0;
+    }
+
+    .audit-count {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
     }
 
     .lead-id {
@@ -522,13 +558,13 @@
       .side-stat {
         margin-top: 0;
       }
-      .hero, .two {
+      .hero, .two, .keyword-summary {
         grid-template-columns: 1fr;
       }
       .hero-actions {
         justify-items: start;
       }
-      .kpis, .run-board, .three, .tier-grid {
+      .kpis, .three, .tier-grid {
         grid-template-columns: 1fr 1fr;
       }
     }
@@ -545,6 +581,18 @@
       }
       .hero {
         padding: 20px;
+      }
+      .section-head {
+        align-items: stretch;
+        flex-direction: column;
+      }
+      .toolbar {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .toolbar select, .toolbar input {
+        min-width: 0;
+        width: 100%;
       }
       .chart-row {
         grid-template-columns: 82px 1fr 44px;
@@ -563,13 +611,14 @@
         <a href="#overview"><span class="dot"></span> Overview</a>
         <a href="#runs"><span class="dot"></span> Runs</a>
         <a href="#costs"><span class="dot"></span> Costs</a>
+        <a href="#keywords"><span class="dot"></span> Keywords</a>
         <a href="#pricing"><span class="dot"></span> Pricing</a>
         <a href="#evidence"><span class="dot"></span> Evidence</a>
         <a href="#notes"><span class="dot"></span> Notes</a>
       </nav>
       <div class="side-stat">
         <span>Strict leads</span>
-        <strong id="sideLeadCount">64</strong>
+        <strong id="sideLeadCount">106</strong>
       </div>
     </aside>
 
@@ -577,7 +626,7 @@
       <section class="hero" id="overview">
         <div>
           <h1>LeadHunter Digital Dashboard</h1>
-          <p>Run-level intelligence for Meta Ads and Roofing batches, with AI billing model cost, editable heat-score pricing, evidence previews, and investor-facing completion status.</p>
+          <p>Run-level intelligence for every LeadHunter batch, with measured run costs in USD, AI billing model costs, editable heat-score pricing, evidence previews, and completion status.</p>
         </div>
         <div class="hero-actions">
           <div class="switch" aria-label="Cost model">
@@ -591,22 +640,22 @@
       <section class="grid kpis" aria-label="Top metrics">
         <article class="card">
           <span class="eyebrow">Strict leads</span>
-          <strong class="value" id="strictLeadKpi">64</strong>
-          <p class="small">50 completed Meta Ads leads plus 14 Roofing leads.</p>
+          <strong class="value" id="strictLeadKpi">106</strong>
+          <p class="small">Strict leads across Meta Ads, Roofing, Electricians, and Home Repairs.</p>
         </article>
         <article class="card">
           <span class="eyebrow">Completion</span>
-          <strong class="value" id="completionKpi">91%</strong>
-          <p class="small">64 strict leads from 70 requested across both runs.</p>
+          <strong class="value" id="completionKpi">62%</strong>
+          <p class="small">106 strict leads from 170 requested across four runs.</p>
         </article>
         <article class="card">
           <span class="eyebrow" id="selectedCplLabel">Effective subscription CPL</span>
-          <strong class="value" id="selectedCplKpi">$0.03</strong>
-          <p class="small" id="selectedCplFoot">$2 allocation divided by 64 accepted leads.</p>
+          <strong class="value" id="selectedCplKpi">$0.04</strong>
+          <p class="small" id="selectedCplFoot">$4 allocation divided by 106 accepted leads.</p>
         </article>
         <article class="card">
           <span class="eyebrow" id="modelLabel">Subscription allocation</span>
-          <strong class="value" id="modelCostKpi">$2</strong>
+          <strong class="value" id="modelCostKpi">$4</strong>
           <p class="small" id="modelFoot">$1 allocated to each run; this is not usage billing.</p>
         </article>
       </section>
@@ -620,6 +669,8 @@
                 <option value="all">All runs</option>
                 <option value="meta">Meta Ads Batch 50</option>
                 <option value="roofing">Roofing Batch 20</option>
+                <option value="electricians">Electricians Batch 50</option>
+                <option value="home-repairs">Home Repairs Batch 50</option>
               </select>
             </div>
           </div>
@@ -639,6 +690,7 @@
           <div class="section-head">
             <h2>Cost Model Split</h2>
           </div>
+          <div class="cost-wrap">
           <table>
             <thead>
               <tr>
@@ -647,10 +699,13 @@
                 <th class="num">Effective Subscription CPL</th>
                 <th class="num">OpenRouter AI Cost</th>
                 <th class="num">OpenRouter AI CPL</th>
+                <th class="num">Measured Run Cost</th>
+                <th class="num">Measured CPL</th>
               </tr>
             </thead>
             <tbody id="costRows"></tbody>
           </table>
+          </div>
         </article>
 
         <article class="card">
@@ -662,8 +717,53 @@
             <div class="note">Effective subscription CPL is calculated after that: allocation divided by actual accepted leads. Roofing shows $1.00 / 14 accepted leads = $0.07 per lead.</div>
             <div class="note orange">OpenRouter AI cost is usage-based. Meta Ads is $14.46 total and Roofing is $4.12 total using the current GPT-5.5 assumption of $5/M input tokens and $30/M output tokens.</div>
             <div class="note">Elapsed time is shown only as a speed/efficiency signal, not as a cost line.</div>
+            <div class="note">Electricians and Home Repairs show measured run cost in U.S. dollars. This uses all active run time at $35/hour plus the $1 subscription allocation and is kept separate from the selectable AI billing model.</div>
           </div>
         </article>
+      </section>
+
+      <section class="card" id="keywords">
+        <div class="section-head">
+          <div>
+            <h2>Keyword Audit</h2>
+            <span class="audit-count" id="keywordCount">Loading exact execution ledger...</span>
+          </div>
+          <div class="toolbar">
+            <select id="keywordRun" aria-label="Keyword run filter">
+              <option value="all">Both runs</option>
+              <option value="electricians_batch50_20260717">Electricians</option>
+              <option value="home_repairs_batch50_20260717">Home Repairs</option>
+            </select>
+            <select id="keywordOutcome" aria-label="Keyword outcome filter">
+              <option value="all">All outcomes</option>
+              <option value="SUCCESSFUL">Successful</option>
+              <option value="UNSUCCESSFUL">Unsuccessful</option>
+            </select>
+            <input id="keywordSearch" type="search" placeholder="Search exact keyword" />
+          </div>
+        </div>
+        <div class="keyword-summary">
+          <div class="note orange"><strong>Electricians: 39/50.</strong> 163 Facebook keywords and 12 provider dorks were executed. Twenty-four keywords produced 39 final strict leads; 151 produced none. The dominant loss was 1,760 stale or out-of-window candidates, then 189 other strict-gate failures.</div>
+          <div class="note orange"><strong>Home Repairs: 3/50.</strong> 185 Facebook executions covered 180 unique phrases, with 24 provider-dork executions. Only three keywords converted; 151 Facebook phrases returned zero rows, and broad results skewed to providers, jobs, vague work, or excluded specialist trades.</div>
+        </div>
+        <div class="keyword-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Run</th>
+                <th>Lane</th>
+                <th>Exact keyword tried</th>
+                <th class="num">Executions</th>
+                <th class="num">Surfaced</th>
+                <th class="num">Final strict</th>
+                <th>Outcome</th>
+                <th>Why</th>
+              </tr>
+            </thead>
+            <tbody id="keywordRows"></tbody>
+          </table>
+        </div>
+        <p class="small" style="margin-top:12px"><a href="./keyword-audit.json" download>Download complete keyword audit JSON</a></p>
       </section>
 
       <section class="grid two" id="pricing">
@@ -681,15 +781,15 @@
           <div class="forecast-grid">
             <div class="card flat">
               <span class="eyebrow">Potential revenue</span>
-              <strong class="value" id="revenueKpi">$3,375</strong>
+              <strong class="value" id="revenueKpi">$5,015</strong>
             </div>
             <div class="card flat">
               <span class="eyebrow">Profit after AI</span>
-              <strong class="value" id="profitKpi">$3,373</strong>
+              <strong class="value" id="profitKpi">$5,011</strong>
             </div>
             <div class="card flat">
               <span class="eyebrow">Avg charge</span>
-              <strong class="value" id="avgChargeKpi">$52.73</strong>
+              <strong class="value" id="avgChargeKpi">$47.31</strong>
             </div>
           </div>
           <div class="canvas" id="tierChart" style="margin-top:16px"></div>
@@ -704,6 +804,8 @@
               <option value="all">All runs</option>
               <option value="meta">Meta Ads</option>
               <option value="roofing">Roofing</option>
+              <option value="electricians">Electricians</option>
+              <option value="home-repairs">Home Repairs</option>
             </select>
             <input id="evidenceSearch" type="search" placeholder="Search lead text" />
           </div>
@@ -732,6 +834,8 @@
           <div class="note-list">
             <div class="note">Meta Ads Batch 50 is complete and can be shown as an investor-ready run.</div>
             <div class="note orange">Roofing Batch 20 is commercially useful but still partial at 14/20. Do not label it complete until the loop finds the missing 6 strict leads.</div>
+            <div class="note orange">Electricians Batch 50 finished at 39/50. Its $40.23 measured run cost and $1.03 measured CPL are valid, but the batch missed target by 11.</div>
+            <div class="note orange">Home Repairs Batch 50 finished at 3/50. Its $31.76 measured run cost and $10.59 measured CPL are valid, but the broad category failed the target by 47.</div>
             <div class="note">Cost views stay separated between subscription allocation and OpenRouter usage-based token estimates.</div>
           </div>
         </article>
@@ -741,6 +845,8 @@
           </div>
           <div class="note-list">
             <div class="note orange">Finish the Roofing loop to 20 strict leads, then refresh pricing and revenue projections.</div>
+            <div class="note orange">Recover Electricians with additional geography partitions and electrician-specific problem language.</div>
+            <div class="note orange">Replace broad Home Repairs with narrower drywall, door/window, and deck/fence repair batches before scaling.</div>
             <div class="note">Export actual OpenRouter logs on future runs so token cost stops being an estimate.</div>
             <div class="note">Keep adding only useful self-improving notes back into the LeadHunter skill and HUB.</div>
           </div>
@@ -792,16 +898,66 @@
           ["ROOF-012", "Selling house and needs licensed roofer to inspect and replace roof flashing ASAP.", 94, "90-95"],
           ["ROOF-009", "Roof leak and needs a reliable roofing company for an estimate.", 93, "90-95"]
         ]
+      },
+      {
+        id: "electricians",
+        name: "Electricians Batch 50",
+        industry: "Residential electricians",
+        status: "Failed Target",
+        target: 50,
+        leads: 39,
+        elapsedHours: 1.12,
+        avgMin: 1.72,
+        tokenCost: 0,
+        tokenCpl: 0,
+        subscriptionCost: 1,
+        subscriptionCpl: 0.03,
+        measuredCost: 40.23,
+        measuredCpl: 1.03,
+        tiers: { "80-85": 15, "85-90": 12, "90-95": 6, "95-100": 6 },
+        evidence: [
+          ["ELEC-20260717-004", "Property has no power in one bedroom and bathroom; owner wants an electrician to diagnose and repair it.", 98, "95-100"],
+          ["ELEC-20260717-005", "Homeowner needs a panel upgrade and electrical drop for new mini-split units.", 98, "95-100"],
+          ["ELEC-20260717-015", "One room has lost electricity and the homeowner needs urgent electrical repair recommendations.", 98, "95-100"],
+          ["ELEC-20260717-016", "Homeowner wants a licensed electrician to replace fixtures and a ceiling fan on vaulted ceilings.", 98, "95-100"]
+        ]
+      },
+      {
+        id: "home-repairs",
+        name: "Home Repairs Batch 50",
+        industry: "General home repairs and handyman services",
+        status: "Failed Target",
+        target: 50,
+        leads: 3,
+        elapsedHours: 0.88,
+        avgMin: 17.58,
+        tokenCost: 0,
+        tokenCpl: 0,
+        subscriptionCost: 1,
+        subscriptionCpl: 0.33,
+        measuredCost: 31.76,
+        measuredCpl: 10.59,
+        tiers: { "80-85": 1, "85-90": 2 },
+        evidence: [
+          ["HREP-20260717-STRICT-001", "Homeowner needs three damaged doorframes and a back-porch pillar repaired.", 80, "80-85"],
+          ["HREP-20260717-STRICT-002", "Owner needs deteriorated window framing inspected and repaired, with possible drywall replacement.", 85, "85-90"],
+          ["HREP-20260717-STRICT-003", "Owner requests driveway, carport foundation, and front-porch post repairs.", 85, "85-90"]
+        ]
       }
     ];
 
     const tierPrices = { "80-85": 25, "85-90": 35, "90-95": 50, "95-100": 75 };
     let activeModel = "subscription";
     let runFocus = "all";
+    let keywordAuditRows = [];
 
     const $ = (id) => document.getElementById(id);
     const money = (n) => "$" + Number(n).toLocaleString("en-US", { minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2 });
+    const measuredMoney = (n) => n == null ? "—" : money(n);
     const allTiers = ["80-85", "85-90", "90-95", "95-100"];
+    const escapeHtml = (value) => String(value ?? "").replace(/[&<>"']/g, character => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
+    })[character]);
 
     function filteredRuns() {
       return runFocus === "all" ? runs : runs.filter(run => run.id === runFocus);
@@ -827,9 +983,9 @@
       const t = totals();
       $("sideLeadCount").textContent = t.leads;
       $("strictLeadKpi").textContent = t.leads;
-      $("completionKpi").textContent = Math.round((t.leads / t.target) * 100) + "%";
+      $("completionKpi").textContent = (t.target ? Math.round((t.leads / t.target) * 100) : 0) + "%";
       $("selectedCplLabel").textContent = activeModel === "subscription" ? "Effective subscription CPL" : "OpenRouter AI CPL";
-      $("selectedCplKpi").textContent = money(t.totalCost / t.leads);
+      $("selectedCplKpi").textContent = money(t.leads ? t.totalCost / t.leads : 0);
       $("selectedCplFoot").textContent = activeModel === "subscription"
         ? `${money(t.modelCost)} allocation divided by ${t.leads} accepted leads.`
         : "Usage-based AI billing divided by accepted leads.";
@@ -845,7 +1001,7 @@
         const pct = Math.round((run.leads / run.target) * 100);
         const partial = run.status !== "Complete";
         const modelCost = activeModel === "subscription" ? run.subscriptionCost : run.tokenCost;
-        const modelCpl = modelCost / run.leads;
+        const modelCpl = run.leads ? modelCost / run.leads : 0;
         const costLabel = activeModel === "subscription" ? "Allocation" : "AI cost";
         const cplLabel = activeModel === "subscription" ? "Effective CPL" : "AI CPL";
         const costFoot = activeModel === "subscription"
@@ -870,7 +1026,7 @@
               <div class="mini"><span class="eyebrow">${cplLabel}</span><strong>${money(modelCpl)}</strong></div>
               <div class="mini"><span class="eyebrow">Revenue</span><strong>${money(runRevenue)}</strong></div>
             </div>
-            <p class="small">${run.elapsedHours}h elapsed, ${run.avgMin} min average per strict lead. ${costFoot}</p>
+            <p class="small">${run.elapsedHours}h active runtime, ${run.avgMin} min average per strict lead. ${costFoot}${run.measuredCost != null ? ` Measured run cost: ${money(run.measuredCost)} total, or ${money(run.measuredCpl)} per strict lead (USD).` : ""}</p>
           </article>
         `;
       }).join("");
@@ -883,7 +1039,7 @@
         return `
           <div class="chart-row">
             <strong>${run.name}</strong>
-            <div class="bar-track"><div class="bar-fill ${run.status === "Partial" ? "orange" : "green"}" style="width:${(run.leads / max) * 100}%"></div></div>
+            <div class="bar-track"><div class="bar-fill ${run.leads >= run.target ? "green" : "orange"}" style="width:${(run.leads / max) * 100}%"></div></div>
             <span>${pct}%</span>
           </div>
         `;
@@ -893,11 +1049,13 @@
     function renderCosts() {
       $("costRows").innerHTML = runs.map(run => `
         <tr>
-          <td><strong>${run.name}</strong><br><span class="${run.status === "Complete" ? "status-complete" : "status-partial"}">${run.status}</span></td>
+          <td><strong>${run.name}</strong><br><span class="${run.leads >= run.target ? "status-complete" : "status-partial"}">${run.status}</span></td>
           <td class="num">${money(run.subscriptionCost)}</td>
-          <td class="num">${money(run.subscriptionCost / run.leads)}</td>
+          <td class="num">${money(run.leads ? run.subscriptionCost / run.leads : 0)}</td>
           <td class="num">${money(run.tokenCost)}</td>
-          <td class="num">${money(run.tokenCost / run.leads)}</td>
+          <td class="num">${money(run.leads ? run.tokenCost / run.leads : 0)}</td>
+          <td class="num">${measuredMoney(run.measuredCost)}</td>
+          <td class="num">${measuredMoney(run.measuredCpl)}</td>
         </tr>
       `).join("");
     }
@@ -923,7 +1081,7 @@
       const t = totals();
       $("revenueKpi").textContent = money(t.revenue);
       $("profitKpi").textContent = money(t.profit);
-      $("avgChargeKpi").textContent = money(t.revenue / t.leads);
+      $("avgChargeKpi").textContent = money(t.leads ? t.revenue / t.leads : 0);
       const max = Math.max(...allTiers.map(tier => tierCount(tier)));
       $("tierChart").innerHTML = allTiers.map(tier => {
         const count = tierCount(tier);
@@ -955,6 +1113,42 @@
       `).join("");
     }
 
+    function renderKeywordAudit() {
+      const run = $("keywordRun").value;
+      const outcome = $("keywordOutcome").value;
+      const query = $("keywordSearch").value.trim().toLowerCase();
+      const rows = keywordAuditRows
+        .filter(row => run === "all" || row.runId === run)
+        .filter(row => outcome === "all" || row.outcome === outcome)
+        .filter(row => !query || row.keyword.toLowerCase().includes(query));
+      $("keywordCount").textContent = `${rows.length} of ${keywordAuditRows.length} exact keyword and provider-dork rows shown`;
+      $("keywordRows").innerHTML = rows.map(row => `
+        <tr>
+          <td><span class="pill">${escapeHtml(row.run)}</span></td>
+          <td>${escapeHtml(row.lane)}</td>
+          <td><strong>${escapeHtml(row.keyword)}</strong></td>
+          <td class="num">${row.executions}</td>
+          <td class="num">${row.surfaced}</td>
+          <td class="num"><strong>${row.finalStrict}</strong></td>
+          <td><span class="${row.outcome === "SUCCESSFUL" ? "status-complete" : "status-partial"}">${escapeHtml(row.outcome)}</span></td>
+          <td>${escapeHtml(row.explanation)}</td>
+        </tr>
+      `).join("");
+    }
+
+    async function loadKeywordAudit() {
+      try {
+        const response = await fetch("./keyword-audit.json");
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const audit = await response.json();
+        keywordAuditRows = audit.rows || [];
+        renderKeywordAudit();
+      } catch (error) {
+        $("keywordCount").textContent = "Keyword ledger could not be loaded.";
+        $("keywordRows").innerHTML = `<tr><td colspan="8">${escapeHtml(error.message)}</td></tr>`;
+      }
+    }
+
     function copySummary() {
       const t = totals();
       const summary = [
@@ -965,7 +1159,11 @@
         `Gross profit after selected AI billing: ${money(t.profit)}`,
         `Active cost model: ${activeModel === "subscription" ? "Subscription allocation" : "OpenRouter token estimate"}`,
         "Meta Ads Batch 50: Complete",
-        "Roofing Batch 20: Partial, 14/20 strict leads"
+        "Roofing Batch 20: Partial, 14/20 strict leads",
+        "Electricians Batch 50: Failed Target, 39/50 strict leads, $40.23 measured cost, $1.03 measured CPL",
+        "Home Repairs Batch 50: Failed Target, 3/50 strict leads, $31.76 measured cost, $10.59 measured CPL",
+        "Electricians keyword audit: 24 successful, 151 unsuccessful",
+        "Home Repairs keyword audit: 3 successful, 189 unsuccessful"
       ].join("\\n");
       navigator.clipboard?.writeText(summary);
       $("copySummary").textContent = "Copied";
@@ -1002,10 +1200,14 @@
 
     $("evidenceRun").addEventListener("change", renderEvidence);
     $("evidenceSearch").addEventListener("input", renderEvidence);
+    $("keywordRun").addEventListener("change", renderKeywordAudit);
+    $("keywordOutcome").addEventListener("change", renderKeywordAudit);
+    $("keywordSearch").addEventListener("input", renderKeywordAudit);
     $("copySummary").addEventListener("click", copySummary);
 
     renderTierInputs();
     renderAll();
+    loadKeywordAudit();
   </script>
 </body>
 </html>
