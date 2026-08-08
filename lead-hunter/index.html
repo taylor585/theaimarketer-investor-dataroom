@@ -618,7 +618,7 @@
       </nav>
       <div class="side-stat">
         <span>Strict leads</span>
-        <strong id="sideLeadCount">111</strong>
+        <strong id="sideLeadCount">121</strong>
       </div>
     </aside>
 
@@ -640,22 +640,22 @@
       <section class="grid kpis" aria-label="Top metrics">
         <article class="card">
           <span class="eyebrow">Strict leads</span>
-          <strong class="value" id="strictLeadKpi">111</strong>
-          <p class="small">Strict leads across Meta Ads, Roofing, Electricians, Home Repairs, and HVAC V3.</p>
+          <strong class="value" id="strictLeadKpi">121</strong>
+          <p class="small">Strict leads across Meta Ads, Roofing, Electricians, Home Repairs, and HVAC GraphQL runs.</p>
         </article>
         <article class="card">
           <span class="eyebrow">Completion</span>
-          <strong class="value" id="completionKpi">63%</strong>
-          <p class="small">111 strict leads from 175 requested across five runs.</p>
+          <strong class="value" id="completionKpi">65%</strong>
+          <p class="small">121 strict leads from 185 requested across seven runs.</p>
         </article>
         <article class="card">
           <span class="eyebrow" id="selectedCplLabel">Effective subscription CPL</span>
-          <strong class="value" id="selectedCplKpi">$0.04</strong>
-          <p class="small" id="selectedCplFoot">$5 allocation divided by 111 accepted leads.</p>
+          <strong class="value" id="selectedCplKpi">$0.06</strong>
+          <p class="small" id="selectedCplFoot">$7 allocation divided by 121 accepted leads.</p>
         </article>
         <article class="card">
           <span class="eyebrow" id="modelLabel">Subscription allocation</span>
-          <strong class="value" id="modelCostKpi">$5</strong>
+          <strong class="value" id="modelCostKpi">$7</strong>
           <p class="small" id="modelFoot">$1 allocated to each run; this is not usage billing.</p>
         </article>
       </section>
@@ -673,6 +673,7 @@
                 <option value="electricians">Electricians Batch 50</option>
                 <option value="home-repairs">Home Repairs Batch 50</option>
                 <option value="hvac-v3">HVAC V3 Pilot 5</option>
+                <option value="hvac-gql-v31">HVAC GraphQL V3.1 Additional 5</option>
               </select>
             </div>
           </div>
@@ -721,6 +722,7 @@
             <div class="note">Elapsed time is shown only as a speed/efficiency signal, not as a cost line.</div>
             <div class="note">Electricians and Home Repairs show measured run cost in U.S. dollars. This uses all active run time at $35/hour plus the $1 subscription allocation and is kept separate from the selectable AI billing model.</div>
             <div class="note">HVAC V3 uses the same measured-cost convention: $17.94 total and $3.59 per strict lead, with all figures denominated in USD.</div>
+            <div class="note">HVAC GraphQL V3.1 Additional 5 completed at $9.18 measured cost and $1.84 per strict lead in USD; profile-lock waiting is excluded.</div>
           </div>
         </article>
       </section>
@@ -737,12 +739,15 @@
               <option value="electricians_batch50_20260717">Electricians</option>
               <option value="home_repairs_batch50_20260717">Home Repairs</option>
               <option value="hvac_v3_pilot5_20260808">HVAC V3 Pilot 5</option>
+              <option value="HVAC-GRAPHQL-V3.1-ADDITIONAL5-20260808">HVAC GraphQL V3.1 Additional 5</option>
             </select>
             <select id="keywordOutcome" aria-label="Keyword outcome filter">
               <option value="all">All outcomes</option>
               <option value="SUCCESSFUL">Successful</option>
               <option value="UNSUCCESSFUL">Unsuccessful</option>
               <option value="NOT EXECUTED">Not executed after target</option>
+              <option value="QUALIFICATION_UNSUCCESSFUL">Qualification unsuccessful</option>
+              <option value="NOT_EXECUTED">Not executed</option>
             </select>
             <input id="keywordSearch" type="search" placeholder="Search exact keyword" />
           </div>
@@ -751,6 +756,7 @@
           <div class="note orange"><strong>Electricians: 39/50.</strong> 163 Facebook keywords and 12 provider dorks were executed. Twenty-four keywords produced 39 final strict leads; 151 produced none. The dominant loss was 1,760 stale or out-of-window candidates, then 189 other strict-gate failures.</div>
           <div class="note orange"><strong>Home Repairs: 3/50.</strong> 185 Facebook executions covered 180 unique phrases, with 24 provider-dork executions. Only three keywords converted; 151 Facebook phrases returned zero rows, and broad results skewed to providers, jobs, vague work, or excluded specialist trades.</div>
           <div class="note"><strong>HVAC V3: 5/5.</strong> Sixteen Facebook buyer-language searches and six Google command families were attempted. Four Facebook phrases produced all five final strict leads; ten planned Google variants were not needed after the target was met.</div>
+          <div class="note"><strong>HVAC GraphQL V3.1 Additional 5: 5/5.</strong> All 20 Facebook searches were collector-healthy, producing 223 unique parents and 76 fresh parents. Four exact phrases produced the five final strict leads; eight Google commands were retained but not needed after validation met target.</div>
         </div>
         <div class="keyword-wrap">
           <table>
@@ -814,6 +820,7 @@
               <option value="electricians">Electricians</option>
               <option value="home-repairs">Home Repairs</option>
               <option value="hvac-v3">HVAC V3 Pilot 5</option>
+              <option value="hvac-gql-v31">HVAC GraphQL V3.1 Additional 5</option>
             </select>
             <input id="evidenceSearch" type="search" placeholder="Search lead text" />
           </div>
@@ -845,6 +852,7 @@
             <div class="note orange">Electricians Batch 50 finished at 39/50. Its $40.23 measured run cost and $1.03 measured CPL are valid, but the batch missed target by 11.</div>
             <div class="note orange">Home Repairs Batch 50 finished at 3/50. Its $31.76 measured run cost and $10.59 measured CPL are valid, but the broad category failed the target by 47.</div>
             <div class="note">HVAC V3 Pilot 5 completed at 5/5. Its $17.94 measured run cost and $3.59 measured CPL are reconciled and investor-ready.</div>
+            <div class="note">HVAC GraphQL V3.1 Additional 5 completed at 5/5. Its $9.18 measured run cost and $1.84 measured CPL are reconciled and investor-ready.</div>
             <div class="note">Cost views stay separated between subscription allocation and OpenRouter usage-based token estimates.</div>
           </div>
         </article>
@@ -998,6 +1006,30 @@
           ["HVAC-V3-20260808-003", "Property owner needs an HVAC assessment because an older unit cannot keep up with an opened-up space.", 83, "80-85"],
           ["HVAC-V3-20260808-004", "Toccoa requester wants a reputable, honest HVAC company for maintenance.", 81, "80-85"],
           ["HVAC-V3-20260808-005", "Moreno Valley requester is actively seeking a trustworthy local HVAC company.", 81, "80-85"]
+        ]
+      },
+      {
+        id: "hvac-gql-v31",
+        name: "HVAC GraphQL V3.1 Additional 5",
+        industry: "U.S. residential and commercial HVAC buyers",
+        status: "Complete",
+        target: 5,
+        leads: 5,
+        elapsedHours: 0.234,
+        avgMin: 2.81,
+        tokenCost: 0,
+        tokenCpl: 0,
+        subscriptionCost: 1,
+        subscriptionCpl: 0.20,
+        measuredCost: 9.18,
+        measuredCpl: 1.84,
+        tiers: { "85-90": 2, "90-95": 1, "95-100": 2 },
+        evidence: [
+          ["HVAC-V31-20260808-003", "San Marcos apartment buyer requests an urgent licensed 2.5-ton HVAC change-out with pricing.", 100, "95-100"],
+          ["HVAC-V31-20260808-005", "Lacey rental owner needs a licensed, permitted 3-ton Coleman AC installation by August 17.", 96, "95-100"],
+          ["HVAC-V31-20260808-004", "Salt Lake City restaurant project has approved plans and needs a commercial HVAC site visit and bid.", 93, "90-95"],
+          ["HVAC-V31-20260808-001", "Orrum household has an AC outage and urgently needs an HVAC technician.", 88, "85-90"],
+          ["HVAC-V31-20260808-002", "Ozark requester needs a company to inspect the HVAC unit the same morning.", 87, "85-90"]
         ]
       }
     ];
@@ -1220,9 +1252,11 @@
         "Electricians Batch 50: Failed Target, 39/50 strict leads, $40.23 measured cost, $1.03 measured CPL",
         "Home Repairs Batch 50: Failed Target, 3/50 strict leads, $31.76 measured cost, $10.59 measured CPL",
         "HVAC V3 Pilot 5: Complete, 5/5 strict leads, $17.94 measured cost, $3.59 measured CPL",
+        "HVAC GraphQL V3.1 Additional 5: Complete, 5/5 strict leads, $9.18 measured cost, $1.84 measured CPL",
         "Electricians keyword audit: 24 successful, 151 unsuccessful",
         "Home Repairs keyword audit: 3 successful, 189 unsuccessful",
-        "HVAC V3 keyword audit: 4 successful, 18 unsuccessful, 10 not executed after target"
+        "HVAC V3 keyword audit: 4 successful, 18 unsuccessful, 10 not executed after target",
+        "HVAC GraphQL V3.1 keyword audit: 4 successful, 16 qualification-unsuccessful, 8 not executed after target"
       ].join("\\n");
       navigator.clipboard?.writeText(summary);
       $("copySummary").textContent = "Copied";
