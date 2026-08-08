@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-17T17:41:56.715Z",
+  "generatedAt": "2026-08-08T16:41:53.349Z",
   "definition": {
     "successful": "At least one final protocol-strict lead is attributed to the exact Facebook keyword.",
     "unsuccessful": "No final protocol-strict lead is attributed to the exact keyword. Provider dorks are unsuccessful when they return no direct Facebook parent-post URL."
@@ -5166,6 +5166,358 @@
       "attempt": "attempt-1 + attempt-2-recovery-evidence-used-by-attempt-3",
       "outcome": "UNSUCCESSFUL",
       "explanation": "Executed exactly, but returned zero direct Facebook parent-post URLs."
+    },
+    {
+      "runId": "hvac_v3_pilot5_20260808",
+      "run": "HVAC V3 Pilot 5",
+      "lane": "Facebook | seed-plus-buyer",
+      "keyword": "HVAC leads homeowners need repair",
+      "executions": 1,
+      "surfaced": 8,
+      "finalStrict": 0,
+      "outcome": "UNSUCCESSFUL",
+      "explanation": "Surfaced parents, but none passed all buyer, geography, recency, parent-post, and dedup gates."
+    },
+    {
+      "runId": "hvac_v3_pilot5_20260808",
+      "run": "HVAC V3 Pilot 5",
+      "lane": "Facebook | exact-buyer",
+      "keyword": "I need HVAC repair",
+      "executions": 1,
+      "surfaced": 8,
+      "finalStrict": 0,
+      "outcome": "UNSUCCESSFUL",
+      "explanation": "Surfaced parents, but none passed all buyer, geography, recency, parent-post, and dedup gates."
+    },
+    {
+      "runId": "hvac_v3_pilot5_20260808",
+      "run": "HVAC V3 Pilot 5",
+      "lane": "Facebook | exact-buyer",
+      "keyword": "need an HVAC technician",
+      "executions": 1,
+      "surfaced": 16,
+      "finalStrict": 0,
+      "outcome": "UNSUCCESSFUL",
+      "explanation": "Surfaced parents, but none passed all buyer, geography, recency, parent-post, and dedup gates."
+    },
+    {
+      "runId": "hvac_v3_pilot5_20260808",
+      "run": "HVAC V3 Pilot 5",
+      "lane": "Facebook | exact-buyer",
+      "keyword": "looking for an HVAC company",
+      "executions": 1,
+      "surfaced": 13,
+      "finalStrict": 1,
+      "outcome": "SUCCESSFUL",
+      "explanation": "Produced 1 final strict lead."
+    },
+    {
+      "runId": "hvac_v3_pilot5_20260808",
+      "run": "HVAC V3 Pilot 5",
+      "lane": "Facebook | recommendation",
+      "keyword": "can anyone recommend an HVAC company",
+      "executions": 1,
+      "surfaced": 22,
+      "finalStrict": 2,
+      "outcome": "SUCCESSFUL",
+      "explanation": "Produced 2 final strict leads."
+    },
+    {
+      "runId": "hvac_v3_pilot5_20260808",
+      "run": "HVAC V3 Pilot 5",
+      "lane": "Facebook | recommendation",
+      "keyword": "HVAC recommendations",
+      "executions": 1,
+      "surfaced": 13,
+      "finalStrict": 1,
+      "outcome": "SUCCESSFUL",
+      "explanation": "Produced 1 final strict lead."
+    },
+    {
+      "runId": "hvac_v3_pilot5_20260808",
+      "run": "HVAC V3 Pilot 5",
+      "lane": "Facebook | problem-action",
+      "keyword": "AC not working need repair",
+      "executions": 1,
+      "surfaced": 6,
+      "finalStrict": 0,
+      "outcome": "UNSUCCESSFUL",
+      "explanation": "Surfaced parents, but none passed all buyer, geography, recency, parent-post, and dedup gates."
+    },
+    {
+      "runId": "hvac_v3_pilot5_20260808",
+      "run": "HVAC V3 Pilot 5",
+      "lane": "Facebook | problem-action",
+      "keyword": "air conditioner stopped working need help",
+      "executions": 1,
+      "surfaced": 20,
+      "finalStrict": 1,
+      "outcome": "SUCCESSFUL",
+      "explanation": "Produced 1 final strict lead."
+    },
+    {
+      "runId": "hvac_v3_pilot5_20260808",
+      "run": "HVAC V3 Pilot 5",
+      "lane": "Facebook | problem-action",
+      "keyword": "central air not cooling repair",
+      "executions": 1,
+      "surfaced": 15,
+      "finalStrict": 0,
+      "outcome": "UNSUCCESSFUL",
+      "explanation": "Surfaced parents, but none passed all buyer, geography, recency, parent-post, and dedup gates."
+    },
+    {
+      "runId": "hvac_v3_pilot5_20260808",
+      "run": "HVAC V3 Pilot 5",
+      "lane": "Facebook | problem-action",
+      "keyword": "HVAC replacement estimate",
+      "executions": 1,
+      "surfaced": 15,
+      "finalStrict": 0,
+      "outcome": "UNSUCCESSFUL",
+      "explanation": "Surfaced parents, but none passed all buyer, geography, recency, parent-post, and dedup gates."
+    },
+    {
+      "runId": "hvac_v3_pilot5_20260808",
+      "run": "HVAC V3 Pilot 5",
+      "lane": "Facebook | commercial-intent",
+      "keyword": "need HVAC quote",
+      "executions": 1,
+      "surfaced": 7,
+      "finalStrict": 0,
+      "outcome": "UNSUCCESSFUL",
+      "explanation": "Surfaced parents, but none passed all buyer, geography, recency, parent-post, and dedup gates."
+    },
+    {
+      "runId": "hvac_v3_pilot5_20260808",
+      "run": "HVAC V3 Pilot 5",
+      "lane": "Facebook | commercial-intent",
+      "keyword": "air conditioning repair estimate",
+      "executions": 1,
+      "surfaced": 11,
+      "finalStrict": 0,
+      "outcome": "UNSUCCESSFUL",
+      "explanation": "Surfaced parents, but none passed all buyer, geography, recency, parent-post, and dedup gates."
+    },
+    {
+      "runId": "hvac_v3_pilot5_20260808",
+      "run": "HVAC V3 Pilot 5",
+      "lane": "Facebook | urgency",
+      "keyword": "need AC repair ASAP",
+      "executions": 1,
+      "surfaced": 6,
+      "finalStrict": 0,
+      "outcome": "UNSUCCESSFUL",
+      "explanation": "Surfaced parents, but none passed all buyer, geography, recency, parent-post, and dedup gates."
+    },
+    {
+      "runId": "hvac_v3_pilot5_20260808",
+      "run": "HVAC V3 Pilot 5",
+      "lane": "Facebook | equipment-problem",
+      "keyword": "heat pump not cooling need repair",
+      "executions": 1,
+      "surfaced": 8,
+      "finalStrict": 0,
+      "outcome": "UNSUCCESSFUL",
+      "explanation": "Surfaced parents, but none passed all buyer, geography, recency, parent-post, and dedup gates."
+    },
+    {
+      "runId": "hvac_v3_pilot5_20260808",
+      "run": "HVAC V3 Pilot 5",
+      "lane": "Facebook | equipment-problem",
+      "keyword": "mini split repair recommendations",
+      "executions": 1,
+      "surfaced": 8,
+      "finalStrict": 0,
+      "outcome": "UNSUCCESSFUL",
+      "explanation": "Surfaced parents, but none passed all buyer, geography, recency, parent-post, and dedup gates."
+    },
+    {
+      "runId": "hvac_v3_pilot5_20260808",
+      "run": "HVAC V3 Pilot 5",
+      "lane": "Facebook | replacement",
+      "keyword": "need new AC unit quote",
+      "executions": 1,
+      "surfaced": 7,
+      "finalStrict": 0,
+      "outcome": "UNSUCCESSFUL",
+      "explanation": "Surfaced parents, but none passed all buyer, geography, recency, parent-post, and dedup gates."
+    },
+    {
+      "runId": "hvac_v3_pilot5_20260808",
+      "run": "HVAC V3 Pilot 5",
+      "lane": "Google command via Bing fallback | singular-post",
+      "keyword": "inurl:facebook.com/post \"I need HVAC repair\" after:2026-08-01",
+      "executions": 3,
+      "surfaced": 1,
+      "finalStrict": 0,
+      "outcome": "UNSUCCESSFUL",
+      "explanation": "Google challenged twice; V3 Bing fallback executed and surfaced discovery-only URLs, but no additional final lead was needed after Facebook met target."
+    },
+    {
+      "runId": "hvac_v3_pilot5_20260808",
+      "run": "HVAC V3 Pilot 5",
+      "lane": "Google command via Bing fallback | plural-post",
+      "keyword": "inurl:facebook.com/posts \"need an HVAC technician\" after:2026-08-01",
+      "executions": 3,
+      "surfaced": 1,
+      "finalStrict": 0,
+      "outcome": "UNSUCCESSFUL",
+      "explanation": "Google challenged twice; V3 Bing fallback executed and surfaced discovery-only URLs, but no additional final lead was needed after Facebook met target."
+    },
+    {
+      "runId": "hvac_v3_pilot5_20260808",
+      "run": "HVAC V3 Pilot 5",
+      "lane": "Google command via Bing fallback | groups",
+      "keyword": "site:facebook.com/groups \"looking for an HVAC company\" after:2026-08-01",
+      "executions": 3,
+      "surfaced": 1,
+      "finalStrict": 0,
+      "outcome": "UNSUCCESSFUL",
+      "explanation": "Google challenged twice; V3 Bing fallback executed and surfaced discovery-only URLs, but no additional final lead was needed after Facebook met target."
+    },
+    {
+      "runId": "hvac_v3_pilot5_20260808",
+      "run": "HVAC V3 Pilot 5",
+      "lane": "Google command via Bing fallback | groups",
+      "keyword": "site:facebook.com/groups \"can anyone recommend an HVAC company\" after:2026-08-01",
+      "executions": 3,
+      "surfaced": 1,
+      "finalStrict": 0,
+      "outcome": "UNSUCCESSFUL",
+      "explanation": "Google challenged twice; V3 Bing fallback executed and surfaced discovery-only URLs, but no additional final lead was needed after Facebook met target."
+    },
+    {
+      "runId": "hvac_v3_pilot5_20260808",
+      "run": "HVAC V3 Pilot 5",
+      "lane": "Google command via Bing fallback | problem-action",
+      "keyword": "site:facebook.com (\"AC not working\" OR \"air conditioner stopped working\") (\"repair\" OR \"need help\" OR \"recommendations\") after:2026-08-01",
+      "executions": 3,
+      "surfaced": 1,
+      "finalStrict": 0,
+      "outcome": "UNSUCCESSFUL",
+      "explanation": "Google challenged twice; V3 Bing fallback executed and surfaced discovery-only URLs, but no additional final lead was needed after Facebook met target."
+    },
+    {
+      "runId": "hvac_v3_pilot5_20260808",
+      "run": "HVAC V3 Pilot 5",
+      "lane": "Google advanced command | commercial-intent",
+      "keyword": "site:facebook.com (\"HVAC quote\" OR \"HVAC estimate\") (\"need\" OR \"looking for\") after:2026-08-01",
+      "executions": 1,
+      "surfaced": 1,
+      "finalStrict": 0,
+      "outcome": "UNSUCCESSFUL",
+      "explanation": "Google challenge appeared; rotation stopped after the five-lead target had already been parent-validated."
+    },
+    {
+      "runId": "hvac_v3_pilot5_20260808",
+      "run": "HVAC V3 Pilot 5",
+      "lane": "Google advanced command | urgency",
+      "keyword": "inurl:facebook.com/groups (\"need AC repair\" OR \"HVAC repair ASAP\") after:2026-08-01",
+      "executions": 0,
+      "surfaced": 0,
+      "finalStrict": 0,
+      "outcome": "NOT EXECUTED",
+      "explanation": "Planned but not executed because the strict target was already met and further rotation was unnecessary."
+    },
+    {
+      "runId": "hvac_v3_pilot5_20260808",
+      "run": "HVAC V3 Pilot 5",
+      "lane": "Google advanced command | replacement",
+      "keyword": "site:facebook.com (\"need new AC unit\" OR \"replace my air conditioner\") (\"quote\" OR \"estimate\" OR \"recommendations\") after:2026-08-01",
+      "executions": 0,
+      "surfaced": 0,
+      "finalStrict": 0,
+      "outcome": "NOT EXECUTED",
+      "explanation": "Planned but not executed because the strict target was already met and further rotation was unnecessary."
+    },
+    {
+      "runId": "hvac_v3_pilot5_20260808",
+      "run": "HVAC V3 Pilot 5",
+      "lane": "Google advanced command | licensed",
+      "keyword": "site:facebook.com/groups (\"licensed HVAC\" OR \"licensed AC company\") (\"need\" OR \"recommend\") after:2026-08-01",
+      "executions": 0,
+      "surfaced": 0,
+      "finalStrict": 0,
+      "outcome": "NOT EXECUTED",
+      "explanation": "Planned but not executed because the strict target was already met and further rotation was unnecessary."
+    },
+    {
+      "runId": "hvac_v3_pilot5_20260808",
+      "run": "HVAC V3 Pilot 5",
+      "lane": "Google advanced command | equipment-problem",
+      "keyword": "site:facebook.com (\"heat pump not cooling\" OR \"mini split not working\") (\"repair\" OR \"recommendations\") after:2026-08-01",
+      "executions": 0,
+      "surfaced": 0,
+      "finalStrict": 0,
+      "outcome": "NOT EXECUTED",
+      "explanation": "Planned but not executed because the strict target was already met and further rotation was unnecessary."
+    },
+    {
+      "runId": "hvac_v3_pilot5_20260808",
+      "run": "HVAC V3 Pilot 5",
+      "lane": "Google advanced command | problem-action",
+      "keyword": "inurl:facebook.com/post (\"central air not cooling\" OR \"AC blowing warm air\") (\"need\" OR \"repair\") after:2026-08-01",
+      "executions": 0,
+      "surfaced": 0,
+      "finalStrict": 0,
+      "outcome": "NOT EXECUTED",
+      "explanation": "Planned but not executed because the strict target was already met and further rotation was unnecessary."
+    },
+    {
+      "runId": "hvac_v3_pilot5_20260808",
+      "run": "HVAC V3 Pilot 5",
+      "lane": "Google advanced command | recommendation",
+      "keyword": "inurl:facebook.com/posts (\"air conditioning company recommendations\" OR \"HVAC company recommendations\") after:2026-08-01",
+      "executions": 0,
+      "surfaced": 0,
+      "finalStrict": 0,
+      "outcome": "NOT EXECUTED",
+      "explanation": "Planned but not executed because the strict target was already met and further rotation was unnecessary."
+    },
+    {
+      "runId": "hvac_v3_pilot5_20260808",
+      "run": "HVAC V3 Pilot 5",
+      "lane": "Google advanced command | installation",
+      "keyword": "site:facebook.com/groups (\"need HVAC installed\" OR \"new HVAC installation\") (\"quote\" OR \"recommendations\") after:2026-08-01",
+      "executions": 0,
+      "surfaced": 0,
+      "finalStrict": 0,
+      "outcome": "NOT EXECUTED",
+      "explanation": "Planned but not executed because the strict target was already met and further rotation was unnecessary."
+    },
+    {
+      "runId": "hvac_v3_pilot5_20260808",
+      "run": "HVAC V3 Pilot 5",
+      "lane": "Google advanced command | furnace",
+      "keyword": "site:facebook.com/groups (\"furnace repair\" OR \"furnace replacement\") (\"need\" OR \"recommendations\" OR \"quote\") after:2026-08-01",
+      "executions": 0,
+      "surfaced": 0,
+      "finalStrict": 0,
+      "outcome": "NOT EXECUTED",
+      "explanation": "Planned but not executed because the strict target was already met and further rotation was unnecessary."
+    },
+    {
+      "runId": "hvac_v3_pilot5_20260808",
+      "run": "HVAC V3 Pilot 5",
+      "lane": "Google advanced command | noise-filtered",
+      "keyword": "site:facebook.com/groups \"need HVAC repair\" after:2026-08-01 -jobs -hiring -\"call us today\" -\"free estimate\"",
+      "executions": 0,
+      "surfaced": 0,
+      "finalStrict": 0,
+      "outcome": "NOT EXECUTED",
+      "explanation": "Planned but not executed because the strict target was already met and further rotation was unnecessary."
+    },
+    {
+      "runId": "hvac_v3_pilot5_20260808",
+      "run": "HVAC V3 Pilot 5",
+      "lane": "Google advanced command | noise-filtered",
+      "keyword": "site:facebook.com \"HVAC recommendations\" after:2026-08-01 -jobs -hiring -marketplace -\"for sale\"",
+      "executions": 0,
+      "surfaced": 0,
+      "finalStrict": 0,
+      "outcome": "NOT EXECUTED",
+      "explanation": "Planned but not executed because the strict target was already met and further rotation was unnecessary."
     }
   ]
 }

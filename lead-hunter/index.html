@@ -618,7 +618,7 @@
       </nav>
       <div class="side-stat">
         <span>Strict leads</span>
-        <strong id="sideLeadCount">106</strong>
+        <strong id="sideLeadCount">111</strong>
       </div>
     </aside>
 
@@ -640,22 +640,22 @@
       <section class="grid kpis" aria-label="Top metrics">
         <article class="card">
           <span class="eyebrow">Strict leads</span>
-          <strong class="value" id="strictLeadKpi">106</strong>
-          <p class="small">Strict leads across Meta Ads, Roofing, Electricians, and Home Repairs.</p>
+          <strong class="value" id="strictLeadKpi">111</strong>
+          <p class="small">Strict leads across Meta Ads, Roofing, Electricians, Home Repairs, and HVAC V3.</p>
         </article>
         <article class="card">
           <span class="eyebrow">Completion</span>
-          <strong class="value" id="completionKpi">62%</strong>
-          <p class="small">106 strict leads from 170 requested across four runs.</p>
+          <strong class="value" id="completionKpi">63%</strong>
+          <p class="small">111 strict leads from 175 requested across five runs.</p>
         </article>
         <article class="card">
           <span class="eyebrow" id="selectedCplLabel">Effective subscription CPL</span>
           <strong class="value" id="selectedCplKpi">$0.04</strong>
-          <p class="small" id="selectedCplFoot">$4 allocation divided by 106 accepted leads.</p>
+          <p class="small" id="selectedCplFoot">$5 allocation divided by 111 accepted leads.</p>
         </article>
         <article class="card">
           <span class="eyebrow" id="modelLabel">Subscription allocation</span>
-          <strong class="value" id="modelCostKpi">$4</strong>
+          <strong class="value" id="modelCostKpi">$5</strong>
           <p class="small" id="modelFoot">$1 allocated to each run; this is not usage billing.</p>
         </article>
       </section>
@@ -671,6 +671,7 @@
                 <option value="roofing">Roofing Batch 20</option>
                 <option value="electricians">Electricians Batch 50</option>
                 <option value="home-repairs">Home Repairs Batch 50</option>
+                <option value="hvac-v3">HVAC V3 Pilot 5</option>
               </select>
             </div>
           </div>
@@ -718,6 +719,7 @@
             <div class="note orange">OpenRouter AI cost is usage-based. Meta Ads is $14.46 total and Roofing is $4.12 total using the current GPT-5.5 assumption of $5/M input tokens and $30/M output tokens.</div>
             <div class="note">Elapsed time is shown only as a speed/efficiency signal, not as a cost line.</div>
             <div class="note">Electricians and Home Repairs show measured run cost in U.S. dollars. This uses all active run time at $35/hour plus the $1 subscription allocation and is kept separate from the selectable AI billing model.</div>
+            <div class="note">HVAC V3 uses the same measured-cost convention: $17.94 total and $3.59 per strict lead, with all figures denominated in USD.</div>
           </div>
         </article>
       </section>
@@ -730,14 +732,16 @@
           </div>
           <div class="toolbar">
             <select id="keywordRun" aria-label="Keyword run filter">
-              <option value="all">Both runs</option>
+              <option value="all">All audited runs</option>
               <option value="electricians_batch50_20260717">Electricians</option>
               <option value="home_repairs_batch50_20260717">Home Repairs</option>
+              <option value="hvac_v3_pilot5_20260808">HVAC V3 Pilot 5</option>
             </select>
             <select id="keywordOutcome" aria-label="Keyword outcome filter">
               <option value="all">All outcomes</option>
               <option value="SUCCESSFUL">Successful</option>
               <option value="UNSUCCESSFUL">Unsuccessful</option>
+              <option value="NOT EXECUTED">Not executed after target</option>
             </select>
             <input id="keywordSearch" type="search" placeholder="Search exact keyword" />
           </div>
@@ -745,6 +749,7 @@
         <div class="keyword-summary">
           <div class="note orange"><strong>Electricians: 39/50.</strong> 163 Facebook keywords and 12 provider dorks were executed. Twenty-four keywords produced 39 final strict leads; 151 produced none. The dominant loss was 1,760 stale or out-of-window candidates, then 189 other strict-gate failures.</div>
           <div class="note orange"><strong>Home Repairs: 3/50.</strong> 185 Facebook executions covered 180 unique phrases, with 24 provider-dork executions. Only three keywords converted; 151 Facebook phrases returned zero rows, and broad results skewed to providers, jobs, vague work, or excluded specialist trades.</div>
+          <div class="note"><strong>HVAC V3: 5/5.</strong> Sixteen Facebook buyer-language searches and six Google command families were attempted. Four Facebook phrases produced all five final strict leads; ten planned Google variants were not needed after the target was met.</div>
         </div>
         <div class="keyword-wrap">
           <table>
@@ -781,15 +786,15 @@
           <div class="forecast-grid">
             <div class="card flat">
               <span class="eyebrow">Potential revenue</span>
-              <strong class="value" id="revenueKpi">$5,015</strong>
+              <strong class="value" id="revenueKpi">$5,160</strong>
             </div>
             <div class="card flat">
               <span class="eyebrow">Profit after AI</span>
-              <strong class="value" id="profitKpi">$5,011</strong>
+              <strong class="value" id="profitKpi">$5,155</strong>
             </div>
             <div class="card flat">
               <span class="eyebrow">Avg charge</span>
-              <strong class="value" id="avgChargeKpi">$47.31</strong>
+              <strong class="value" id="avgChargeKpi">$46.49</strong>
             </div>
           </div>
           <div class="canvas" id="tierChart" style="margin-top:16px"></div>
@@ -806,6 +811,7 @@
               <option value="roofing">Roofing</option>
               <option value="electricians">Electricians</option>
               <option value="home-repairs">Home Repairs</option>
+              <option value="hvac-v3">HVAC V3 Pilot 5</option>
             </select>
             <input id="evidenceSearch" type="search" placeholder="Search lead text" />
           </div>
@@ -836,6 +842,7 @@
             <div class="note orange">Roofing Batch 20 is commercially useful but still partial at 14/20. Do not label it complete until the loop finds the missing 6 strict leads.</div>
             <div class="note orange">Electricians Batch 50 finished at 39/50. Its $40.23 measured run cost and $1.03 measured CPL are valid, but the batch missed target by 11.</div>
             <div class="note orange">Home Repairs Batch 50 finished at 3/50. Its $31.76 measured run cost and $10.59 measured CPL are valid, but the broad category failed the target by 47.</div>
+            <div class="note">HVAC V3 Pilot 5 completed at 5/5. Its $17.94 measured run cost and $3.59 measured CPL are reconciled and investor-ready.</div>
             <div class="note">Cost views stay separated between subscription allocation and OpenRouter usage-based token estimates.</div>
           </div>
         </article>
@@ -847,6 +854,7 @@
             <div class="note orange">Finish the Roofing loop to 20 strict leads, then refresh pricing and revenue projections.</div>
             <div class="note orange">Recover Electricians with additional geography partitions and electrician-specific problem language.</div>
             <div class="note orange">Replace broad Home Repairs with narrower drywall, door/window, and deck/fence repair batches before scaling.</div>
+            <div class="note">Use the HVAC V3 exact buyer, recommendation, and problem-plus-action families as the baseline for the next larger HVAC test.</div>
             <div class="note">Export actual OpenRouter logs on future runs so token cost stops being an estimate.</div>
             <div class="note">Keep adding only useful self-improving notes back into the LeadHunter skill and HUB.</div>
           </div>
@@ -942,6 +950,30 @@
           ["HREP-20260717-STRICT-001", "Homeowner needs three damaged doorframes and a back-porch pillar repaired.", 80, "80-85"],
           ["HREP-20260717-STRICT-002", "Owner needs deteriorated window framing inspected and repaired, with possible drywall replacement.", 85, "85-90"],
           ["HREP-20260717-STRICT-003", "Owner requests driveway, carport foundation, and front-porch post repairs.", 85, "85-90"]
+        ]
+      },
+      {
+        id: "hvac-v3",
+        name: "HVAC V3 Pilot 5",
+        industry: "Residential HVAC buyers",
+        status: "Complete",
+        target: 5,
+        leads: 5,
+        elapsedHours: 0.484,
+        avgMin: 5.81,
+        tokenCost: 0,
+        tokenCpl: 0,
+        subscriptionCost: 1,
+        subscriptionCpl: 0.20,
+        measuredCost: 17.94,
+        measuredCpl: 3.59,
+        tiers: { "80-85": 3, "85-90": 2 },
+        evidence: [
+          ["HVAC-V3-20260808-001", "Homeowner's AC stopped and they want a reliable HVAC company to diagnose and repair it.", 88, "85-90"],
+          ["HVAC-V3-20260808-002", "South Denver homeowner needs urgent help after the air-conditioner fan stopped working.", 86, "85-90"],
+          ["HVAC-V3-20260808-003", "Property owner needs an HVAC assessment because an older unit cannot keep up with an opened-up space.", 83, "80-85"],
+          ["HVAC-V3-20260808-004", "Toccoa requester wants a reputable, honest HVAC company for maintenance.", 81, "80-85"],
+          ["HVAC-V3-20260808-005", "Moreno Valley requester is actively seeking a trustworthy local HVAC company.", 81, "80-85"]
         ]
       }
     ];
@@ -1130,7 +1162,7 @@
           <td class="num">${row.executions}</td>
           <td class="num">${row.surfaced}</td>
           <td class="num"><strong>${row.finalStrict}</strong></td>
-          <td><span class="${row.outcome === "SUCCESSFUL" ? "status-complete" : "status-partial"}">${escapeHtml(row.outcome)}</span></td>
+          <td><span class="${row.outcome === "SUCCESSFUL" ? "status-complete" : row.outcome === "NOT EXECUTED" ? "pill" : "status-partial"}">${escapeHtml(row.outcome)}</span></td>
           <td>${escapeHtml(row.explanation)}</td>
         </tr>
       `).join("");
@@ -1162,8 +1194,10 @@
         "Roofing Batch 20: Partial, 14/20 strict leads",
         "Electricians Batch 50: Failed Target, 39/50 strict leads, $40.23 measured cost, $1.03 measured CPL",
         "Home Repairs Batch 50: Failed Target, 3/50 strict leads, $31.76 measured cost, $10.59 measured CPL",
+        "HVAC V3 Pilot 5: Complete, 5/5 strict leads, $17.94 measured cost, $3.59 measured CPL",
         "Electricians keyword audit: 24 successful, 151 unsuccessful",
-        "Home Repairs keyword audit: 3 successful, 189 unsuccessful"
+        "Home Repairs keyword audit: 3 successful, 189 unsuccessful",
+        "HVAC V3 keyword audit: 4 successful, 18 unsuccessful, 10 not executed after target"
       ].join("\\n");
       navigator.clipboard?.writeText(summary);
       $("copySummary").textContent = "Copied";
