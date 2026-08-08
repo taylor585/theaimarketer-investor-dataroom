@@ -669,6 +669,7 @@
                 <option value="all">All runs</option>
                 <option value="meta">Meta Ads Batch 50</option>
                 <option value="roofing">Roofing Batch 20</option>
+                <option value="roofing-gql-v31">Roofing GraphQL V3.1 Pilot 5</option>
                 <option value="electricians">Electricians Batch 50</option>
                 <option value="home-repairs">Home Repairs Batch 50</option>
                 <option value="hvac-v3">HVAC V3 Pilot 5</option>
@@ -809,6 +810,7 @@
               <option value="all">All runs</option>
               <option value="meta">Meta Ads</option>
               <option value="roofing">Roofing</option>
+              <option value="roofing-gql-v31">Roofing GraphQL V3.1 Pilot 5</option>
               <option value="electricians">Electricians</option>
               <option value="home-repairs">Home Repairs</option>
               <option value="hvac-v3">HVAC V3 Pilot 5</option>
@@ -905,6 +907,28 @@
           ["ROOF-005", "Paying out of pocket and looking for a roofing contractor to replace a home roof.", 95, "95-100"],
           ["ROOF-012", "Selling house and needs licensed roofer to inspect and replace roof flashing ASAP.", 94, "90-95"],
           ["ROOF-009", "Roof leak and needs a reliable roofing company for an estimate.", 93, "90-95"]
+        ]
+      },
+      {
+        id: "roofing-gql-v31",
+        name: "Roofing GraphQL V3.1 Pilot 5",
+        industry: "U.S. roofing buyers",
+        status: "Complete",
+        target: 5,
+        leads: 5,
+        elapsedHours: 0.35,
+        avgMin: 4.20,
+        tokenCost: 0,
+        tokenCpl: 0,
+        subscriptionCost: 1,
+        subscriptionCpl: 0.20,
+        tiers: { "80-85": 3, "90-95": 2 },
+        evidence: [
+          ["ROOF-GQL-20260808-002", "Beaumont buyer needs roofing quotes today.", 93, "90-95"],
+          ["ROOF-GQL-20260808-003", "San Diego buyer wants competitive bids for a 1,300-square-foot roof replacement.", 92, "90-95"],
+          ["ROOF-GQL-20260808-001", "Elizabeth buyer needs seven shingles repaired for a property closing.", 80, "80-85"],
+          ["ROOF-GQL-20260808-004", "Spring Hill buyer needs urgent help with a storm-exposed roof leak.", 80, "80-85"],
+          ["ROOF-GQL-20260808-005", "Sanford business requester needs an active roof leak repaired.", 80, "80-85"]
         ]
       },
       {
@@ -1192,6 +1216,7 @@
         `Active cost model: ${activeModel === "subscription" ? "Subscription allocation" : "OpenRouter token estimate"}`,
         "Meta Ads Batch 50: Complete",
         "Roofing Batch 20: Partial, 14/20 strict leads",
+        "Roofing GraphQL V3.1 Pilot 5: Complete, 5/5 strict leads, 30/30 GraphQL-healthy queries",
         "Electricians Batch 50: Failed Target, 39/50 strict leads, $40.23 measured cost, $1.03 measured CPL",
         "Home Repairs Batch 50: Failed Target, 3/50 strict leads, $31.76 measured cost, $10.59 measured CPL",
         "HVAC V3 Pilot 5: Complete, 5/5 strict leads, $17.94 measured cost, $3.59 measured CPL",
