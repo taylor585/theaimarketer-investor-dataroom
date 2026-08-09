@@ -646,7 +646,7 @@
         <article class="card">
           <span class="eyebrow">Completion</span>
           <strong class="value" id="completionKpi">65%</strong>
-          <p class="small">121 strict leads from 190 requested across eight runs.</p>
+          <p class="small">121 strict leads from 210 requested across nine runs.</p>
         </article>
         <article class="card">
           <span class="eyebrow" id="selectedCplLabel">Effective subscription CPL</span>
@@ -676,6 +676,7 @@
                 <option value="hvac-v3">HVAC V3 Pilot 5</option>
                 <option value="hvac-gql-v31">HVAC GraphQL V3.1 Additional 5</option>
                 <option value="hvac-lead-buyers">HVAC Lead Buyers Pilot 5</option>
+                <option value="hvac-lead-buyers-batch20">HVAC Lead Buyers GraphQL Batch 20</option>
               </select>
             </div>
           </div>
@@ -726,6 +727,7 @@
             <div class="note">HVAC V3 uses the same measured-cost convention: $17.94 total and $3.59 per strict lead, with all figures denominated in USD.</div>
             <div class="note">HVAC GraphQL V3.1 Additional 5 completed at $9.18 measured cost and $1.84 per strict lead in USD; profile-lock waiting is excluded.</div>
             <div class="note orange">HVAC Lead Buyers Pilot 5 failed at 0/5 after 65 Facebook searches and 8 Google commands. Measured run cost is $18.15 USD; CPL is N/A because no strict leads were accepted.</div>
+            <div class="note orange">HVAC Lead Buyers GraphQL Batch 20 failed at 0/20 after 85 parent-post searches. Eighty-three searches were GraphQL-healthy, 499 unique parents and 126 fresh parents were extracted, but none passed strict HVAC buyer qualification. Measured cost is $11.79 USD; CPL is N/A.</div>
           </div>
         </article>
       </section>
@@ -744,6 +746,7 @@
               <option value="hvac_v3_pilot5_20260808">HVAC V3 Pilot 5</option>
               <option value="HVAC-GRAPHQL-V3.1-ADDITIONAL5-20260808">HVAC GraphQL V3.1 Additional 5</option>
               <option value="HVAC-LEAD-BUYERS-PILOT5-20260809">HVAC Lead Buyers Pilot 5</option>
+              <option value="HVAC-LEAD-BUYERS-GRAPHQL-BATCH20-20260809">HVAC Lead Buyers GraphQL Batch 20</option>
             </select>
             <select id="keywordOutcome" aria-label="Keyword outcome filter">
               <option value="all">All outcomes</option>
@@ -764,6 +767,7 @@
           <div class="note orange"><strong>Home Repairs: 3/50.</strong> 185 Facebook executions covered 180 unique phrases, with 24 provider-dork executions. Only three keywords converted; 151 Facebook phrases returned zero rows, and broad results skewed to providers, jobs, vague work, or excluded specialist trades.</div>
           <div class="note"><strong>HVAC V3: 5/5.</strong> Sixteen Facebook buyer-language searches and six Google command families were attempted. Four Facebook phrases produced all five final strict leads; ten planned Google variants were not needed after the target was met.</div>
           <div class="note"><strong>HVAC GraphQL V3.1 Additional 5: 5/5.</strong> All 20 Facebook searches were collector-healthy, producing 223 unique parents and 76 fresh parents. Four exact phrases produced the five final strict leads; eight Google commands were retained but not needed after validation met target.</div>
+          <div class="note orange"><strong>HVAC Lead Buyers GraphQL Batch 20: 0/20.</strong> Eighty-three of 85 searches were GraphQL-healthy. The run extracted 499 unique parents and 126 fresh parents, but vendor, homeowner, service-advertising, and unrelated results left zero strict HVAC business buyers. Two searches were not measured after safety stops.</div>
         </div>
         <div class="keyword-wrap">
           <table>
@@ -1079,6 +1083,24 @@
         measuredCpl: null,
         tiers: {},
         evidence: []
+      },
+      {
+        id: "hvac-lead-buyers-batch20",
+        name: "HVAC Lead Buyers GraphQL Batch 20",
+        industry: "U.S. HVAC lead buyers",
+        status: "Failed Target",
+        target: 20,
+        leads: 0,
+        elapsedHours: 0.31,
+        avgMin: null,
+        tokenCost: 0,
+        tokenCpl: null,
+        subscriptionCost: 1,
+        subscriptionCpl: null,
+        measuredCost: 11.79,
+        measuredCpl: null,
+        tiers: {},
+        evidence: []
       }
     ];
 
@@ -1305,11 +1327,13 @@
         "HVAC V3 Pilot 5: Complete, 5/5 strict leads, $17.94 measured cost, $3.59 measured CPL",
         "HVAC GraphQL V3.1 Additional 5: Complete, 5/5 strict leads, $9.18 measured cost, $1.84 measured CPL",
         "HVAC Lead Buyers Pilot 5: Failed Target, 0/5 strict leads, $18.15 measured cost, CPL N/A",
+        "HVAC Lead Buyers GraphQL Batch 20: Failed Target, 0/20 strict leads, $11.79 measured cost, CPL N/A",
         "Electricians keyword audit: 24 successful, 151 unsuccessful",
         "Home Repairs keyword audit: 3 successful, 189 unsuccessful",
         "HVAC V3 keyword audit: 4 successful, 18 unsuccessful, 10 not executed after target",
         "HVAC GraphQL V3.1 keyword audit: 4 successful, 16 qualification-unsuccessful, 8 not executed after target",
-        "HVAC Lead Buyers keyword audit: 0 successful, 63 qualification-unsuccessful, 2 collector-not-measured safety stops, 17 not executed after stop, 8 healthy-zero Google commands"
+        "HVAC Lead Buyers keyword audit: 0 successful, 63 qualification-unsuccessful, 2 collector-not-measured safety stops, 17 not executed after stop, 8 healthy-zero Google commands",
+        "HVAC Lead Buyers GraphQL Batch 20 keyword audit: 0 successful, 83 qualification-unsuccessful, 2 collector-not-measured safety stops"
       ].join("\\n");
       navigator.clipboard?.writeText(summary);
       $("copySummary").textContent = "Copied";
