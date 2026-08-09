@@ -646,7 +646,7 @@
         <article class="card">
           <span class="eyebrow">Completion</span>
           <strong class="value" id="completionKpi">65%</strong>
-          <p class="small">121 strict leads from 185 requested across seven runs.</p>
+          <p class="small">121 strict leads from 190 requested across eight runs.</p>
         </article>
         <article class="card">
           <span class="eyebrow" id="selectedCplLabel">Effective subscription CPL</span>
@@ -674,6 +674,7 @@
                 <option value="home-repairs">Home Repairs Batch 50</option>
                 <option value="hvac-v3">HVAC V3 Pilot 5</option>
                 <option value="hvac-gql-v31">HVAC GraphQL V3.1 Additional 5</option>
+                <option value="hvac-lead-buyers">HVAC Lead Buyers Pilot 5</option>
               </select>
             </div>
           </div>
@@ -723,6 +724,7 @@
             <div class="note">Electricians and Home Repairs show measured run cost in U.S. dollars. This uses all active run time at $35/hour plus the $1 subscription allocation and is kept separate from the selectable AI billing model.</div>
             <div class="note">HVAC V3 uses the same measured-cost convention: $17.94 total and $3.59 per strict lead, with all figures denominated in USD.</div>
             <div class="note">HVAC GraphQL V3.1 Additional 5 completed at $9.18 measured cost and $1.84 per strict lead in USD; profile-lock waiting is excluded.</div>
+            <div class="note orange">HVAC Lead Buyers Pilot 5 failed at 0/5 after 65 Facebook searches and 8 Google commands. Measured run cost is $18.15 USD; CPL is N/A because no strict leads were accepted.</div>
           </div>
         </article>
       </section>
@@ -740,6 +742,7 @@
               <option value="home_repairs_batch50_20260717">Home Repairs</option>
               <option value="hvac_v3_pilot5_20260808">HVAC V3 Pilot 5</option>
               <option value="HVAC-GRAPHQL-V3.1-ADDITIONAL5-20260808">HVAC GraphQL V3.1 Additional 5</option>
+              <option value="HVAC-LEAD-BUYERS-PILOT5-20260809">HVAC Lead Buyers Pilot 5</option>
             </select>
             <select id="keywordOutcome" aria-label="Keyword outcome filter">
               <option value="all">All outcomes</option>
@@ -748,6 +751,9 @@
               <option value="NOT EXECUTED">Not executed after target</option>
               <option value="QUALIFICATION_UNSUCCESSFUL">Qualification unsuccessful</option>
               <option value="NOT_EXECUTED">Not executed</option>
+              <option value="COLLECTOR_NOT_MEASURED">Collector not measured</option>
+              <option value="HEALTHY_ZERO_RESULTS">Healthy zero results</option>
+              <option value="NOT_EXECUTED_AFTER_BLOCK">Not executed after block</option>
             </select>
             <input id="keywordSearch" type="search" placeholder="Search exact keyword" />
           </div>
@@ -1031,6 +1037,24 @@
           ["HVAC-V31-20260808-001", "Orrum household has an AC outage and urgently needs an HVAC technician.", 88, "85-90"],
           ["HVAC-V31-20260808-002", "Ozark requester needs a company to inspect the HVAC unit the same morning.", 87, "85-90"]
         ]
+      },
+      {
+        id: "hvac-lead-buyers",
+        name: "HVAC Lead Buyers Pilot 5",
+        industry: "U.S. HVAC lead buyers",
+        status: "Failed Target",
+        target: 5,
+        leads: 0,
+        elapsedHours: 0.49,
+        avgMin: null,
+        tokenCost: 0,
+        tokenCpl: null,
+        subscriptionCost: 1,
+        subscriptionCpl: null,
+        measuredCost: 18.15,
+        measuredCpl: null,
+        tiers: {},
+        evidence: []
       }
     ];
 
@@ -1093,7 +1117,9 @@
         const costLabel = activeModel === "subscription" ? "Allocation" : "AI cost";
         const cplLabel = activeModel === "subscription" ? "Effective CPL" : "AI CPL";
         const costFoot = activeModel === "subscription"
-          ? `Subscription allocation: ${money(modelCost)} / ${run.leads} accepted leads = ${money(modelCpl)} effective CPL.`
+          ? run.leads
+            ? `Subscription allocation: ${money(modelCost)} / ${run.leads} accepted leads = ${money(modelCpl)} effective CPL.`
+            : `Subscription allocation: ${money(modelCost)} / 0 accepted leads = N/A effective CPL.`
           : `Selected AI billing cost: ${money(modelCost)}.`;
         const runRevenue = allTiers.reduce((sum, tier) => sum + (run.tiers[tier] || 0) * tierPrices[tier], 0);
         return `
@@ -1114,7 +1140,7 @@
               <div class="mini"><span class="eyebrow">${cplLabel}</span><strong>${money(modelCpl)}</strong></div>
               <div class="mini"><span class="eyebrow">Revenue</span><strong>${money(runRevenue)}</strong></div>
             </div>
-            <p class="small">${run.elapsedHours}h active runtime, ${run.avgMin} min average per strict lead. ${costFoot}${run.measuredCost != null ? ` Measured run cost: ${money(run.measuredCost)} total, or ${money(run.measuredCpl)} per strict lead (USD).` : ""}</p>
+            <p class="small">${run.elapsedHours}h active runtime, ${run.avgMin == null ? "N/A" : run.avgMin + " min"} average per strict lead. ${costFoot}${run.measuredCost != null ? ` Measured run cost: ${money(run.measuredCost)} total, or ${run.measuredCpl == null ? "N/A" : money(run.measuredCpl)} per strict lead (USD).` : ""}</p>
           </article>
         `;
       }).join("");
@@ -1253,10 +1279,12 @@
         "Home Repairs Batch 50: Failed Target, 3/50 strict leads, $31.76 measured cost, $10.59 measured CPL",
         "HVAC V3 Pilot 5: Complete, 5/5 strict leads, $17.94 measured cost, $3.59 measured CPL",
         "HVAC GraphQL V3.1 Additional 5: Complete, 5/5 strict leads, $9.18 measured cost, $1.84 measured CPL",
+        "HVAC Lead Buyers Pilot 5: Failed Target, 0/5 strict leads, $18.15 measured cost, CPL N/A",
         "Electricians keyword audit: 24 successful, 151 unsuccessful",
         "Home Repairs keyword audit: 3 successful, 189 unsuccessful",
         "HVAC V3 keyword audit: 4 successful, 18 unsuccessful, 10 not executed after target",
-        "HVAC GraphQL V3.1 keyword audit: 4 successful, 16 qualification-unsuccessful, 8 not executed after target"
+        "HVAC GraphQL V3.1 keyword audit: 4 successful, 16 qualification-unsuccessful, 8 not executed after target",
+        "HVAC Lead Buyers keyword audit: 0 successful, 63 qualification-unsuccessful, 2 collector-not-measured safety stops, 17 not executed after stop, 8 healthy-zero Google commands"
       ].join("\\n");
       navigator.clipboard?.writeText(summary);
       $("copySummary").textContent = "Copied";
