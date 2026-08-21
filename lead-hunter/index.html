@@ -80,6 +80,7 @@
       color: #afbed3;
       line-height: 1.35;
       font-size: 13px;
+      overflow-wrap: anywhere;
     }
 
     nav {
@@ -165,6 +166,7 @@
       margin-top: 12px;
       font-size: 17px;
       line-height: 1.45;
+      overflow-wrap: anywhere;
     }
 
     .hero-actions {
@@ -245,6 +247,7 @@
       color: var(--muted);
       font-size: 13px;
       line-height: 1.45;
+      overflow-wrap: anywhere;
     }
 
     .section-head {
@@ -375,6 +378,7 @@
       height: 22px;
       background: #edf1f6;
       border: 1px solid var(--line);
+      overflow: hidden;
     }
 
     .bar-fill {
@@ -533,6 +537,7 @@
       background: var(--soft);
       color: #26374d;
       line-height: 1.45;
+      overflow-wrap: anywhere;
     }
 
     .note.orange {
@@ -605,7 +610,7 @@
     <aside>
       <div class="brand">
         <strong>LeadHunter HUB</strong>
-        <span>Canonical Master Hub mirror · hash a3b94dbffd11b834…</span>
+        <span>Canonical Master Hub mirror · hash d0a14aaae955681d…</span>
       </div>
       <nav aria-label="Dashboard sections">
         <a href="#overview"><span class="dot"></span> Overview</a>
@@ -626,12 +631,12 @@
       <section class="hero" id="overview">
         <div>
           <h1>LeadHunter Digital Dashboard</h1>
-          <p>Reconciled portfolio view for the ten LeadHunter industries. Local JSON is transactional authority; this dashboard mirrors the same snapshot as the canonical Hub. Hash a3b94dbffd11b8346b696c3525fe66fd8bcee2b02a3936198ffc5b9416b5d261.</p>
+          <p>Reconciled portfolio view for 11 LeadHunter industries. Local JSON is transactional authority; this dashboard mirrors the canonical Hub snapshot. Hash d0a14aaae955681d4e7867fe694bde8a1ea18e755004f28f4d5fd122e7805faa.</p>
         </div>
         <div class="hero-actions">
-          <div class="switch" aria-label="Cost model">
-            <button id="modelSub" class="active" type="button">Subscription</button>
-            <button id="modelOpen" type="button">OpenRouter</button>
+          <div class="switch" aria-label="Cost view">
+            <button id="modelSub" class="active" type="button">Recorded Cost</button>
+            <button id="modelOpen" type="button">Same Evidence</button>
           </div>
           <button class="copy-btn" id="copySummary" type="button">Copy Summary</button>
         </div>
@@ -640,18 +645,18 @@
       <section class="grid kpis" aria-label="Top metrics">
         <article class="card">
           <span class="eyebrow">Strict leads</span>
-          <strong class="value" id="strictLeadKpi">121</strong>
+          <strong class="value" id="strictLeadKpi">149</strong>
           <p class="small">Deduplicated validated requester leads across the ten canonical LeadHunter industries.</p>
         </article>
         <article class="card">
           <span class="eyebrow">Completion</span>
           <strong class="value" id="completionKpi">65%</strong>
-          <p class="small">80 validated leads against the 500-lead portfolio target.</p>
+          <p class="small">149 validated leads against the 510-lead portfolio target.</p>
         </article>
         <article class="card">
           <span class="eyebrow" id="selectedCplLabel">Effective subscription CPL</span>
           <strong class="value" id="selectedCplKpi">$0.06</strong>
-          <p class="small" id="selectedCplFoot">$7 allocation divided by 121 accepted leads.</p>
+          <p class="small" id="selectedCplFoot">Recorded cost divided by 149 accepted leads.</p>
         </article>
         <article class="card">
           <span class="eyebrow" id="modelLabel">Subscription allocation</span>
@@ -717,18 +722,12 @@
         </article>
 
         <article class="card">
-          <div class="section-head">
-            <h2>Cost Explanation</h2>
-          </div>
+          <div class="section-head"><h2>Cost Explanation</h2></div>
           <div class="note-list">
-            <div class="note">Recorded portfolio cost is <h2>Cost Explanation</h2>
-          </div>
-          <div class="note-list">0.12 USD across the unique run-cost evidence in the reconciled snapshot.</div>
-            <div class="note">Measured CPL is $0.13 USD: <h2>Cost Explanation</h2>
-          </div>
-          <div class="note-list">0.12 divided by 80 deduplicated validated requester leads.</div>
-            <div class="note">Missing run costs remain unrecorded; they are not estimated or backfilled.</div>
-            <div class="note orange">The cost model is historical evidence, not a promise of future acquisition cost or profitability.</div>
+            <div class="note">Recorded portfolio cost is $11,574.61 USD across source-reported measured run-cost evidence.</div>
+            <div class="note">Measured CPL is $77.68 USD: recorded cost divided by 149 deduplicated validated requester leads.</div>
+            <div class="note">Legacy elapsed-time operating costs are preserved as reported. Active versus idle time was not independently verifiable, so these figures must not be presented as predictive acquisition cost.</div>
+            <div class="note orange">Missing run costs remain unrecorded; they are never estimated or backfilled.</div>
           </div>
         </article>
       </section>
@@ -764,12 +763,12 @@
               <option value="HEALTHY_ZERO_RESULTS">Healthy zero results</option>
               <option value="NOT_EXECUTED_AFTER_BLOCK">Not executed after block</option>
             </select>
-            <input id="keywordSearch" type="search" placeholder="Search exact keyword" />
+            <input id="keywordSearch" type="search" aria-label="Search exact keyword" placeholder="Search exact keyword" />
           </div>
         </div>
         <div class="keyword-summary">
-          <div class="note"><strong>710 reconciled query records.</strong> 20 are successful, 609 unsuccessful, 67 testing, and 14 technical failures or not measured.</div>
-          <div class="note orange"><strong>Collector failures remain separate.</strong> The 14 technical/not-measured rows are not counted as unsuccessful keywords.</div>
+          <div class="note"><strong>2,788 reconciled query records.</strong> 112 are successful, 2,486 unsuccessful, 67 testing, 10 healthy-zero, and 113 technical failures or not measured.</div>
+          <div class="note orange"><strong>Collector failures remain separate.</strong> Technical and not-measured rows are not counted as unsuccessful keywords.</div>
           <div class="note"><strong>Immutable evidence.</strong> Every measured row retains its exact query, engine, execution counts, outcome, provenance, and reconciliation hash.</div>
         </div>
         <div class="keyword-wrap">
@@ -839,7 +838,7 @@
               <option value="hvac-v3">HVAC V3 Pilot 5</option>
               <option value="hvac-gql-v31">HVAC GraphQL V3.1 Additional 5</option>
             </select>
-            <input id="evidenceSearch" type="search" placeholder="Search lead text" />
+            <input id="evidenceSearch" type="search" aria-label="Search lead evidence" placeholder="Search lead text" />
           </div>
         </div>
         <div class="evidence-wrap">
@@ -864,9 +863,9 @@
             <h2>Investor Readiness</h2>
           </div>
           <div class="note-list">
-            <div class="note">The canonical snapshot contains 80 deduplicated validated requester leads across ten industries, reconciled to hash a3b94dbffd11b8346b696c3525fe66fd8bcee2b02a3936198ffc5b9416b5d261.</div>
-            <div class="note">HVAC is 16/50 with its latest run complete; Roofing has 57 accepted leads but its latest run remains blocked and is not relabelled complete.</div>
-            <div class="note orange">Pool Builders, Home Remodeling, Life & Health Insurance, Mortgage, Senior Care Placement, and Business Brokers remain below target or not run.</div>
+            <div class="note">The canonical snapshot contains 149 deduplicated validated requester leads across eleven industries, reconciled to hash d0a14aaae955681d4e7867fe694bde8a1ea18e755004f28f4d5fd122e7805faa.</div>
+            <div class="note">HVAC is 16/50, Roofing is 75/50, and Pool Builders is 20/50.</div>
+            <div class="note orange">Zero-supply industries: Home Remodeling, Mortgage, Senior Care Placement, Business Brokers. Partial-supply industries: HVAC, Pool Builders, Water & Fire Restoration, Life & Health Insurance, Family Law, Divorce Law.</div>
             <div class="note">All cost, CPL, lead-anchor, and pricing figures are denominated in USD; missing economics evidence stays unrecorded.</div>
           </div>
         </article>
@@ -876,9 +875,9 @@
           </div>
           <div class="note-list">
             <div class="note orange">Resume blocked and failed discovery runs from their atomic local state without weakening validation.</div>
-            <div class="note">Prioritise the six industries with zero accepted leads, then complete the partial Water & Fire Restoration and Family Law supply.</div>
-            <div class="note">Keep technical failures out of unsuccessful keyword counts and use the 67 testing rows for controlled follow-up.</div>
-            <div class="note">Every future run must finish the 14-step JSON → Hub contract with zero pending rows.</div>
+            <div class="note">Prioritise industries below target, using the measured query ledger and preserved rejection evidence.</div>
+            <div class="note">Keep technical failures out of unsuccessful keyword counts and use testing rows for controlled follow-up.</div>
+            <div class="note">Every future run must finish the JSON → Hub contract with zero pending rows and verified readback.</div>
           </div>
         </article>
       </section>
@@ -886,267 +885,13 @@
   </div>
 
   <script>
-    const historicalRuns = [
-      {
-        id: "meta",
-        name: "Meta Ads Batch 50",
-        industry: "Meta ads experts",
-        status: "Complete",
-        target: 50,
-        leads: 50,
-        elapsedHours: 1.51,
-        avgMin: 1.81,
-        tokenCost: 14.46,
-        tokenCpl: 0.29,
-        subscriptionCost: 1,
-        subscriptionCpl: 0.02,
-        tiers: { "85-90": 5, "90-95": 33, "95-100": 12 },
-        evidence: [
-          ["META-020", "Nonprofit consulting firm scaling paid ads; needs Meta, Google, LinkedIn and GHL integration.", 98, "95-100"],
-          ["META-029", "Needs Facebook Lead Form to GoHighLevel pipeline conversion tracking via Meta CAPI.", 97, "95-100"],
-          ["META-050", "Looking for someone to run Meta ads for Facebook and Instagram at a fair price.", 90, "90-95"],
-          ["META-030", "Looking for a freelancer to run FB ads and report on performance.", 85, "85-90"]
-        ]
-      },
-      {
-        id: "roofing",
-        name: "Roofing Batch 20",
-        industry: "Roofing",
-        status: "Partial",
-        target: 20,
-        leads: 14,
-        elapsedHours: 1.22,
-        avgMin: 5.22,
-        tokenCost: 4.12,
-        tokenCpl: 0.29,
-        subscriptionCost: 1,
-        subscriptionCpl: 0.07,
-        tiers: { "80-85": 1, "85-90": 5, "90-95": 6, "95-100": 2 },
-        evidence: [
-          ["ROOF-011", "Needs a licensed and insured roofer for a 40sq standing seam roof replacement ASAP.", 96, "95-100"],
-          ["ROOF-005", "Paying out of pocket and looking for a roofing contractor to replace a home roof.", 95, "95-100"],
-          ["ROOF-012", "Selling house and needs licensed roofer to inspect and replace roof flashing ASAP.", 94, "90-95"],
-          ["ROOF-009", "Roof leak and needs a reliable roofing company for an estimate.", 93, "90-95"]
-        ]
-      },
-      {
-        id: "roofing-gql-v31",
-        name: "Roofing GraphQL V3.1 Pilot 5",
-        industry: "U.S. roofing buyers",
-        status: "Complete",
-        target: 5,
-        leads: 5,
-        elapsedHours: 0.35,
-        avgMin: 4.20,
-        tokenCost: 0,
-        tokenCpl: 0,
-        subscriptionCost: 1,
-        subscriptionCpl: 0.20,
-        tiers: { "80-85": 3, "90-95": 2 },
-        evidence: [
-          ["ROOF-GQL-20260808-002", "Beaumont buyer needs roofing quotes today.", 93, "90-95"],
-          ["ROOF-GQL-20260808-003", "San Diego buyer wants competitive bids for a 1,300-square-foot roof replacement.", 92, "90-95"],
-          ["ROOF-GQL-20260808-001", "Elizabeth buyer needs seven shingles repaired for a property closing.", 80, "80-85"],
-          ["ROOF-GQL-20260808-004", "Spring Hill buyer needs urgent help with a storm-exposed roof leak.", 80, "80-85"],
-          ["ROOF-GQL-20260808-005", "Sanford business requester needs an active roof leak repaired.", 80, "80-85"]
-        ]
-      },
-      {
-        id: "roofing-gql-v31-batch20",
-        name: "Roofing GraphQL V3.1 Batch 20",
-        industry: "U.S. roofing buyers",
-        status: "Complete",
-        target: 20,
-        leads: 20,
-        elapsedHours: 0.82,
-        avgMin: 2.46,
-        tokenCost: 0,
-        tokenCpl: 0,
-        subscriptionCost: 1,
-        subscriptionCpl: 0.05,
-        tiers: { "75-80": 4, "80-85": 1, "85-90": 8, "90-95": 5, "95-100": 2 },
-        evidence: [
-          ["ROOF-GQL-20260809-007", "Farmington buyer has an active roof leak directly above a bedroom circuit breaker.", 96, "95-100"],
-          ["ROOF-GQL-20260809-018", "Buffalo business has water entering through a 30-year-old commercial roof.", 96, "95-100"],
-          ["ROOF-GQL-20260809-005", "East Northport buyer needs same-day diagnosis of an active roof leak soaking a room.", 94, "90-95"],
-          ["ROOF-GQL-20260809-017", "Leonard buyer has materials ready for a 900-square-foot shingle job this week.", 93, "90-95"],
-          ["ROOF-GQL-20260809-020", "Milwaukee requester needs roof and wall repairs with repeat property-flip potential.", 92, "90-95"]
-        ]
-      },
-      {
-        id: "roofing-groups-test-20260809",
-        name: "Roofing Groups Test 20 (Blocked)",
-        industry: "U.S. residential roofing buyers",
-        status: "Blocked",
-        target: 20,
-        leads: 0,
-        elapsedHours: 0.14,
-        avgMin: null,
-        tokenCost: 0,
-        tokenCpl: null,
-        subscriptionCost: 1,
-        subscriptionCpl: null,
-        measuredCost: 0,
-        measuredCpl: null,
-        tiers: {},
-        evidence: []
-      },
-      {
-        id: "pool-builders-b28-20260809",
-        name: "Pool Builders Buyer Test 28 (Blocked)",
-        industry: "U.S. pool-building lead buyers",
-        status: "Blocked Discovery",
-        target: 28,
-        leads: 0,
-        elapsedHours: 0.06,
-        avgMin: null,
-        tokenCost: 0,
-        tokenCpl: null,
-        subscriptionCost: 0,
-        subscriptionCpl: null,
-        measuredCost: null,
-        measuredCpl: null,
-        tiers: {},
-        evidence: []
-      },
-      {
-        id: "electricians",
-        name: "Electricians Batch 50",
-        industry: "Residential electricians",
-        status: "Failed Target",
-        target: 50,
-        leads: 39,
-        elapsedHours: 1.12,
-        avgMin: 1.72,
-        tokenCost: 0,
-        tokenCpl: 0,
-        subscriptionCost: 1,
-        subscriptionCpl: 0.03,
-        measuredCost: 40.23,
-        measuredCpl: 1.03,
-        tiers: { "80-85": 15, "85-90": 12, "90-95": 6, "95-100": 6 },
-        evidence: [
-          ["ELEC-20260717-004", "Property has no power in one bedroom and bathroom; owner wants an electrician to diagnose and repair it.", 98, "95-100"],
-          ["ELEC-20260717-005", "Homeowner needs a panel upgrade and electrical drop for new mini-split units.", 98, "95-100"],
-          ["ELEC-20260717-015", "One room has lost electricity and the homeowner needs urgent electrical repair recommendations.", 98, "95-100"],
-          ["ELEC-20260717-016", "Homeowner wants a licensed electrician to replace fixtures and a ceiling fan on vaulted ceilings.", 98, "95-100"]
-        ]
-      },
-      {
-        id: "home-repairs",
-        name: "Home Repairs Batch 50",
-        industry: "General home repairs and handyman services",
-        status: "Failed Target",
-        target: 50,
-        leads: 3,
-        elapsedHours: 0.88,
-        avgMin: 17.58,
-        tokenCost: 0,
-        tokenCpl: 0,
-        subscriptionCost: 1,
-        subscriptionCpl: 0.33,
-        measuredCost: 31.76,
-        measuredCpl: 10.59,
-        tiers: { "80-85": 1, "85-90": 2 },
-        evidence: [
-          ["HREP-20260717-STRICT-001", "Homeowner needs three damaged doorframes and a back-porch pillar repaired.", 80, "80-85"],
-          ["HREP-20260717-STRICT-002", "Owner needs deteriorated window framing inspected and repaired, with possible drywall replacement.", 85, "85-90"],
-          ["HREP-20260717-STRICT-003", "Owner requests driveway, carport foundation, and front-porch post repairs.", 85, "85-90"]
-        ]
-      },
-      {
-        id: "hvac-v3",
-        name: "HVAC V3 Pilot 5",
-        industry: "Residential HVAC buyers",
-        status: "Complete",
-        target: 5,
-        leads: 5,
-        elapsedHours: 0.484,
-        avgMin: 5.81,
-        tokenCost: 0,
-        tokenCpl: 0,
-        subscriptionCost: 1,
-        subscriptionCpl: 0.20,
-        measuredCost: 17.94,
-        measuredCpl: 3.59,
-        tiers: { "80-85": 3, "85-90": 2 },
-        evidence: [
-          ["HVAC-V3-20260808-001", "Homeowner's AC stopped and they want a reliable HVAC company to diagnose and repair it.", 88, "85-90"],
-          ["HVAC-V3-20260808-002", "South Denver homeowner needs urgent help after the air-conditioner fan stopped working.", 86, "85-90"],
-          ["HVAC-V3-20260808-003", "Property owner needs an HVAC assessment because an older unit cannot keep up with an opened-up space.", 83, "80-85"],
-          ["HVAC-V3-20260808-004", "Toccoa requester wants a reputable, honest HVAC company for maintenance.", 81, "80-85"],
-          ["HVAC-V3-20260808-005", "Moreno Valley requester is actively seeking a trustworthy local HVAC company.", 81, "80-85"]
-        ]
-      },
-      {
-        id: "hvac-gql-v31",
-        name: "HVAC GraphQL V3.1 Additional 5",
-        industry: "U.S. residential and commercial HVAC buyers",
-        status: "Complete",
-        target: 5,
-        leads: 5,
-        elapsedHours: 0.234,
-        avgMin: 2.81,
-        tokenCost: 0,
-        tokenCpl: 0,
-        subscriptionCost: 1,
-        subscriptionCpl: 0.20,
-        measuredCost: 9.18,
-        measuredCpl: 1.84,
-        tiers: { "85-90": 2, "90-95": 1, "95-100": 2 },
-        evidence: [
-          ["HVAC-V31-20260808-003", "San Marcos apartment buyer requests an urgent licensed 2.5-ton HVAC change-out with pricing.", 100, "95-100"],
-          ["HVAC-V31-20260808-005", "Lacey rental owner needs a licensed, permitted 3-ton Coleman AC installation by August 17.", 96, "95-100"],
-          ["HVAC-V31-20260808-004", "Salt Lake City restaurant project has approved plans and needs a commercial HVAC site visit and bid.", 93, "90-95"],
-          ["HVAC-V31-20260808-001", "Orrum household has an AC outage and urgently needs an HVAC technician.", 88, "85-90"],
-          ["HVAC-V31-20260808-002", "Ozark requester needs a company to inspect the HVAC unit the same morning.", 87, "85-90"]
-        ]
-      },
-      {
-        id: "hvac-lead-buyers",
-        name: "HVAC Lead Buyers Pilot 5",
-        industry: "U.S. HVAC lead buyers",
-        status: "Failed Target",
-        target: 5,
-        leads: 0,
-        elapsedHours: 0.49,
-        avgMin: null,
-        tokenCost: 0,
-        tokenCpl: null,
-        subscriptionCost: 1,
-        subscriptionCpl: null,
-        measuredCost: 18.15,
-        measuredCpl: null,
-        tiers: {},
-        evidence: []
-      },
-      {
-        id: "hvac-lead-buyers-batch20",
-        name: "HVAC Lead Buyers GraphQL Batch 20",
-        industry: "U.S. HVAC lead buyers",
-        status: "Failed Target",
-        target: 20,
-        leads: 0,
-        elapsedHours: 0.31,
-        avgMin: null,
-        tokenCost: 0,
-        tokenCpl: null,
-        subscriptionCost: 1,
-        subscriptionCpl: null,
-        measuredCost: 11.79,
-        measuredCpl: null,
-        tiers: {},
-        evidence: []
-      }
-    ];
-
     const masterHubSnapshot = {
-      "generatedAt": "2026-08-10T12:00:00+01:00",
-      "reconciliationHash": "a3b94dbffd11b8346b696c3525fe66fd8bcee2b02a3936198ffc5b9416b5d261",
-      "acceptedLeads": 80,
-      "target": 500,
-      "totalCostUsd": 10.120000000000001,
-      "measuredCplUsd": 0.1265,
+      "generatedAt": "2026-08-21T13:03:06.511Z",
+      "reconciliationHash": "d0a14aaae955681d4e7867fe694bde8a1ea18e755004f28f4d5fd122e7805faa",
+      "acceptedLeads": 149,
+      "target": 550,
+      "totalCostUsd": 11574.61,
+      "measuredCplUsd": 77.68194630872483,
       "spreadsheetId": "1pTM5iWmrv3LVs45U9xBuDbhAZ8s4GPCcO8wTWqoc2AE"
 };
     const runs = [
@@ -1154,22 +899,22 @@
             "id": "hvac",
             "name": "HVAC — Master Hub",
             "industry": "HVAC",
-            "status": "Complete",
+            "status": "Blocked",
             "target": 50,
             "leads": 16,
             "elapsedHours": 0,
             "avgMin": null,
-            "tokenCost": 2,
-            "tokenCpl": 0.125,
-            "subscriptionCost": 2,
-            "subscriptionCpl": 0.125,
-            "measuredCost": 2,
-            "measuredCpl": 0.125,
+            "tokenCost": 10894.23,
+            "tokenCpl": 680.889375,
+            "subscriptionCost": 10894.23,
+            "subscriptionCpl": 680.889375,
+            "measuredCost": 10894.23,
+            "measuredCpl": 680.889375,
             "tiers": {
                   "80-85": 3,
-                  "85-90": 2,
-                  "90-95": 0,
-                  "95-100": 0
+                  "85-90": 5,
+                  "90-95": 1,
+                  "95-100": 2
             },
             "evidence": [
                   [
@@ -1191,28 +936,28 @@
                         "Warm"
                   ]
             ],
-            "reconciliationHash": "a3b94dbffd11b8346b696c3525fe66fd8bcee2b02a3936198ffc5b9416b5d261"
+            "reconciliationHash": "d0a14aaae955681d4e7867fe694bde8a1ea18e755004f28f4d5fd122e7805faa"
       },
       {
             "id": "roofing",
             "name": "Roofing — Master Hub",
             "industry": "Roofing",
-            "status": "Blocked",
+            "status": "Complete",
             "target": 50,
-            "leads": 57,
+            "leads": 75,
             "elapsedHours": 0,
             "avgMin": null,
-            "tokenCost": 8.120000000000001,
-            "tokenCpl": 0.1424561403508772,
-            "subscriptionCost": 8.120000000000001,
-            "subscriptionCpl": 0.1424561403508772,
-            "measuredCost": 8.120000000000001,
-            "measuredCpl": 0.1424561403508772,
+            "tokenCost": 680.38,
+            "tokenCpl": 10.79968253968254,
+            "subscriptionCost": 680.38,
+            "subscriptionCpl": 10.79968253968254,
+            "measuredCost": 680.38,
+            "measuredCpl": 10.79968253968254,
             "tiers": {
-                  "80-85": 3,
-                  "85-90": 0,
-                  "90-95": 1,
-                  "95-100": 4
+                  "80-85": 12,
+                  "85-90": 15,
+                  "90-95": 15,
+                  "95-100": 12
             },
             "evidence": [
                   [
@@ -1234,31 +979,50 @@
                         "Hot"
                   ]
             ],
-            "reconciliationHash": "a3b94dbffd11b8346b696c3525fe66fd8bcee2b02a3936198ffc5b9416b5d261"
+            "reconciliationHash": "d0a14aaae955681d4e7867fe694bde8a1ea18e755004f28f4d5fd122e7805faa"
       },
       {
             "id": "pool-builders",
             "name": "Pool Builders — Master Hub",
             "industry": "Pool Builders",
-            "status": "Blocked",
+            "status": "Zero Yield",
             "target": 50,
-            "leads": 0,
+            "leads": 20,
             "elapsedHours": 0,
             "avgMin": null,
             "tokenCost": 0,
-            "tokenCpl": null,
+            "tokenCpl": 0,
             "subscriptionCost": 0,
-            "subscriptionCpl": null,
+            "subscriptionCpl": 0,
             "measuredCost": 0,
-            "measuredCpl": null,
+            "measuredCpl": 0,
             "tiers": {
-                  "80-85": 0,
-                  "85-90": 0,
+                  "80-85": 7,
+                  "85-90": 1,
                   "90-95": 0,
                   "95-100": 0
             },
-            "evidence": [],
-            "reconciliationHash": "a3b94dbffd11b8346b696c3525fe66fd8bcee2b02a3936198ffc5b9416b5d261"
+            "evidence": [
+                  [
+                        "POOL-10163786071536107",
+                        "Planning a new Florida home and seeking a custom inground-pool company.",
+                        78,
+                        "Hot"
+                  ],
+                  [
+                        "POOL-10165442084550903",
+                        "Ready-market request for a custom gunite pool builder.",
+                        80,
+                        "Hot"
+                  ],
+                  [
+                        "POOL-10167645090357786",
+                        "Household seeking an inground-pool installation company.",
+                        72,
+                        "Hot"
+                  ]
+            ],
+            "reconciliationHash": "d0a14aaae955681d4e7867fe694bde8a1ea18e755004f28f4d5fd122e7805faa"
       },
       {
             "id": "home-remodeling",
@@ -1282,7 +1046,7 @@
                   "95-100": 0
             },
             "evidence": [],
-            "reconciliationHash": "a3b94dbffd11b8346b696c3525fe66fd8bcee2b02a3936198ffc5b9416b5d261"
+            "reconciliationHash": "d0a14aaae955681d4e7867fe694bde8a1ea18e755004f28f4d5fd122e7805faa"
       },
       {
             "id": "water-fire-restoration",
@@ -1301,8 +1065,8 @@
             "measuredCpl": 0,
             "tiers": {
                   "80-85": 0,
-                  "85-90": 0,
-                  "90-95": 0,
+                  "85-90": 3,
+                  "90-95": 2,
                   "95-100": 0
             },
             "evidence": [
@@ -1310,7 +1074,7 @@
                         "WDR-20260716-001",
                         "Looking for recommendations for a reliable company or contractor to inspect water damage on an interior downstairs wall in my home. I’m not sure what’s causing it—it could be a roof leak, plumbing issue, HVAC problem, or something else. Looking for someone experienced who can find the source of the leak and provide an estimate for repairs.",
                         87,
-                        "hot"
+                        "Hot"
                   ],
                   [
                         "WDR-PILOT-002",
@@ -1319,37 +1083,44 @@
                         "Hot"
                   ],
                   [
-                        "WDR-PILOT-002-MIG-C90151",
-                        "hi! I’m looking for a company either water restoration or a drywall company that is fairly priced to come out and see what’s going on with the paint cracking in my bathroom. We have no exhaust fan in there, and the ceiling and walls aren’t wet as to the touch, but the paint continues to crack and more spots keep forming. we also added a dehumidifier to see if that would help, but it has not helped. ￼We don’t know what exactly is going on so we would love to get someone to come out and come look! Please help with the best recommendations for companies!￼",
+                        "WDR-PILOT-002-MIG-9D7E48",
+                        "Looking for a general contractor that has experience dealing with water mitigation and insurance companies. Have a client who had a leak in a wall behind the kitchen cabinets, slab house, but will likely need all new flooring and most of the kitchen redone. Insurance company is requiring the client to submit photos as the tear out happens to see if it will be covered. Any suggestions?",
                         85,
-                        "Warm"
+                        "Hot"
                   ]
             ],
-            "reconciliationHash": "a3b94dbffd11b8346b696c3525fe66fd8bcee2b02a3936198ffc5b9416b5d261"
+            "reconciliationHash": "d0a14aaae955681d4e7867fe694bde8a1ea18e755004f28f4d5fd122e7805faa"
       },
       {
             "id": "life-health-insurance",
             "name": "Life & Health Insurance — Master Hub",
             "industry": "Life & Health Insurance",
-            "status": "Not Run",
+            "status": "Partial",
             "target": 50,
-            "leads": 0,
+            "leads": 21,
             "elapsedHours": 0,
             "avgMin": null,
             "tokenCost": 0,
-            "tokenCpl": null,
+            "tokenCpl": 0,
             "subscriptionCost": 0,
-            "subscriptionCpl": null,
+            "subscriptionCpl": 0,
             "measuredCost": 0,
-            "measuredCpl": null,
+            "measuredCpl": 0,
             "tiers": {
                   "80-85": 0,
                   "85-90": 0,
                   "90-95": 0,
                   "95-100": 0
             },
-            "evidence": [],
-            "reconciliationHash": "a3b94dbffd11b8346b696c3525fe66fd8bcee2b02a3936198ffc5b9416b5d261"
+            "evidence": [
+                  [
+                        "GQL-LIFE-3067056430352669",
+                        "Seeking recommendations for a legitimate life-insurance company.",
+                        63,
+                        "Warm"
+                  ]
+            ],
+            "reconciliationHash": "d0a14aaae955681d4e7867fe694bde8a1ea18e755004f28f4d5fd122e7805faa"
       },
       {
             "id": "family-law",
@@ -1368,9 +1139,9 @@
             "measuredCpl": 0,
             "tiers": {
                   "80-85": 0,
-                  "85-90": 0,
+                  "85-90": 1,
                   "90-95": 0,
-                  "95-100": 0
+                  "95-100": 1
             },
             "evidence": [
                   [
@@ -1386,7 +1157,7 @@
                         "Hot"
                   ]
             ],
-            "reconciliationHash": "a3b94dbffd11b8346b696c3525fe66fd8bcee2b02a3936198ffc5b9416b5d261"
+            "reconciliationHash": "d0a14aaae955681d4e7867fe694bde8a1ea18e755004f28f4d5fd122e7805faa"
       },
       {
             "id": "mortgage",
@@ -1410,7 +1181,7 @@
                   "95-100": 0
             },
             "evidence": [],
-            "reconciliationHash": "a3b94dbffd11b8346b696c3525fe66fd8bcee2b02a3936198ffc5b9416b5d261"
+            "reconciliationHash": "d0a14aaae955681d4e7867fe694bde8a1ea18e755004f28f4d5fd122e7805faa"
       },
       {
             "id": "senior-care-placement",
@@ -1434,7 +1205,7 @@
                   "95-100": 0
             },
             "evidence": [],
-            "reconciliationHash": "a3b94dbffd11b8346b696c3525fe66fd8bcee2b02a3936198ffc5b9416b5d261"
+            "reconciliationHash": "d0a14aaae955681d4e7867fe694bde8a1ea18e755004f28f4d5fd122e7805faa"
       },
       {
             "id": "business-brokers",
@@ -1458,7 +1229,50 @@
                   "95-100": 0
             },
             "evidence": [],
-            "reconciliationHash": "a3b94dbffd11b8346b696c3525fe66fd8bcee2b02a3936198ffc5b9416b5d261"
+            "reconciliationHash": "d0a14aaae955681d4e7867fe694bde8a1ea18e755004f28f4d5fd122e7805faa"
+      },
+      {
+            "id": "divorce-law",
+            "name": "Divorce Law — Master Hub",
+            "industry": "Divorce Law",
+            "status": "Partial",
+            "target": 50,
+            "leads": 10,
+            "elapsedHours": 0,
+            "avgMin": null,
+            "tokenCost": 0,
+            "tokenCpl": 0,
+            "subscriptionCost": 0,
+            "subscriptionCpl": 0,
+            "measuredCost": 0,
+            "measuredCpl": 0,
+            "tiers": {
+                  "80-85": 2,
+                  "85-90": 2,
+                  "90-95": 0,
+                  "95-100": 0
+            },
+            "evidence": [
+                  [
+                        "DLAW-R2-001",
+                        "Seeking a top divorce attorney regardless of cost",
+                        87,
+                        "Hot"
+                  ],
+                  [
+                        "DLAW-R2-002",
+                        "Needs divorce counsel for a serious child-custody matter",
+                        85,
+                        "Hot"
+                  ],
+                  [
+                        "DLAW-R2-003",
+                        "Preparing for divorce amid financial and child-safety concerns",
+                        82,
+                        "Hot"
+                  ]
+            ],
+            "reconciliationHash": "d0a14aaae955681d4e7867fe694bde8a1ea18e755004f28f4d5fd122e7805faa"
       }
 ];
     for (const select of [document.getElementById("runFocus"), document.getElementById("evidenceRun")]) {
@@ -1561,7 +1375,7 @@
         return `
           <div class="chart-row">
             <strong>${run.name}</strong>
-            <div class="bar-track"><div class="bar-fill ${run.leads >= run.target ? "green" : "orange"}" style="width:${(run.leads / max) * 100}%"></div></div>
+            <div class="bar-track"><div class="bar-fill ${run.leads >= run.target ? "green" : "orange"}" style="width:${Math.min(100, (run.leads / max) * 100)}%"></div></div>
             <span>${pct}%</span>
           </div>
         `;
@@ -1675,28 +1489,13 @@
       const t = totals();
       const summary = [
         "LeadHunter Dashboard Summary",
-        `Strict leads: ${t.leads}/${t.target}`,
-        `Potential revenue: ${money(t.revenue)}`,
-        `Recorded run cost: ${money(t.totalCost)}`,
-        `Gross profit after selected AI billing: ${money(t.profit)}`,
-        `Active cost model: ${activeModel === "subscription" ? "Subscription allocation" : "OpenRouter token estimate"}`,
-        "Meta Ads Batch 50: Complete",
-        "Roofing Batch 20: Partial, 14/20 strict leads",
-        "Roofing GraphQL V3.1 Pilot 5: Complete, 5/5 strict leads, 30/30 GraphQL-healthy queries",
-        "Roofing GraphQL V3.1 Batch 20: Complete, 20/20 strict leads, 80/80 GraphQL-healthy queries, $0.05 subscription CPL",
-        "Electricians Batch 50: Failed Target, 39/50 strict leads, $40.23 measured cost, $1.03 measured CPL",
-        "Home Repairs Batch 50: Failed Target, 3/50 strict leads, $31.76 measured cost, $10.59 measured CPL",
-        "HVAC V3 Pilot 5: Complete, 5/5 strict leads, $17.94 measured cost, $3.59 measured CPL",
-        "HVAC GraphQL V3.1 Additional 5: Complete, 5/5 strict leads, $9.18 measured cost, $1.84 measured CPL",
-        "HVAC Lead Buyers Pilot 5: Failed Target, 0/5 strict leads, $18.15 measured cost, CPL N/A",
-        "HVAC Lead Buyers GraphQL Batch 20: Failed Target, 0/20 strict leads, $11.79 measured cost, CPL N/A",
-        "Electricians keyword audit: 24 successful, 151 unsuccessful",
-        "Home Repairs keyword audit: 3 successful, 189 unsuccessful",
-        "HVAC V3 keyword audit: 4 successful, 18 unsuccessful, 10 not executed after target",
-        "HVAC GraphQL V3.1 keyword audit: 4 successful, 16 qualification-unsuccessful, 8 not executed after target",
-        "HVAC Lead Buyers keyword audit: 0 successful, 63 qualification-unsuccessful, 2 collector-not-measured safety stops, 17 not executed after stop, 8 healthy-zero Google commands",
-        "HVAC Lead Buyers GraphQL Batch 20 keyword audit: 0 successful, 83 qualification-unsuccessful, 2 collector-not-measured safety stops"
-      ].join("\\n");
+        `Reconciliation hash: ${masterHubSnapshot.reconciliationHash}`,
+        `Validated leads: ${t.leads}/${t.target}`,
+        `Recorded source-reported cost: ${money(t.totalCost)} USD`,
+        `Measured CPL: ${money(t.leads ? t.totalCost / t.leads : 0)} USD`,
+        ...runs.map(run => `${run.industry}: ${run.leads}/${run.target}, latest status ${run.status}`),
+        "Cost caveat: legacy elapsed-time costs are preserved as reported; active versus idle time was not independently verifiable."
+      ].join("\n");
       navigator.clipboard?.writeText(summary);
       $("copySummary").textContent = "Copied";
       window.setTimeout(() => $("copySummary").textContent = "Copy Summary", 1200);
